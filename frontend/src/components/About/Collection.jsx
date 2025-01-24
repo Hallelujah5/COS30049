@@ -8,10 +8,10 @@ import checkmark from '../../images/market/newest/checkmark.png'
 import Newest_item from "../Marketplace/Newest-item";
 
 const NewItems = [
-  { name: "Digigenesis", image: img3,check: checkmark, address: "0.16 ETH" },
-  { name: "Sunset 0.7FM", image: img1,  check: checkmark,address: "0.59 ETH"},
-  { name: "Haleocean Int.", image: img4,check: checkmark, address: "0.34 ETH" },
-  { name: "SnackHungry", image: img2,check: checkmark, address: "0.29 ETH" },
+  { name: "V", image: img4,check: checkmark, address: "0.19 ETH" },
+  { name: "Pudgy Penguin", image: img1,  check: checkmark,address: "0.41 ETH"},
+  { name: "CryptoDicButts", image: img2,check: checkmark, address: "0.34 ETH" },
+  { name: "Gritters", image: img3,check: checkmark, address: "0.29 ETH" },
 ];
 
 const handleClick = (item) => {
