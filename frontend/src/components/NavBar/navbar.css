@@ -1,0 +1,31 @@
+#logo-img {
+    margin-right: 2em;
+}
+
+.navbar-container {
+    border-radius: 1em 1em 1em 1em;
+    -webkit-border-radius: 1em 1em 1em 1em;
+    -moz-border-radius: 1em 1em 1em 1em;
+    background: #1e1a52;
+    border: 0.8em solid #1e1a52;
+} 
+
+#wallet {
+    background: #1e1a52;
+    border: 0.1em solid #1e1a52;
+    color: rgb(229, 229, 229);
+    padding-right: 0;
+}
+
+#wallet img {
+    margin-right: 0.8em;
+    margin-bottom:0.2em;
+}
+
+.nav-link {
+    color: rgb(214, 214, 214) !important;
+    margin: 0 .8rem !important;
+    font-size: large !important;
+}
+
+

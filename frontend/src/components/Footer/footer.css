@@ -1,0 +1,63 @@
+.footer {
+    background-color: #07061d;
+    color: #fdfff5;
+  }  
+  .footer-heading {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .footer ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+  
+  .footer ul li a:hover {
+    color: #b0c4de;
+  }
+  
+  .newsletter-container {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .newsletter-input {
+    width: 50%;
+    max-width: 18em;
+    padding: 0.51rem;
+    border-radius: 10em 10em 10em 10em;
+    border: none;
+    outline: none;
+    color: black;
+  }
+  
+  .newsletter-submit {
+    background-color: #6c5ce7;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 10em 10em 10em 10em;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .newsletter-submit:hover {
+    background-color: #4c3ba4;
+  }
+
+  

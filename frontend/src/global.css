@@ -1,0 +1,88 @@
+*{
+    color: white;
+}
+
+/* ----------------FONTS---------------- */
+.roboto {
+    font-family: 'Roboto Slab', serif !important;
+}
+
+.roboto-reg {
+    font-family: 'Roboto Slab', serif !important;
+    font-weight: 300 !important;
+}
+
+.outfit {
+    font-family: 'Outfit', serif !important;
+}
+
+.outfit-reg {
+    font-family: 'Outfit', serif !important;
+    font-weight: 300;
+}
+    
+.outfit-bold {
+    font-family: 'Outfit', serif !important;
+    font-weight: bold;
+    
+}  
+
+.subheading-text {
+    font-size: 1.3em !important;
+    letter-spacing: 0.17em;
+    font-weight: 600 !important;
+}
+
+
+.bodytext {
+    color:rgb(226, 226, 226);
+    margin-bottom: 1.6em;
+    letter-spacing: 0.025em;
+}
+
+.hl-bold-text {
+    letter-spacing: 0.1em;
+    font-weight: 500 !important;
+    margin: 0;
+}
+
+
+
+/* ------------------TEXT COLOR------------------ */
+
+.teal {
+    color: #AAD9D9;
+    margin-bottom: 0;
+}
+
+.gray {
+    color: rgb(157, 157, 157) !important;
+}
+
+.light-gray {
+    color: rgb(189, 189, 189) !important;
+}
+
+
+
+
+body {
+    
+    background: linear-gradient(to left top,  #010058,#010032); 
+    min-height: 100vh; /* full viewport height */
+    margin: 0; 
+    padding: 0;
+    position: relative;   
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 00px;
+    right: 0;
+    bottom: 0;
+    background: url('images/bg/BGCircles.png') no-repeat center center;
+    z-index: -1; /* The blurrish circles to not obstruct any content*/
+    opacity: 1;
+}
+

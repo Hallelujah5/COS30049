@@ -1,0 +1,30 @@
+
+h1 {
+    font-size: clamp(2em, 5vw, 4.6em) !important;
+}
+
+div .btn-primary  {
+    --bs-btn-border-radius: 10rem !important;
+    --bs-btn-padding-x: 2.5em !important;
+    --bs-btn-padding-y: .65em !important;
+    --bs-btn-font-size: 1.35rem !important;
+    background-color: #8686D8;
+    border: 1px solid #8686D8;
+    color: white;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #60609f !important;
+    --bs-btn-hover-border-color: #60609f !important;
+    --bs-btn-active-bg: #37375c;
+    --bs-btn-active-border-color: #37375c;
+    letter-spacing: 0.03em;
+}
+
+.teal {
+    color: #AAD9D9;
+    margin-bottom: 0;
+}
+
+.image-container {
+    max-width: 100%;
+    height: auto;
+}

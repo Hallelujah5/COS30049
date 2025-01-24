@@ -1,0 +1,49 @@
+
+
+.herotext {
+    color:rgb(226, 226, 226);
+    margin-bottom: 1.6em;
+    letter-spacing: 0.025em;
+}
+
+
+#hero-trade {
+    font-size: clamp(2em, 5vw, 4.6em) !important;
+}
+
+
+.NFT {
+    --bs-btn-border-radius: 10rem !important;
+    --bs-btn-padding-x: 2.5em !important;
+    --bs-btn-padding-y: .65em !important;
+    --bs-btn-font-size: 1.35rem !important;
+}
+
+
+div .btn-primary {
+    background-color: #8686D8;
+    border: 1px solid #8686D8;
+    color: white;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #60609f !important;
+    --bs-btn-hover-border-color: #60609f !important;
+    --bs-btn-active-bg: #37375c;
+    --bs-btn-active-border-color: #37375c;
+}
+
+#sellNFT {
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #3f3f6e !important;
+    --bs-btn-hover-border-color: #3f3f6e !important;
+    border: 1px solid #8686D8;
+    --bs-btn-active-bg: #6262a2;
+    --bs-btn-active-border-color: #6262a2;
+    color: rgb(255, 255, 255);
+}
+
+
+.image-container {
+    max-width: 100%;
+    height: auto;
+}
+
