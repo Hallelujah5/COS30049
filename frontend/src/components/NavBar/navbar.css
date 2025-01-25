@@ -1,5 +1,46 @@
+
+:root {
+    --search-bar-color: #6962b9;
+}
+
+
 #logo-img {
     margin-right: 2em;
+}
+
+#searchbar {
+    background-color: var(--search-bar-color);
+    border-color: var(--search-bar-color);
+    border-radius: 1rem;    
+    padding: 0.75rem 1.85rem;
+    padding-left: 2.6rem;
+    color: rgb(228, 227, 227);
+    font-size: 1.1rem;
+}
+#searchbar::placeholder {
+    color: rgb(211, 211, 211);
+}
+
+#searchbar:focus::placeholder {
+    color: transparent; 
+}
+#searchbar:focus{
+    outline: none;
+}
+#searchbar:hover{
+    background-color: #7771bb;
+    transition: 0.3s;
+}
+
+.search-container{
+    position: relative;
+}
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none; 
 }
 
 .navbar-container {
@@ -28,10 +69,6 @@
     font-size: large !important;
 }
 
-
-.user-icon {
-    color: white !important;
-}
 
 #user-icon {
     margin-right: 0 !important;
