@@ -29,3 +29,12 @@
 }
 
 
+.user-icon {
+    color: white !important;
+}
+
+#user-icon {
+    margin-right: 0 !important;
+    margin-left: 1rem !important;
+}
+

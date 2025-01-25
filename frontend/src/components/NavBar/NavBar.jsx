@@ -1,11 +1,34 @@
 import { Link } from 'react-router-dom'; 
-import React from 'react';
+import React, { useState } from 'react';
 import './navbar.css';
 import wallet from '../../images/navbar/wallet.png';
 import logo from '../../images/navbar/xyora2.png';
+import userIcon from '../../images/user-icon.svg'
+
+
+function isLoggedIn() {
+  const [user, setUser] = useState(false);
+
+  if (!user) {
+    return <button id="wallet" onClick={() => {setUser(!user)}} className="btn "><img src={wallet} alt="" />Connect Wallet</button>   
+  }
+  else {
+    return <span>
+    <form class="d-flex form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+      <Link to="/profile"><img src={userIcon} alt="White user icon" id='user-icon' /></Link>   </form>
+      
+      </span>
+  }
+
+}
+
+
 
 
 const Navbar = () => {
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark ">
       <div className="container-fluid navbar-container" style={{ maxWidth: '87.5%' }}>
@@ -32,7 +55,8 @@ const Navbar = () => {
             </ul>
             <ul className="navbar-nav ms-auto">
             <li className="nav-item roboto">
-              <button id="wallet" className="btn "><img src={wallet} alt="" />Connect Wallet</button> 
+              {isLoggedIn()}
+
             </li>
             </ul>
         </div>
