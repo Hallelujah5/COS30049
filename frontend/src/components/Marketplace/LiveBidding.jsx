@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom'
 import "./marketplace.css";
 import img1 from "../../images/market/image-1.png";
 import img2 from "../../images/market/image-2.png";
@@ -9,6 +10,8 @@ import img6 from "../../images/market/image-6.png";
 import img7 from "../../images/market/image-10.png";
 import img8 from "../../images/market/image.png";
 import BiddingItem from "./LiveBidding-item";
+
+
 
 const biddingItems = [
   { name: "G-bean", image: img7, text: "Highest bid 1/16", day: "14d", address: "0.477wETH" },
@@ -21,13 +24,10 @@ const biddingItems = [
   { name: "Persona", image: img6, text: "Highest bid 1/20.", day: "35d", address: "0.477wETH" },
 ];
 
-const handleClick = (item) => {
-  console.log(`Clicked on ${item.name}`); //debug
-
-  //navigate to Buy.jsx
-};
 
 const Bidding = () => {
+  let navigate = useNavigate();
+  let path = '/buy'
   return (
     <div className="container py-5 text-white">
       <div className="d-flex justify-content-between">
@@ -53,7 +53,7 @@ const Bidding = () => {
             text={item.text}
             day={item.day}
             address={item.address}
-            onClick={() => handleClick(item)}
+            onClick={() => {  navigate(path)}}
           />
         ))}
       </div>

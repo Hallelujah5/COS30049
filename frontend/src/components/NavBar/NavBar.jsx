@@ -46,7 +46,7 @@ const Navbar = () => {
         </button>
 
 
-        {/* Nav links */}
+
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ms-left"> 
             <li className="nav-item">

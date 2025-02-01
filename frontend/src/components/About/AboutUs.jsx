@@ -1,10 +1,7 @@
-import React from "react";
 import "./aboutUs.css";
 import phuc from '../../images/aboutus/phuc.png'
 import phale from '../../images/aboutus/phale.png'
 import thinh from '../../images/aboutus/thinh.png'
-
-
 
 
 const testimonies = [

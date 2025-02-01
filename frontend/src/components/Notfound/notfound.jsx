@@ -1,3 +1,5 @@
+//Shows when user tries to access invalid page.
+
 import React from "react";
 
 const NotFound = () => {

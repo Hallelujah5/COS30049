@@ -1,1 +1,0 @@
-//This page is accessible from clicking a random NFT item on the market.

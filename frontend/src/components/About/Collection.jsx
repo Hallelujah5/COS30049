@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../Marketplace/marketplace.css";
 import img1 from "../../images/market/notable-col/image-1.png";
 import img2 from "../../images/market/notable-col/image-2.png";
@@ -14,13 +15,10 @@ const NewItems = [
   { name: "Gritters", image: img3,check: checkmark, address: "0.29 ETH" },
 ];
 
-const handleClick = (item) => {
-  console.log(`Clicked on ${item.name}`); //debug
-
-  //navigate to Buy.jsx
-};
 
 const Collection = () => {
+  let navigate = useNavigate();
+  let path = '/buy'
   return (
     <div className="container py-5 text-white">
       <div className="d-flex justify-content-between">
@@ -44,7 +42,7 @@ const Collection = () => {
             image={item.image}
             checkmark={item.check}
             address={item.address}
-            onClick={() => handleClick(item)}
+            onClick={() => navigate(path)}
           />
         ))}
       </div>

@@ -15,8 +15,8 @@ const Heart = () => {
       viewBox="0 0 24 24"
       width="25"
       height="25"
-      fill={liked ? "red" : "none"} // Fill red if liked, none if not
-      stroke={liked ? "red" : "gray"} // Optional stroke
+      fill={liked ? "red" : "none"} 
+      stroke={liked ? "red" : "gray"} 
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
