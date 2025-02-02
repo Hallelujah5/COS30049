@@ -7,7 +7,7 @@ import thinh from '../../../assets/images/aboutus/thinh.png'
 const testimonies = [
     {name: "Tran Bao Phuc", img: phuc, text: "Radipisicing elit. Reiciendis quibusdam fugiat accusantium laboriosam architecto deleniti eos facilis exercitationem dolores nisi commodi, et adipisci, similique voluptas distinctio velit asperiores expedita officia."}, 
     {name: "Nguyen Pha Le", img: phale, text: "Lorem ipsum, dolor sit amet consectetur adip elit. Reiciendis quibusdam fugiat accusantium laboriosam architecto deleniti eos facilis exercitationem dolores nisi commodi, et adipisci, similique voluptas distinctio velit asperiores expedita officia."}, 
-    {name: "Nguyen Trung Thinh", img: thinh, text: "Lorem ipsum, dolor sit amet consectetur adipism laboriosam architecto deleniti eos facilis exercitationem dolores nisi commodi, et adipisci, similique voluptas distinctio velit asperiores expedita officia."}
+    {name: "Nguyen Trung Thinh", img: thinh, text: "Consectetur adipism laboriosam architecto deleniti eos facilis exercitationem dolores nisi commodi, et adipisci, similique voluptas distinctio velit asperiores expedita officia."}
 ] 
 
 

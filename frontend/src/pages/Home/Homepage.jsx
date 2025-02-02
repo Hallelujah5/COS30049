@@ -1,9 +1,9 @@
 import React from 'react'
-import Hero from '../../components/Homepage/Hero/Hero'
-import Featured from '../../components/Homepage/Featured/featured'
-import Transparency from '../../components/Homepage/Transparency/transparency'
-import NFT from '../../components/Homepage/NFT/nft'
-import Testimony from '../../components/Homepage/Testimonial/testimony'
+import Hero from './HomeComponent/Hero/Hero'
+import Featured from './HomeComponent/Featured/featured'
+import Transparency from './HomeComponent/Transparency/transparency'
+import NFT from './HomeComponent/NFT/nft'
+import Testimony from './HomeComponent/Testimonial/testimony'
 import Footer from '../../components/Footer/footer'
 const Homepage = () => {
   return (

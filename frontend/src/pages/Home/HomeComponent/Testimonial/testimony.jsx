@@ -1,8 +1,8 @@
 import React from "react";
 import "./testimonials.css";
-import oliviaImg from "../../../assets/images/testimonial/m1.png";
-import evanImg from "../../../assets/images/testimonial/m2.png";
-import jessicaImg from "../../../assets/images/testimonial/m3.png";
+import oliviaImg from "../../../../assets/images/testimonial/m1.png";
+import evanImg from "../../../../assets/images/testimonial/m2.png";
+import jessicaImg from "../../../../assets/images/testimonial/m3.png";
 
 
 
@@ -27,7 +27,7 @@ const Testimonials = () => {
       <div className="row justify-content-center">
 
     {testimonies.map((testimony, index) => (
-        <div className="col-md-3 d-flex justify-content-center mb-1" key={index}>
+        <div className="col-md-3 d-flex justify-content-center mb-3" key={index}>
         <div className="testimonial-cards p-3 text-center shadow-lg ">
           <img
             src={testimony.img}

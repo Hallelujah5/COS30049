@@ -89,9 +89,9 @@ body::before {
     left: 00px;
     right: 0;
     bottom: 0;
-    background: url('images/bg/BGCircles.png') no-repeat center center;
+    background: url('../src/assets/images/bg/BGCircles.png') no-repeat center center;
     z-index: -1; /* underlayer for blur circle*/
-    opacity: 1;
+    opacity: 0.;
 }
 
 
