@@ -1,31 +1,32 @@
 import React from "react";
-import "./marketplace.css";
 import { useNavigate } from "react-router-dom";
-import img1 from "../../images/market/newest/image.png";
-import img2 from "../../images/market/newest/image-2.png";
-import img3 from "../../images/market/newest/image-3.png";
-import img4 from "../../images/market/newest/image-1.png";
-import checkmark from "../../images/market/newest/checkmark.png";
-import Newest_item from "./Newest-item";
+import "../../Market/MarketComponent/marketplace.css";
+import img1 from "../../../assets/images/market/notable-col/image-1.png";
+import img2 from "../../../assets/images/market/notable-col/image-2.png";
+import img3 from "../../../assets/images/market/notable-col/image-3.png";
+import img4 from "../../../assets/images/market/notable-col/image.png";
+import checkmark from '../../../assets/images/market/newest/checkmark.png'
+import Newest_item from "../../Market/MarketComponent/Newest-item";
+
+
 
 const NewItems = [
-  { name: "Digigenesis", image: img3,check: checkmark, address: "0.16 ETH" },
-  { name: "Sunset 0.7FM", image: img1,  check: checkmark,address: "0.59 ETH"},
-  { name: "Haleocean Int.", image: img4,check: checkmark, address: "0.34 ETH" },
-  { name: "SnackHungry", image: img2,check: checkmark, address: "0.29 ETH" },
+  { name: "V", image: img4,check: checkmark, address: "0.19 ETH" },
+  { name: "Pudgy Penguin", image: img1,  check: checkmark,address: "0.41 ETH"},
+  { name: "CryptoDicButts", image: img2,check: checkmark, address: "0.34 ETH" },
+  { name: "Gritters", image: img3,check: checkmark, address: "0.29 ETH" },
 ];
 
 
-const Newest = () => {
+const Collection = () => {
   let navigate = useNavigate();
   let path = '/buy'
-  
   return (
     <div className="container py-5 text-white">
       <div className="d-flex justify-content-between">
         <h4 className="outfit live-bid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16">
   <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4z"/>
-</svg>NEWEST ITEMS</h4>
+</svg>NOTABLE COLLECTIONS</h4>
         <a href="#" className="text-decoration-none">
             <p id='viewall' className="gray outfit">VIEW ALL
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -51,4 +52,4 @@ const Newest = () => {
   );
 };
 
-export default Newest;
+export default Collection;

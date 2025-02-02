@@ -1,6 +1,6 @@
 //This page is accessible from clicking a random NFT item on the market.
 import React from 'react'
-import Buy from '../components/BuyPage/buy'
+import Buy from './BuyComponent/buy'
 const BuyPage = () => {
   return (
 

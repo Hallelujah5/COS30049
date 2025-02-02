@@ -1,6 +1,6 @@
 import React from 'react'
 import './buy.css'
-import img7 from "../../images/market/image-10.png";
+import img7 from "../../../assets/images/market/image-10.png";
 
 const Buy = () => {
   return (

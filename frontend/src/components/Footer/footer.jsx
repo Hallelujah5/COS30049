@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../../images/navbar/xyora.png';
+import logo from '../../assets/images/navbar/xyora.png';
 import "./footer.css";
 
 const Footer = () => {

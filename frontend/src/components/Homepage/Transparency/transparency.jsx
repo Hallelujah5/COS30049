@@ -1,5 +1,5 @@
 import React from 'react'
-import stock from '../../../images/homepage/stock.png'
+import stock from '../../../assets/images/homepage/stock.png'
 const Transparency = () => {
   return (
     <>

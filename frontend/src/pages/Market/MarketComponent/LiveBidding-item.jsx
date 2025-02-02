@@ -3,7 +3,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import Heart from "../heart";
+import Heart from "../../../components/heart";
 
 const BiddingItem = ({ name, image, text, day, address, onClick }) => {
   return (

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'; 
 import React, { useState } from 'react';
 import './navbar.css';
-import wallet from '../../images/navbar/wallet.png';
-import logo from '../../images/navbar/xyora2.png';
-import userIcon from '../../images/user-icon.svg'
+import wallet from '../../assets/images/navbar/wallet.png';
+import logo from '../../assets/images/navbar/xyora2.png';
+import userIcon from '../../assets/images/user-icon.svg'
 
 
 const IsLoggedIn =() => {
