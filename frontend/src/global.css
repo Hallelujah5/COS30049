@@ -48,6 +48,7 @@
 
 
 
+
 /* ------------------TEXT COLOR------------------ */
 
 .teal {
@@ -67,12 +68,16 @@
     color:white !important; 
 }
 
+.blue {
+    color:rgb(0, 102, 255) !important;
+}
+
 
 
 body {
     
-    background: linear-gradient(to left top,  #010058,#010032); 
-    min-height: 100vh; /* full viewport height */
+    background: linear-gradient(to left top,  #03023a,#03023a); 
+    min-height: 100vh; 
     margin: 0; 
     padding: 0;
     position: relative;   
@@ -85,7 +90,32 @@ body::before {
     right: 0;
     bottom: 0;
     background: url('images/bg/BGCircles.png') no-repeat center center;
-    z-index: -1; /* The blurrish circles to not obstruct any content*/
+    z-index: -1; /* underlayer for blur circle*/
     opacity: 1;
+}
+
+
+h1 {
+    font-size: clamp(2em, 5vw, 4.6em) !important;
+}
+
+
+/*==========BUTTON==========*/
+
+
+.btn-purple  {
+    --bs-btn-border-radius: 10rem !important;
+    --bs-btn-padding-x: 2.5em !important;
+    --bs-btn-padding-y: .65em !important;
+    --bs-btn-font-size: 1.35rem !important;
+    background-color: #8686D8 !important;
+    border: 1px solid #8686D8 !important;
+    color: white !important;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #60609f !important;
+    --bs-btn-hover-border-color: #60609f !important;
+    --bs-btn-active-bg: #37375c !important;
+    --bs-btn-active-border-color: #37375c !important;
+    letter-spacing: 0.03em !important;
 }
 

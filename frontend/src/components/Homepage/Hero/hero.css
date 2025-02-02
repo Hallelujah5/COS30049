@@ -12,6 +12,7 @@
 }
 
 
+
 .NFT {
     --bs-btn-border-radius: 10rem !important;
     --bs-btn-padding-x: 2.5em !important;
@@ -19,17 +20,6 @@
     --bs-btn-font-size: 1.35rem !important;
 }
 
-
-div .btn-primary {
-    background-color: #8686D8;
-    border: 1px solid #8686D8;
-    color: white;
-    --bs-btn-hover-color: #fff !important;
-    --bs-btn-hover-bg: #60609f !important;
-    --bs-btn-hover-border-color: #60609f !important;
-    --bs-btn-active-bg: #37375c;
-    --bs-btn-active-border-color: #37375c;
-}
 
 #sellNFT {
     --bs-btn-hover-color: #fff !important;

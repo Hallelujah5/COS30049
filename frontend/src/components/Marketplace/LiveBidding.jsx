@@ -31,9 +31,14 @@ const Bidding = () => {
   return (
     <div className="container py-5 text-white">
       <div className="d-flex justify-content-between">
-        <h4 className="outfit live-bid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16">
-  <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4z"/>
-</svg>LIVE BIDDING</h4>
+        <h4 className="outfit live-bid">
+
+
+        {/*Subheading*/}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16">
+          <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4z"/>
+          </svg>LIVE BIDDING</h4>
+
         <a href="#" className="text-decoration-none">
           <p id='viewall'  className="gray outfit">VIEW ALL
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -41,7 +46,10 @@ const Bidding = () => {
             </svg>
           </p>
         </a>
+        
       </div>
+
+
       <div className="text-center mb-5"></div>
       <div className="row justify-content-center">
         {biddingItems.map((item, index) => (

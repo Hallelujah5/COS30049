@@ -8,7 +8,7 @@ import Heart from "../heart";
 const BiddingItem = ({ name, image, text, day, address, onClick }) => {
   return (
     <div
-      className="col-12 col-sm-12 col-md-4 col-lg-3 d-flex justify-content-center mb-3"
+      className="col-sm-12 col-md-4 col-lg-3   d-flex justify-content-center mb-3"
 
     >
       <div className="text-center shadow-lg card-layout"

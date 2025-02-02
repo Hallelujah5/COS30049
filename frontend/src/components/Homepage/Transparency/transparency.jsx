@@ -1,6 +1,5 @@
 import React from 'react'
 import stock from '../../../images/homepage/stock.png'
-import './transparency.css'
 const Transparency = () => {
   return (
     <>
@@ -12,7 +11,7 @@ const Transparency = () => {
         <h1 className='display-5 fw-bold lh-1 mb-3 outfit-bold'>Seamless Trading, Redefined</h1>
         <p className="herotext">Seamlessly access the future of trading with our blockchain-powered platform, designed for ultimate security and efficiency.</p>
         <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" className="btn btn-primary NFT outfit-bold">TRADE NOW</button>
+          <button type="button" className="btn btn-purple NFT outfit-bold">TRADE NOW</button>
         </div>
         
       </div>

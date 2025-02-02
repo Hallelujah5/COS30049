@@ -1,5 +1,4 @@
 import React from 'react'
-
 import heroimg from '../../../images/hero/Hero-img.png'
 import './hero.css'
 const Hero = () => {
@@ -15,7 +14,7 @@ const Hero = () => {
       <h1 id='hero-trade' className='display-5 fw-bold lh-1 mb-3 outfit-bold'>Trade Smarter, Trade Decentrialized</h1>
         <p className="herotext">Seamlessly access the future of trading with our blockchain-powered platform, designed for ultimate security and efficiency.</p>
         <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button id='buyNFT' type="button" className="btn btn-primary NFT outfit-bold subheading-text">BUY NFTS</button>
+          <button id='buyNFT' type="button" className="btn btn-purple NFT outfit-bold subheading-text">BUY NFTS</button>
           <button id='sellNFT' type="button" className="btn btn-outline-secondary NFT outfit subheading-text">SELL NFTS</button>
         </div>
       </div>

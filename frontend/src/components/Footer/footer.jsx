@@ -14,8 +14,8 @@ const Footer = () => {
           <div className="col-lg-3 mb-4 ">
             <h6 className="footer-heading teal bodytext roboto">Home</h6>
             <ul className="list-unstyled outfit-reg">
-              <li><a href="#">About</a></li>
-              <li><a href="#">Trading</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/market">Trading</a></li>
               <li><a href="#">Contact</a></li>
             </ul>
           </div>
@@ -23,9 +23,9 @@ const Footer = () => {
           <div className="col-lg-3 mb-4">
             <h6 className="footer-heading roboto bodytext teal">Market</h6>
             <ul className="list-unstyled">
-              <li><a href="#">Browse NFTs</a></li>
-              <li><a href="#">Buy NFTs</a></li>
-              <li><a href="#">Sell NFTs</a></li>
+              <li><a href="/market">Browse NFTs</a></li>
+              <li><a href="/market">Buy NFTs</a></li>
+              <li><a href="/market">Sell NFTs</a></li>
             </ul>
           </div>
 
