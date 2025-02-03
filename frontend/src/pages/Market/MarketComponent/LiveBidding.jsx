@@ -30,7 +30,7 @@ const Bidding = () => {
   let path = '/buy'
   return (
     <div className="container py-5 text-white">
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mt-5">
         <h4 className="outfit live-bid">
 
 
@@ -51,19 +51,21 @@ const Bidding = () => {
 
 
       <div className="text-center mb-5"></div>
-      <div className="row justify-content-center">
-        {biddingItems.map((item, index) => (
-          <BiddingItem
-            key={index}
-            className={`bidding-item ${index >= 4 ? "hidden-sm" : ""}`} 
-            name={item.name}
-            image={item.image}
-            text={item.text}
-            day={item.day}
-            address={item.address}
-            onClick={() => {  navigate(path)}}
-          />
-        ))}
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        <div className="row justify-content-center mt-5" id="navbar-example">
+          {biddingItems.map((item, index) => (
+            <BiddingItem
+              key={index}
+              className={`bidding-item ${index >= 4 ? "hidden-sm" : ""}`}
+              name={item.name}
+              image={item.image}
+              text={item.text}
+              day={item.day}
+              address={item.address}
+              onClick={() => {  navigate(path)}}
+            />
+          ))}
+        </div>
       </div>
       <p className="gray mx-3">Bidding updates every 10s</p>
     </div>

@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Heart from "../../../components/heart";
 
-const CheckmarkItem = ({ name, image, checkmark, address, onClick }) => {
+const CheckmarkItem = ({ name, image, checkmark, address, onClick = () => {} }) => {
   return (
     <div
       className="col-12 col-sm-12 col-md-4 col-lg-3 d-flex justify-content-center mb-3"
@@ -50,10 +50,6 @@ CheckmarkItem.propTypes = {
   checkmark: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-};
-
-CheckmarkItem.defaultProps = {
-  onClick: () => {},
 };
 
 export default CheckmarkItem;
