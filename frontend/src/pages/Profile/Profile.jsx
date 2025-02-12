@@ -1,1 +1,0 @@
-//This page is only accessible through logging in and clickin on the user icon.

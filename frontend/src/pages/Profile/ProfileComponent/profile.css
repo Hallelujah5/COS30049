@@ -1,0 +1,223 @@
+.img-banner {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.img-avatar {
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border: 3px solid white;
+  display: block;
+  margin: -20vh auto 10px;
+}
+
+
+  .profile-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 30vh; 
+  }
+
+
+
+.profile-name {
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: left;
+  margin-top: 10px;
+  padding: 5px 0px
+}
+
+.profile-wallet,
+.profile-bio {
+  text-align: left;
+  font-size: 1.3rem;
+  color: #ffffff;
+  padding: 5px 0px;
+}
+
+.profile-icon {
+  width: 20px;
+}
+
+@media (max-width: 768px) {
+  .img-banner {
+    width: 100%;
+  }
+
+  .img-avatar {
+    width: 100px;
+    height: 100px;
+    margin: -80px auto 10px;
+  }
+
+  .profile-name {
+    font-size: 1.2rem;
+  }
+
+  .profile-wallet,
+  .profile-bio {
+    font-size: 0.9rem;
+    padding: 0px 10px;
+  }
+
+  .profile-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 0; 
+  }
+}
+
+
+
+/* ------------TRANSACTIONS-------------- */
+
+.transaction-container {
+  max-width: 900px;
+  margin: auto;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.tabs {
+  display: flex;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 5px;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.tab-button {
+  flex: 1;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.tab-button:hover {
+  color: #c4b5fd;
+}
+
+.active-bg {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: #8776cd;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out;
+  top: 0;
+  z-index: 1;
+}
+
+.table-container {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  background: #12063d;
+  padding: 20px;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.table-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #c4b5fd; /* Light purple */
+  text-transform: uppercase;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-overflow {
+  overflow: auto;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  color: white;
+}
+
+/* Light purple horizontal lines between rows */
+tbody tr {
+  border-bottom: 1px solid #6b5ca980; /* Light purple */
+}
+
+th {
+  font-weight: bold;
+  border-bottom: 1px solid #6b5ca980 /* Light purple */
+}
+
+/* Hover effect */
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .tab-button {
+    font-size: 10px;
+  }
+
+  .table-title {
+    font-size: 20px;
+  }
+
+  th, td {
+    padding: 0px 10px;
+    text-align: left;
+    color: white;
+    font-size: 13px;
+  }
+}
+
+/* --------pagination--------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.pagination-btn {
+  background-color: #8776cd;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.pagination-btn:hover {
+  background-color: #5d4ca0;
+}
+
+.pagination-info {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
