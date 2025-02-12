@@ -7,6 +7,7 @@ import Market from './pages/Market/Market'
 import Buy from './pages/Buy/BuyPage'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
+import Footer from './components/Footer/footer'
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
-        
+      
     </Router>
   )
 }

@@ -4,7 +4,8 @@ import './heart.css'
 const Heart = () => {
   const [liked, setLiked] = useState(false);
 
-  const toggleLike = () => {
+  const toggleLike = (e) => {
+    e.stopPropagation();
     setLiked(!liked); // Toggle between liked and not liked
   };
 

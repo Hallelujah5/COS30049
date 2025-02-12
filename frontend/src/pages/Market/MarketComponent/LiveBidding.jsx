@@ -9,8 +9,7 @@ import img5 from "../../../assets/images/market/image-5.png";
 import img6 from "../../../assets/images/market/image-6.png";
 import img7 from "../../../assets/images/market/image-10.png";
 import img8 from "../../../assets/images/market/image.png";
-import BiddingItem from "./LiveBidding-item";
-
+import BiddingItem from "./LiveBidding-item"; 
 
 
 const biddingItems = [

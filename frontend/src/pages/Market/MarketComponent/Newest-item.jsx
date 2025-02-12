@@ -36,7 +36,7 @@ const CheckmarkItem = ({ name, image, checkmark, address, onClick = () => {} }) 
             <p className="outfit mb-0">
               {address}
             </p>
-            <Heart />
+            <Heart onClick={(e) => e.stopPropagation()} />
           </div>
         </div>
       </div>
