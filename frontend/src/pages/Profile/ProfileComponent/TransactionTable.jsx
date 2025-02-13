@@ -5,8 +5,20 @@ import { offersMade } from "../data/offersMade";
 
 // Sample data for "Collected" (NFTs)
 const collectedNFTs = [
-  { id: 1, name: "CryptoPunk #1234", owner: "0xA12bC34D...", price: "3.5", acquired: "2025-01-30" },
-  { id: 2, name: "Bored Ape #5678", owner: "0xD56eF78A...", price: "5.2", acquired: "2025-01-29" },
+  {
+    id: 1,
+    name: "CryptoPunk #1234",
+    owner: "0xA12bC34D...",
+    price: "3.5",
+    acquired: "2025-01-30",
+  },
+  {
+    id: 2,
+    name: "Bored Ape #5678",
+    owner: "0xD56eF78A...",
+    price: "5.2",
+    acquired: "2025-01-29",
+  },
 ];
 
 // Tab data mapping
@@ -36,7 +48,9 @@ const TransactionTable = () => {
           {Object.keys(tabData).map((tab) => (
             <button
               key={tab}
-              className={`tab-button ${activeTab === tab ? "active" : ""}`}
+              className={`tab-button ${
+                activeTab === tab ? "active" : ""
+              } outfit`}
               onClick={() => setActiveTab(tab)}
             >
               {tabTitles[tab].toUpperCase()}
@@ -51,8 +65,8 @@ const TransactionTable = () => {
 
       {/* Table Content */}
       <div className="table-container">
-        <h2 className="table-title">{tabTitles[activeTab]}</h2>
-        <div className="table-overflow">
+        <h2 className="table-title outfit-bold">{tabTitles[activeTab]}</h2>
+        <div className="table-overflow outfit">
           <table>
             <thead>
               <tr>
@@ -121,17 +135,19 @@ const TransactionTable = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: "center", padding: "10px" }}>
+                  <td
+                    style={{ textAlign: "center"}}
+                  >
                     No Data Available
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
-        </div> 
+        </div>
       </div>
-                {/* Pagination Buttons (----temporary----)*/}
-      <div className="pagination">
+      {/* Pagination Buttons (----temporary----)*/}
+      <div className="pagination outfit">
         <button className="pagination-btn">Previous</button>
         <span className="pagination-info">Page 1...</span>
         <button className="pagination-btn">Next</button>

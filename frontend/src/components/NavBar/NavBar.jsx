@@ -59,9 +59,6 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link roboto" to="/contact">Contact</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link roboto" to="/profile">Profile</Link>
-            </li>
             </ul>
             <ul className="navbar-nav ms-auto">
             <li className="nav-item roboto">

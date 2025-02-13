@@ -20,7 +20,6 @@ const App = () => {
           <Route path="/buy" element={<Buy />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
-
         </Routes>
         
     </Router>
