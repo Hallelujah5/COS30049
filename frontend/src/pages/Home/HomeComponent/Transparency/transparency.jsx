@@ -1,5 +1,6 @@
 import React from 'react'
 import stock from '../../../../assets/images/homepage/stock.png'
+import {motion} from "motion/react"
 const Transparency = () => {
   return (
     <>
@@ -11,7 +12,7 @@ const Transparency = () => {
         <h1 className='display-5 fw-bold lh-1 mb-3 outfit-bold'>Seamless Trading, Redefined</h1>
         <p className="herotext">Seamlessly access the future of trading with our blockchain-powered platform, designed for ultimate security and efficiency.</p>
         <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" className="btn btn-purple NFT outfit-bold">TRADE NOW</button>
+          <motion.button whileTap={{scale:0.9}} type="button" className="btn btn-purple NFT outfit-bold">TRADE NOW</motion.button>
         </div>
         
       </div>

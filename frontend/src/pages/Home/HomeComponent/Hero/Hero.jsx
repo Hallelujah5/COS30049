@@ -7,7 +7,7 @@ const Hero = () => {
     <motion.div className="container col-xxl-8 px-4 py-5 text-white"  initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{
-      duration: 1,
+      duration: 0.6,
       delay: 0.1,
       ease: [0, 0.1, 0.2, 1.01],
   }}

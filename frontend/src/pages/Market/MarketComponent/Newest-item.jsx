@@ -1,13 +1,16 @@
-//Item component for Newest section
+//========================================================
+//=========ITEM COMPONENT FOR NEWEST ITEMS SECTION=========
+//========================================================
 
 
 import React from "react";
 import PropTypes from "prop-types";
 import Heart from "../../../components/heart";
+import {motion} from "motion/react"
 
 const CheckmarkItem = ({ name, image, checkmark, address, onClick = () => {} }) => {
   return (
-    <div
+    <motion.div whileHover={{scale:1.03}}
       className="col-12 col-sm-12 col-md-4 col-lg-3 d-flex justify-content-center mb-3"
 
 
@@ -40,7 +43,7 @@ const CheckmarkItem = ({ name, image, checkmark, address, onClick = () => {} }) 
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

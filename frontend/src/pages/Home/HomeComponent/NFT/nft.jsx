@@ -1,5 +1,6 @@
 import React from 'react'
 import nft_img from '../../../../assets/images/homepage/nft.png'
+import {motion} from "motion/react"
 const NFT = () => {
   return (
     <>
@@ -14,7 +15,7 @@ const NFT = () => {
       <h1 className='display-5 fw-bold lh-1 mb-3 outfit-bold'>Trade Your NFTs, Anytime, Anywhere</h1>
         <p className="bodytext">With our easy-to-use platform, you can buy or sell assets from anywhere in the world, at any time.</p>
         <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" className="btn btn-purple NFT outfit-bold">GET STARTED</button>
+        <motion.button whileTap={{scale:0.9}} type="button" className="btn btn-purple NFT outfit-bold">GET STARTED</motion.button>
         </div>
       </div>
     </div>

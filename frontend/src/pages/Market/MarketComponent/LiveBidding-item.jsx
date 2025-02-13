@@ -1,13 +1,15 @@
-//item component for LiveBidding section
-
+//========================================================
+//=========ITEM COMPONENT FOR LIVEBIDDING SECTION=========
+//========================================================
 
 import React from "react";
 import PropTypes from "prop-types";
 import Heart from "../../../components/heart";
+import {motion} from "motion/react"
 
 const BiddingItem = ({ name, image, text, day, address, onClick }) => {
   return (
-    <div
+    <motion.div whileHover={{scale:1.03}}
       className="col-sm-12 col-md-4 col-lg-3   d-flex justify-content-center mb-3"
 
     >
@@ -35,7 +37,7 @@ const BiddingItem = ({ name, image, text, day, address, onClick }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
