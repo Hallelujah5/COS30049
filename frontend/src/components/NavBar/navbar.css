@@ -82,7 +82,7 @@
 
 
 .offcanvas {
-    background: linear-gradient(to bottom, #232685, #2c569f) !important;
+    background: linear-gradient(to bottom, #272a85e3, #2c569f) !important;
     
 }
 
@@ -95,12 +95,19 @@
 }
 
 .offcanvas a {
-    text-decoration: none;
+    
     color: white !important;
 }
 .offcanvas h4 {
-    padding: 0.8em 1em;
+    padding: 0.7em 1em;
     margin: 0;
+}
+
+.offcanvas p {
+    padding: 0 1em;
+    margin: 0;
+    margin-bottom: 1rem;
+    font-size: large;
 }
 
 .logout-btn{

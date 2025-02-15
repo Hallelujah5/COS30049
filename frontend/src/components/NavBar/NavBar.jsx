@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import wallet from "../../assets/images/navbar/wallet.png";
+import wallet2 from "../../assets/wallet.svg"
 import logo from "../../assets/images/navbar/xyora2.png";
 import userIcon from "../../assets/images/user-icon.svg";
 import { motion } from "framer-motion";
@@ -100,15 +101,17 @@ const IsLoggedIn = () => {
           className="outfit"
         >
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Welcome, User!</Offcanvas.Title>
+            <h3>Welcome,  John Doe!</h3>
+            
           </Offcanvas.Header>
+          <p><img src={wallet2} alt="" className="svg-icon"/>Balance: 0.17 ETH</p>
           <hr />
           <Offcanvas.Body>
             <motion.div
               whileTap={{ scale: 0.95 }}
               whileHover={{
                 background:
-                  "linear-gradient(to bottom,rgb(44, 47, 138),rgb(44, 57, 159))",
+                  "linear-gradient(to bottom,rgb(48, 51, 140),rgb(59, 71, 159))",
               }}
             >
               <Link to="/profile">
@@ -116,7 +119,8 @@ const IsLoggedIn = () => {
               </Link>
             </motion.div>
             <hr />
-            <Button
+            
+            <Button 
               className="logout-btn"
               variant="danger"
               onClick={() => {
