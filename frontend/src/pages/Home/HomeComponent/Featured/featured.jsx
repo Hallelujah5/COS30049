@@ -9,6 +9,9 @@ import { motion } from "motion/react";
 const Featured = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
 
+
+
+  //CHECK FOR SCREEN WIDTH
   useEffect(() => {
     const handleResize = () => setIsSmallScreen(window.innerWidth < 1200);
     window.addEventListener("resize", handleResize);

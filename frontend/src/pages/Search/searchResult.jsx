@@ -1,3 +1,5 @@
+//Reused from Market/LiveBidding
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../Market/MarketComponent/marketplace.css";
