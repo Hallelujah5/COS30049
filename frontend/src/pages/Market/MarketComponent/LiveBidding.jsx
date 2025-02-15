@@ -52,7 +52,6 @@ const Bidding = () => {
 
 
       <div className="text-center mb-5"></div>
-      <div data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
         <div className="row justify-content-center mt-5" id="navbar-example">
           {biddingItems.map((item, index) => (
             <BiddingItem
@@ -66,7 +65,6 @@ const Bidding = () => {
               onClick={() => {  navigate(path)}}
             />
           ))}
-        </div>
       </div>
       <p className="gray mx-3">Bidding updates every 10s</p>
     </div>

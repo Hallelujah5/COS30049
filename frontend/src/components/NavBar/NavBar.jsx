@@ -9,23 +9,28 @@ import { Offcanvas, Button } from "react-bootstrap";
 
 const IsLoggedIn = () => {
   const [user, setUser] = useState(
-    () => JSON.parse(localStorage.getItem("user")) || false
+    () => JSON.parse(localStorage.getItem("user")) || false //USER STATE  (LOGGED IN OR NOT)
   );
-  const [query, setQuery] = useState("");
-  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [query, setQuery] = useState(""); //SEARCH STATE
+  const [showOffcanvas, setShowOffcanvas] = useState(false); //OFFCANVAS STATE
   const navigate = useNavigate();
 
+
+  const SearchKeyWords = ["gbean", "g-bean"];
   const handleSearch = (event) => {
-    event.preventDefault();
-    if (query.trim()) {
+    //SEARCH LOGIC NAVIGATION
+    event.preventDefault(); // Prevent form submission
+    if (SearchKeyWords.includes(query.trim().toLowerCase())) {
       navigate("/search");
-      //
-    }
+    }else {navigate("/*")}
   };
 
-  const handleCloseOffcanvas = () => setShowOffcanvas(false);
-  const handleShowOffcanvas = () => setShowOffcanvas(true);
 
+
+  const handleCloseOffcanvas = () => setShowOffcanvas(false); //TOGGLE OFFCANVAS
+  const handleShowOffcanvas = () => setShowOffcanvas(true); //TOGGLE OFFCANVAS
+
+  
   if (!user) {
     return (
       <button
@@ -40,10 +45,12 @@ const IsLoggedIn = () => {
         Connect Wallet
       </button>
     );
-  } else {
+  } //SHOW A CONNECT WALLET BUTTON TOP RIGHT CORNER FOR WHEN USER FIRST LOG IN WEBSITE.
+  else {
+    //AFTER LOGIN (PRESUMABLY), SHOW THE SEARCH BAR AND USER ICON.
     return (
       <span>
-        <form className="d-flex justify-content-center align-items-center form-inline my-2 my-lg-0">
+        <div className="d-flex justify-content-center align-items-center form-inline my-2 my-lg-0" >
           <div className="search-container">
             <svg
               className="search-icon"
@@ -58,17 +65,22 @@ const IsLoggedIn = () => {
                 fill="#9D9D9D"
               />
             </svg>
+
+            {/* =============SEARCH BAR============= */}
             <form onSubmit={handleSearch}>
               <input
                 className="form-control mr-sm-2"
                 id="searchbar"
                 type="search"
+                value={query} 
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search"
                 aria-label="Search"
               />
             </form>
           </div>
+
+          {/* =============USER ICON============= */}
           <motion.div whileTap={{ scale: 0.89 }}>
             <img
               src={userIcon}
@@ -78,9 +90,9 @@ const IsLoggedIn = () => {
               onClick={handleShowOffcanvas}
             />
           </motion.div>
-        </form>
+        </div>
 
-        {/* Offcanvas */}
+        {/* =============OFFCANVAS============= */}
         <Offcanvas
           show={showOffcanvas}
           onHide={handleCloseOffcanvas}
@@ -94,7 +106,10 @@ const IsLoggedIn = () => {
           <Offcanvas.Body>
             <motion.div
               whileTap={{ scale: 0.95 }}
-              whileHover={{ background: "linear-gradient(to bottom,rgb(44, 47, 138),rgb(44, 57, 159))" }}
+              whileHover={{
+                background:
+                  "linear-gradient(to bottom,rgb(44, 47, 138),rgb(44, 57, 159))",
+              }}
             >
               <Link to="/profile">
                 <h4>Profile</h4>
