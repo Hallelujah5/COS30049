@@ -1,4 +1,4 @@
-*{
+*:not(.offcanvas-body *):not(.offcanvas *){
     color: white;
 }
 
@@ -72,6 +72,9 @@
     color:rgb(0, 102, 255) !important;
 }
 
+.black {
+    color: black !important;
+}
 
 
 body {

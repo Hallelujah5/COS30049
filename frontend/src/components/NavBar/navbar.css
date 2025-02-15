@@ -1,6 +1,6 @@
 
 :root {
-    --search-bar-color: #6962b9;
+    --search-bar-color: #615ab5;
 }
 
 
@@ -28,7 +28,7 @@
     outline: none;
 }
 #searchbar:hover{
-    background-color: #7771bb;
+    background-color: #7871c9;
     transition: 0.3s;
 }
 
@@ -75,3 +75,35 @@
     margin-left: 1rem !important;
 }
 
+
+
+
+/* -------------OFFCANVAS------------- */
+
+
+.offcanvas {
+    background: linear-gradient(to bottom, #232685, #2c569f) !important;
+    
+}
+
+.offcanvas-body {
+    padding: 0em 0em !important;
+}
+
+.offcanvas hr {
+    margin: 0;
+}
+
+.offcanvas a {
+    text-decoration: none;
+    color: white !important;
+}
+.offcanvas h4 {
+    padding: 0.8em 1em;
+    margin: 0;
+}
+
+.logout-btn{
+    margin-top: 2rem;
+    margin-left: 1rem;
+}

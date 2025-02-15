@@ -1,13 +1,30 @@
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import wallet from "../../assets/images/navbar/wallet.png";
 import logo from "../../assets/images/navbar/xyora2.png";
 import userIcon from "../../assets/images/user-icon.svg";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
+import { Offcanvas, Button } from "react-bootstrap";
 
 const IsLoggedIn = () => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(
+    () => JSON.parse(localStorage.getItem("user")) || false
+  );
+  const [query, setQuery] = useState("");
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (query.trim()) {
+      navigate("/search");
+      //
+    }
+  };
+
+  const handleCloseOffcanvas = () => setShowOffcanvas(false);
+  const handleShowOffcanvas = () => setShowOffcanvas(true);
 
   if (!user) {
     return (
@@ -15,6 +32,7 @@ const IsLoggedIn = () => {
         id="wallet"
         onClick={() => {
           setUser(!user);
+          localStorage.setItem("user", JSON.stringify(!user));
         }}
         className="btn "
       >
@@ -25,7 +43,7 @@ const IsLoggedIn = () => {
   } else {
     return (
       <span>
-        <form class="d-flex justify-content-center align-items-center form-inline my-2 my-lg-0">
+        <form className="d-flex justify-content-center align-items-center form-inline my-2 my-lg-0">
           <div className="search-container">
             <svg
               className="search-icon"
@@ -40,21 +58,62 @@ const IsLoggedIn = () => {
                 fill="#9D9D9D"
               />
             </svg>
-            <input
-              class="form-control mr-sm-2"
-              id="searchbar"
-              className="outfit"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
+            <form onSubmit={handleSearch}>
+              <input
+                className="form-control mr-sm-2"
+                id="searchbar"
+                type="search"
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </form>
           </div>
-          <motion.div whileTap={{scale:0.89}}>
-            <Link to="/profile">
-              <img src={userIcon} alt="White user icon" id="user-icon" />
-            </Link>
+          <motion.div whileTap={{ scale: 0.89 }}>
+            <img
+              src={userIcon}
+              alt="User Icon"
+              style={{ cursor: "pointer" }}
+              id="user-icon"
+              onClick={handleShowOffcanvas}
+            />
           </motion.div>
         </form>
+
+        {/* Offcanvas */}
+        <Offcanvas
+          show={showOffcanvas}
+          onHide={handleCloseOffcanvas}
+          placement="end"
+          className="outfit"
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Welcome, User!</Offcanvas.Title>
+          </Offcanvas.Header>
+          <hr />
+          <Offcanvas.Body>
+            <motion.div
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ background: "linear-gradient(to bottom,rgb(44, 47, 138),rgb(44, 57, 159))" }}
+            >
+              <Link to="/profile">
+                <h4>Profile</h4>
+              </Link>
+            </motion.div>
+            <hr />
+            <Button
+              className="logout-btn"
+              variant="danger"
+              onClick={() => {
+                setUser(false);
+                localStorage.removeItem("user");
+                handleCloseOffcanvas();
+              }}
+            >
+              Logout
+            </Button>
+          </Offcanvas.Body>
+        </Offcanvas>
       </span>
     );
   }
@@ -70,7 +129,7 @@ const Navbar = () => {
         style={{ maxWidth: "87.5%" }}
       >
         {/* WEBSITE LOGO */}
-        <motion.div whileHover={{ scale:1.05 }} whileTap={{scale:0.95}} >
+        <motion.div whileTap={{ scale: 0.95 }}>
           <Link to="/">
             <img src={logo} alt="" />
           </Link>
@@ -97,26 +156,36 @@ const Navbar = () => {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav ms-left ml-3">
-            <motion.li whileHover={{ scale: 1.08 }} whileTap={{scale:0.95}} className="nav-item">
+            <motion.li
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="nav-item"
+            >
               <Link className="nav-link roboto" aria-current="page" to="/about">
                 About
               </Link>
             </motion.li>
-            <motion.li whileHover={{ scale: 1.08 }} whileTap={{scale:0.95}} className="nav-item">
+            <motion.li
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="nav-item"
+            >
               <Link className="nav-link roboto" to="/market">
                 Marketplace
               </Link>
             </motion.li>
-            <motion.li whileHover={{ scale: 1.08 }} whileTap={{scale:0.95}} className="nav-item">
+            <motion.li
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="nav-item"
+            >
               <Link className="nav-link roboto" to="/contact">
                 Contact
               </Link>
             </motion.li>
           </ul>
           <ul className="navbar-nav ms-auto">
-            <li  className="nav-item roboto">
-              {IsLoggedIn()}
-            </li>
+            <li className="nav-item roboto">{IsLoggedIn()}</li>
           </ul>
         </div>
       </div>

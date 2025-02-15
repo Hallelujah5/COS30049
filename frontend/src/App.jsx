@@ -5,6 +5,7 @@ import NotFound from './pages/Notfound/notfound'
 import About from './pages/About/About'
 import Market from './pages/Market/Market'
 import Buy from './pages/Buy/BuyPage'
+import Search from './pages/Search/search'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
 
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/market" element={<Market />} />
           <Route path="/buy" element={<Buy />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/search" element={<Search />} />
 
         </Routes>
       
