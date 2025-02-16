@@ -95,7 +95,7 @@
 }
 
 .offcanvas a {
-    
+    text-decoration: none;
     color: white !important;
 }
 .offcanvas h4 {
