@@ -1,11 +1,7 @@
 # Group 6 - Assignment 1
 
 ## Description
-According to an insight into blockchain technology, it has the potential to revolutionize global business and financial processes without requiring reliable intermediaries or taking geographic restrictions into account. Therefore, a number of aspects of the blockchain, such as consensus techniques and managed services in terms of effectiveness, will remain to be popular study areas (Khan et al., 2022). Blockchain technology has enabled the development of decentralized applications that promote transparency, security, and secure transactions. For this assignment, we created Xyora, a website designed to provide a safe trading space for Non-Fungible Tokens (NFT) enthusiasts.
-
-Despite the growing popularity of NFTs, many existing centralized trading platforms are vulnerable to hacking, have high transaction fees, and lack of trust because of unclear transaction processes. Our project aims to address these issues by developing a decentralized trading platform that can ensure a secure transaction experience using blockchain technology. By not using intermediaries, the platform can improve security and reduce transaction costs, creating a user-friendly trading environment. Blockchain technology “provides provenance, immutability, and finality for the transfer of value within a business network. It enables value exchange in real time, reducing costs and errors.” (Satarupa Saha et al., 2019)
-
-Our goal is to build a decentralized NFT trading platform that facilitates peer-to-peer transactions of digital collectibles. Our platform Xyora offers a secure and user-friendly marketplace where users can easily browse, buy, and sell NFTs. By using blockchain technology, we can enhance security and efficiency, ensuring a safe and seamless trading experience for our users. This report will cover the front-end development stage of our project, from designing the user interface to implementing the website.
+Our project (Xyora) is a decentralized NFT trading platform designed to provide a safe and user-friendly marketplace for NFT enthusiasts. By leveraging blockchain technology, Xyora ensures secure and efficient peer-to-peer transactions of digital collectibles, eliminating intermediaries and reducing transaction costs.
 
 ## Setup Instructions
 
