@@ -20,7 +20,7 @@ To set up and run the project locally, follow these steps:
 
 2. Navigate into the project directory:
     ```sh
-    cd group-project-spr-2025-g6
+    cd group-project-spr-2025-g6/frontend
     ```
 
 3. Pull the latest changes from the main branch:
