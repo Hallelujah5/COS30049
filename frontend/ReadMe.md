@@ -23,5 +23,5 @@ Commands to run:
 And you're done!
 
 
-
+also the keyword to search is 'Gbean' (any variation is fine), otherwise the search result will return an error.
 
