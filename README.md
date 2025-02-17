@@ -3,6 +3,16 @@
 ## Description
 Our project (Xyora) is a decentralized NFT trading platform designed to provide a safe and user-friendly marketplace for NFT enthusiasts. By leveraging blockchain technology, Xyora ensures secure and efficient peer-to-peer transactions of digital collectibles, eliminating intermediaries and reducing transaction costs.
 
+## Usage
+
+To use this project, follow these steps:
+
+1. Ensure all dependencies are installed as mentioned in the Setup Instructions.
+2. Run the development server using `npm run dev`.
+3. Open your browser and navigate to `http://localhost:3000` (or the port specified in your configuration).
+4. Follow the on-screen instructions to interact with the application.
+5. For searching function, the only keyword is "Gbean" (fine with any variation), otherwise the search result will return an error
+
 ## Setup Instructions
 
 ### Prerequisites
