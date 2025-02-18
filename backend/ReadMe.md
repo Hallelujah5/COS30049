@@ -1,25 +1,32 @@
-Your **backend** code project (dApp).
-# Back end set up
-## Set up instruction
-### Clone the repo
-'''
- git clone https://github.com/COS30049-SUVHN/group-project-spr-2025-g6.git
-'''
-### Install Fast API, Uvicorn on ./backend/
-#### Move to backend folder
-'''
- cd .\group-project-spr-2025-g6\backend\
-'''
-#### Activate venv
-'''
- .\venv\Scripts\activate
-'''
-#### Install fastapi uvicorn
-'''
+# Backend Code Project (dApp)
+
+## Backend Setup Instructions
+
+### Clone the repository
+```bash
+git clone https://github.com/COS30049-SUVHN/group-project-spr-2025-g6.git
+```
+
+### Install FastAPI and Uvicorn in the backend directory
+
+#### Move to the backend folder
+```bash
+cd ./group-project-spr-2025-g6/backend/
+```
+
+#### Activate the virtual environment
+```bash
+.\venv\Scripts\activate
+```
+
+#### Install FastAPI and Uvicorn
+```bash
 pip install fastapi uvicorn
-'''
+```
+
 #### Testing with main.py
-'''
+Create a `main.py` file with the following content:
+```python
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -27,19 +34,23 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
-'''
-#### Run main:app
-'''
-uvicorn main:app --reload
-'''
-#### Witness the result in http://127.0.0.1:8000/
+```
 
-### Deactivate and Delete Fast API, Uvicorn
-#### Deactivate Fast API, Uvicorn
-'''
+#### Run the application
+```bash
+uvicorn main:app --reload
+```
+
+#### Witness the result at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+### Deactivate and delete FastAPI and Uvicorn
+
+#### Deactivate the virtual environment
+```bash
 deactivate
-'''
-#### Delete Fast API, Uvicorn
-'''
+```
+
+#### Delete the virtual environment
+```bash
 Remove-Item -Recurse -Force venv
-'''
+```
