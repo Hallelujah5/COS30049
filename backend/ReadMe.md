@@ -23,6 +23,13 @@ cd ./group-project-spr-2025-g6/backend/
 ```bash
 pip install fastapi uvicorn
 ```
+#### (Optional) After installing a dependency, one should use:
+
+```bash
+pip freeze > requirements.txt
+```
+
+As to manually update the libraries so everyone would get the same exact versions.
 
 #### Testing with main.py
 Create a `main.py` file with the following content:
@@ -43,14 +50,14 @@ uvicorn main:app --reload
 
 #### Witness the result at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-### Deactivate and delete FastAPI and Uvicorn
+### Deactivate and delete FastAPI and Uvicorn 
 
-#### Deactivate the virtual environment
+#### Deactivate the virtual environment 
 ```bash
 deactivate
 ```
 
-#### Delete the virtual environment
+#### Delete the virtual environment (this is unneeded as one can add venv/ folder to .gitignore)
 ```bash
 Remove-Item -Recurse -Force venv
 ```
