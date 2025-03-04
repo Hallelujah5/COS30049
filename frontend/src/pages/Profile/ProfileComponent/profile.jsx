@@ -1,8 +1,8 @@
 import React from "react";
 import "./profile.css";
-import userBanner from "../../../assets/images/profile/userbanner.png";
-import wallet from "../../../assets/images/profile/wallet.png";
-import calendar from "../../../assets/images/profile/calendar.png";
+import userBanner from "../../../../../backend/static/images/profile/userbanner.png";
+import wallet from "../../../../../backend/static/images/profile/wallet.png";
+import calendar from "../../../../../backend/static/images/profile/calendar.png";
 
 const Profile = () => {
   const user = {

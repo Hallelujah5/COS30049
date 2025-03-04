@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom'
 import "./marketplace.css";
-import img1 from "../../../assets/images/market/image-1.png";
-import img2 from "../../../assets/images/market/image-2.png";
-import img3 from "../../../assets/images/market/image-3.png";
-import img4 from "../../../assets/images/market/image-4.png";
-import img5 from "../../../assets/images/market/image-5.png";
-import img6 from "../../../assets/images/market/image-6.png";
-import img7 from "../../../assets/images/market/image-10.png";
-import img8 from "../../../assets/images/market/image.png";
+import img1 from "../../../../../backend/static/images/market/image-1.png";
+import img2 from "../../../../../backend/static/images/market/image-2.png";
+import img3 from "../../../../../backend/static/images/market/image-3.png";
+import img4 from "../../../../../backend/static/images/market/image-4.png";
+import img5 from "../../../../../backend/static/images/market/image-5.png";
+import img6 from "../../../../../backend/static/images/market/image-6.png";
+import img7 from "../../../../../backend/static/images/market/image-10.png";
+import img8 from "../../../../../backend/static/images/market/image.png";
 import BiddingItem from "./LiveBidding-item";
 
 

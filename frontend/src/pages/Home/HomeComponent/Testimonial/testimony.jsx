@@ -1,8 +1,8 @@
 import React from "react";
 import "./testimonials.css";
-import oliviaImg from "../../../../assets/images/testimonial/m1.png";
-import evanImg from "../../../../assets/images/testimonial/m2.png";
-import jessicaImg from "../../../../assets/images/testimonial/m3.png";
+import oliviaImg from "../../../../../../backend/static/images/testimonial/m1.png";
+import evanImg from "../../../../../../backend/static/images/testimonial/m2.png";
+import jessicaImg from "../../../../../../backend/static/images/testimonial/m3.png";
 
 
 

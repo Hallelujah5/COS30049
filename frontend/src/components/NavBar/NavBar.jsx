@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import "./navbar.css";
-import wallet from "../../assets/images/navbar/wallet.png";
+import wallet from "../../../../backend/static/images/navbar/wallet.png";
 import wallet2 from "../../assets/wallet.svg"
-import logo from "../../assets/images/navbar/xyora2.png";
+import logo from "../../../../backend/static/images/navbar/xyora2.png";
 import userIcon from "../../assets/images/user-icon.svg";
 import { motion } from "framer-motion";
 import { Offcanvas, Button } from "react-bootstrap";

@@ -3,7 +3,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../Market/MarketComponent/marketplace.css";
-import img7 from "../../assets/images/market/image-10.png";
+import img7 from "../../../../backend/static/images/market/image-10.png";
 import BiddingItem from "../Market/MarketComponent/LiveBidding-item";
 
 const biddingItems = [

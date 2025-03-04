@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./featured.css";
-import fc from "../../../../assets/images/featured/FC.png";
-import forbe from "../../../../assets/images/featured/Forbes.png";
-import idk from "../../../../assets/images/featured/idk.png";
-import TC from "../../../../assets/images/featured/TC.png";
-import tcSmall from "../../../../assets/images/featured/TC-sm.png";
+import fc from "../../../../../../backend/static/images/featured/FC.png";
+import forbe from "../../../../../../backend/static/images/featured/Forbes.png";
+import idk from "../../../../../../backend/static/images/featured/idk.png";
+import TC from "../../../../../../backend/static/images/featured/TC.png";
+import tcSmall from "../../../../../../backend/static/images/featured/TC-sm.png";
 import { motion } from "motion/react";
 const Featured = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);

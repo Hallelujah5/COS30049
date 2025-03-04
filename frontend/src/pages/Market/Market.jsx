@@ -4,7 +4,6 @@ import Newest from "./MarketComponent/Newest";
 import CreateNFT from "./MarketComponent/CreateNFT";
 import Footer from "../../components/Footer/footer";
 import { motion } from "motion/react";
-import { duration } from "@mui/material";
 
 const fadeInVariant = {
   offscreen: { opacity: 0, y: 50 },

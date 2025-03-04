@@ -128,3 +128,17 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+#Ignore virtual environment
+venv/
+
+#Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+#Ignore logs and env files
+*.log
+.env

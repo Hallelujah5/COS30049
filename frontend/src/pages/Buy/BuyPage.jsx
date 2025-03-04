@@ -1,7 +1,7 @@
 import React from 'react'
 import './buy.css'
 import Footer from '../../components/Footer/footer';
-import img7 from "../../assets/images/market/image-10.png";
+import img7 from "../../../../backend/static/images/market/image-10.png";
 import menu from "../../assets/menu.svg"
 import cash from "../../assets/cash.svg"
 import more from "../../assets/more.svg"

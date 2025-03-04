@@ -1,5 +1,5 @@
 import React from "react";
-import heroimg from "../../../../assets/images/hero/Hero-img.png";
+import heroimg from "../../../../../../backend/static/images/hero/Hero-img.png";
 import "./hero.css";
 import {motion} from "motion/react"
 const Hero = () => {
