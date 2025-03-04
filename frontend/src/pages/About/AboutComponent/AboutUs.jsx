@@ -1,7 +1,8 @@
 import "./aboutUs.css";
-import phuc from '../../../assets/images/aboutus/phuc.png'
-import phale from '../../../assets/images/aboutus/phale.png'
-import thinh from '../../../assets/images/aboutus/thinh.png'
+import phuc from '../../../../../backend/static/images/aboutus/phuc.png'
+import phale from '../../../../../backend/static/images/aboutus/phale.png'
+import thinh from '../../../../../backend/static/images/aboutus/thinh.png'
+
 
 
 const testimonies = [

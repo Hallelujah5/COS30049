@@ -1,11 +1,11 @@
 import React from "react";
 import "./marketplace.css";
 import { useNavigate } from "react-router-dom";
-import img1 from "../../../assets/images/market/newest/image.png";
-import img2 from "../../../assets/images/market/newest/image-2.png";
-import img3 from "../../../assets/images/market/newest/image-3.png";
-import img4 from "../../../assets/images/market/newest/image-1.png";
-import checkmark from "../../../assets/images/market/newest/checkmark.png";
+import img1 from "../../../../../backend/static/images/market/newest/image.png";
+import img2 from "../../../../../backend/static/images/market/newest/image-2.png";
+import img3 from "../../../../../backend/static/images/market/newest/image-3.png";
+import img4 from "../../../../../backend/static/images/market/newest/image-1.png";
+import checkmark from "../../../../../backend/static/images/market/newest/checkmark.png";
 import Newest_item from "./Newest-item";
 
 const NewItems = [
