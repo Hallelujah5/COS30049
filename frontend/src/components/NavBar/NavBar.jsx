@@ -1,21 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./navbar.css";
 import wallet from "../../../../backend/static/images/navbar/wallet.png";
-import wallet2 from "../../assets/wallet.svg"
+import wallet2 from "../../assets/wallet.svg";
 import logo from "../../../../backend/static/images/navbar/xyora2.png";
+import logouticon from "../../../../backend/static/images/navbar/logout.png";
+import profileicon from "../../../../backend/static/images/navbar/user.png";
 import userIcon from "../../assets/images/user-icon.svg";
 import { motion } from "framer-motion";
-import { Offcanvas, Button } from "react-bootstrap";
 
 const IsLoggedIn = () => {
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem("user")) || false //USER STATE  (LOGGED IN OR NOT)
   );
   const [query, setQuery] = useState(""); //SEARCH STATE
-  const [showOffcanvas, setShowOffcanvas] = useState(false); //OFFCANVAS STATE
+  const [hover, setHover] = useState(false); //HOVER STATE
   const navigate = useNavigate();
-
 
   const SearchKeyWords = ["gbean", "g-bean"];
   const handleSearch = (event) => {
@@ -23,15 +23,12 @@ const IsLoggedIn = () => {
     event.preventDefault(); // Prevent form submission
     if (SearchKeyWords.includes(query.trim().toLowerCase())) {
       navigate("/search");
-    }else {navigate("/*")}
+    } else {
+      navigate("/*");
+    }
   };
 
-
-
-  const handleCloseOffcanvas = () => setShowOffcanvas(false); //TOGGLE OFFCANVAS
-  const handleShowOffcanvas = () => setShowOffcanvas(true); //TOGGLE OFFCANVAS
-
-  
+  // WALLET CONNECTION
   if (!user) {
     return (
       <button
@@ -51,7 +48,7 @@ const IsLoggedIn = () => {
     //AFTER LOGIN (PRESUMABLY), SHOW THE SEARCH BAR AND USER ICON.
     return (
       <span>
-        <div className="d-flex justify-content-center align-items-center form-inline my-2 my-lg-0" >
+        <div className="loggedin-container d-flex justify-content-center align-items-center form-inline my-2 my-lg-0">
           <div className="search-container">
             <svg
               className="search-icon"
@@ -73,7 +70,7 @@ const IsLoggedIn = () => {
                 className="form-control mr-sm-2"
                 id="searchbar"
                 type="search"
-                value={query} 
+                value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search"
                 aria-label="Search"
@@ -81,58 +78,60 @@ const IsLoggedIn = () => {
             </form>
           </div>
 
-          {/* =============USER ICON============= */}
-          <motion.div whileTap={{ scale: 0.89 }}>
-            <img
-              src={userIcon}
-              alt="User Icon"
-              style={{ cursor: "pointer" }}
-              id="user-icon"
-              onClick={handleShowOffcanvas}
-            />
-          </motion.div>
-        </div>
-
-        {/* =============OFFCANVAS============= */}
-        <Offcanvas
-          show={showOffcanvas}
-          onHide={handleCloseOffcanvas}
-          placement="end"
-          className="outfit"
-        >
-          <Offcanvas.Header closeButton>
-            <h3>Welcome,  John Doe!</h3>
-            
-          </Offcanvas.Header>
-          <p><img src={wallet2} alt="" className="svg-icon"/>Balance: 0.17 ETH</p>
-          <hr />
-          <Offcanvas.Body>
-            <motion.div
-              whileTap={{ scale: 0.95 }}
-              whileHover={{
-                background:
-                  "linear-gradient(to bottom,rgb(48, 51, 140),rgb(59, 71, 159))",
-              }}
+          <div className="balance-profile-container">
+            {/* User Balance Display */}
+            <div className="balance-container">
+              <p>
+                <img src={wallet2} alt="" className="svg-icon" /> BAL: 0.17 ETH
+              </p>
+            </div>
+            {/* USER ICON & HOVER MENU */}
+            <div
+              className="profile-container"
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
             >
               <Link to="/profile">
-                <h4>Profile</h4>
+                <motion.div whileTap={{ scale: 0.89 }}>
+                  <img
+                    src={userIcon}
+                    alt="User Icon"
+                    style={{ cursor: "pointer" }}
+                    id="user-icon"
+                  />
+                </motion.div>
               </Link>
-            </motion.div>
-            <hr />
-            
-            <Button 
-              className="logout-btn"
-              variant="danger"
-              onClick={() => {
-                setUser(false);
-                localStorage.removeItem("user");
-                handleCloseOffcanvas();
-              }}
-            >
-              Logout
-            </Button>
-          </Offcanvas.Body>
-        </Offcanvas>
+              {/* HOVER MENU */}
+              {hover && (
+                <div className="hover-menu">
+                  <h3>Welcome, John Doe!</h3>
+                  <hr />
+                  <motion.div
+                    whileTap={{ scale: 0.95 }}
+                    whileHover={{
+                      background:
+                        "linear-gradient(to bottom,rgb(48, 51, 140),rgb(59, 71, 159))",
+                    }}
+                  >
+                    <Link to="/profile" className="profile-link">
+                    <p><img src={profileicon} alt="profile" />&nbsp;&nbsp; Profile</p>
+                    </Link>
+                  </motion.div>
+                  <hr />
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      setUser(false);
+                      localStorage.removeItem("user");
+                    }}
+                  > <img src={logouticon} alt="log out" />
+                    &nbsp;&nbsp;Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </span>
     );
   }
