@@ -17,9 +17,10 @@ DROP TABLE IF EXISTS Users;
 
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(255) NOT NULL UNIQUE DEFAULT 'Unnamed',
     user_wallet VARCHAR(255) NOT NULL UNIQUE,
-    date_join TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    date_join TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    short_address VARCHAR(6) NOT NULL
 );
 
 CREATE TABLE NFTs(
@@ -28,8 +29,8 @@ CREATE TABLE NFTs(
     own_by INT,
     current_price DECIMAL(18, 8) NOT NULL,
     description TEXT,
-    details TEXT,
     image_path VARCHAR(255),
+    exp_date INT NOT NULL,
     FOREIGN KEY (own_by) REFERENCES Users(user_id) ON DELETE SET NULL
 );
 

@@ -25,14 +25,11 @@ const Buy = () => {
             <div>
             <img src={share} alt=""  />
             <img src={more} alt="" />
-          </div>
-          
-          
-        
-          </div>
+          </div>         
+        </div>
 
-          {/*---------------IMAGE---------------*/}
-          <img src={img7} alt="image of the chosen NFT item" className='item-img' />
+        {/*---------------IMAGE---------------*/}
+        <img src={img7} alt="image of the chosen NFT item" className='item-img' />
               
 
 
@@ -87,7 +84,6 @@ const Buy = () => {
         
         </div>
 
-
       <div className='col-8 outfit bodytext col-4 hl mt-5 col-12 col-sm-10 col-md-8 col-lg-8'>
 
 
@@ -129,14 +125,11 @@ const Buy = () => {
               
             </div>
           </div>
-
-
 <div>
 
 
+
 </div>
-
-
           {/*---------------OFFER---------------*/}
           <div className='d-flex flex-column m-lg-5 mt-4 mb-5 border-rounded bg-purple offer-pb'>
           
