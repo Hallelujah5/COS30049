@@ -201,6 +201,15 @@ const Navbar = () => {
                 Contact
               </Link>
             </motion.li>
+            <motion.li
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="nav-item"
+            >
+              <Link className="nav-link roboto" to="/create">
+                Create
+              </Link>
+            </motion.li>
           </ul>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item roboto">{IsLoggedIn()}</li>
