@@ -103,33 +103,49 @@ const IsLoggedIn = () => {
               </Link>
               {/* HOVER MENU */}
               {hover && (
-                <div className="hover-menu">
+                <motion.div
+                  className="hover-menu"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <h3>Welcome, John Doe!</h3>
                   <hr />
-                  <motion.div
-                    whileTap={{ scale: 0.95 }}
-                    whileHover={{
-                      background:
-                        "linear-gradient(to bottom,rgb(48, 51, 140),rgb(59, 71, 159))",
-                    }}
-                  >
-                    <Link to="/profile" className="profile-link">
-                    <p><img src={profileicon} alt="profile" />&nbsp;&nbsp; Profile</p>
-                    </Link>
-                  </motion.div>
+                  <Link to="/profile" className="profile-link">
+                    <p>
+                      <img src={profileicon} alt="profile" />
+                      &nbsp;&nbsp; Profile
+                    </p>
+                  </Link>
                   <hr />
                   <button
-                    className="btn btn-danger"
+                    className="btn logout-btn"
                     onClick={() => {
                       setUser(false);
                       localStorage.removeItem("user");
                     }}
-                  > <img src={logouticon} alt="log out" />
+                  >
+                    <img src={logouticon} alt="log out" />
                     &nbsp;&nbsp;Logout
                   </button>
-                </div>
+                </motion.div>
               )}
             </div>
+          </div>
+
+          {/* Logout button for mobile view */}
+          <div className="mobile-logout">
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                setUser(false);
+                localStorage.removeItem("user");
+              }}
+            >
+              <img src={logouticon} alt="log out" />
+              &nbsp;&nbsp;Logout
+            </button>
           </div>
         </div>
       </span>

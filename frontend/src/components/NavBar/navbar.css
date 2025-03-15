@@ -136,7 +136,7 @@
   position: absolute;
   top: 30px;
   right: 0;
-  background: #2f1e7d;
+  background: #1a0e4d;
   border-radius: 10px;
   box-shadow: 0px 4px 10px #00000033;
   padding: 15px;
@@ -144,6 +144,7 @@
   z-index: 5;
   display: flex;
   flex-direction: column;
+  word-wrap: break-word;
 }
 
 .hover-menu h3 {
@@ -153,9 +154,52 @@
 }
 
 .hover-menu p {
-  margin-bottom: 5px;
+  margin: 15px;
+}
+
+.hover-menu hr {
+  margin: 2px;
 }
 
 .hover-menu img {
   width: 20px;
+  height: 20px;
 }
+
+.profile-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px;
+}
+
+.logout-btn {
+  display: flex !important;
+  position: relative;
+  padding: 15px !important;
+  align-items: center;
+}
+
+.mobile-logout {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hover-menu {
+    display: none;
+  }
+
+  .mobile-logout {
+    display: block;
+    align-items: center;
+  }
+
+  .mobile-logout img {
+    width: 20px;
+  }
+}
+
+
