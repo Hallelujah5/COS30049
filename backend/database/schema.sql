@@ -28,6 +28,7 @@ CREATE TABLE NFTs(
     nft_name VARCHAR(255) NOT NULL,
     own_by INT,
     current_price DECIMAL(18, 8) NOT NULL,
+    short_description TEXT,
     description TEXT,
     image_path VARCHAR(255),
     exp_date INT NOT NULL,

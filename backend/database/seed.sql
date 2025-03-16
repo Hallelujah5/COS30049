@@ -26,16 +26,20 @@ INSERT INTO Users (username) VALUES
 ('diana_art'),
 ('ethan_trader');
 
+
+
 -- INSERT NFTs
-INSERT INTO NFTs (nft_name, own_by, current_price, description, image_path, exp_date) VALUES
-('G-Bean', 1, 2.1, 'Highest bid 1/16', '/static/images/market/image-10.png', 14),
-('DooBeanz', 2, 2.75, 'Highest bid 1/31', '/static/images/market/image-1.png', 6),
-('GLHFers', 3, 1.2, 'Highest bid 5/25', '/static/images/market/image-3.png', 21),
-('Noxus', 4, 3.1, 'Highest bid 3/16', '/static/images/market/image-5.png', 23),
-('PixelBeasts', 5, 0.8, 'Highest bid 1/120',  '/static/images/market/image.png', 2),
-('Honey Jar', 4, 2, 'Highest bid 1/52', '/static/images/market/image-2.png', 43),
-('Tootsies', 2, 5.3, 'Highest bid 2/24', '/static/images/market/image-4.png', 36),
-('Persona', 1, 2.8, 'Highest bid 1/20', '/static/images/market/image-6.png', 35);
+INSERT INTO NFTs (nft_name, own_by, current_price, short_description, description, image_path, exp_date) VALUES
+('G-Bean', 1, 2.81, 'Highest bid 1/16', 'By GreenGuru\n500 G-Beans Growing on the Ethereum Vine', '/static/images/market/image-10.png', 14),
+('DooBeanz', 2, 3.75, 'Highest bid 1/31', 'By BeanMaster\n1000 DooBeanz Sprouting on Polygon Soil' , '/static/images/market/image-1.png', 6),
+('GLHFers', 3, 2.23, 'Highest bid 5/25','By GameLord\n3000 GLHFers Battling on Solana Fields', '/static/images/market/image-3.png', 21),
+('Noxus', 4, 3.24, 'Highest bid 3/16','By DarkForge\n1500 Noxus Warriors Forged on BeraChain', '/static/images/market/image-5.png', 23),
+('PixelBeasts', 5, 4.86, 'Highest bid 1/120', 'By PixelPioneer\n2000 PixelBeasts Roaming the Binance Plains',  '/static/images/market/image.png', 2),
+('Honey Jar', 4, 2.17, 'Highest bid 1/52','By SweetScribe\n800 Honey Jars Buzzing on Avalanche', '/static/images/market/image-2.png', 43),
+('Tootsies', 2, 5.33, 'Highest bid 2/24', 'By FootFreak\n1200 Tootsies Dancing on Cardano Streets','/static/images/market/image-4.png', 36),
+('Persona', 1, 3.89, 'Highest bid 1/20', 'By MaskMaker\n2500 Personas Unveiled on Ethereum Stages', '/static/images/market/image-6.png', 35);
+
+
 
 
 -- INSERT TRANSACTIONS

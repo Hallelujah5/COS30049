@@ -12,13 +12,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
+    // ALL THE POSSIBLE PATHS IN THE WEBSITE, ANYTHING ELSE WILL RESULT IN THE 404 ERROR PAGE.
     <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
         <Route path="/market" element={<Market />} />
-        <Route path="/buy" element={<Buy />} />
+        <Route path="/buy/:nft_id" element={<Buy />}/>
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/search" element={<Search />} />

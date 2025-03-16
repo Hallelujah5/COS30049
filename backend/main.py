@@ -51,9 +51,38 @@ def get_nfts(page: int = Query(1, alias="page", description="Page number"), limi
         "totalPage": totalPage,
         "totalNFTs": totalNFTs        
         }
-    
+    # TRY EXCEPT BLOCK
     except mysql.connector.Error as e:
-        return {"error": str(e)}                                                    
+        return {"error fetching NFTs List": str(e)}          
+
+
+
+
+
+# WHEN USER CLICKS ON AN NFT IN /MARKET, FETCH THAT NFT'S ID AND LOAD ITS DATA CORRESPONDINGLY.
+@app.get("/nfts/{nft_id}")
+def get_nft(nft_id: int):
+    try:
+        db = mysql.connector.connect(
+            host="localhost",
+            port=3307,
+            user="root",
+            password="root",
+            database="nft_db"
+        )
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM nfts WHERE nft_id = %s", (nft_id,))
+        nft = cursor.fetchone()
+        if not nft:
+            return {"error": "NFT not found"}
+        # cursor.execute("SELECT * FROM offers WHERE nft_id = %s", (nft_id))
+        # offers = cursor.fetchall()
+        cursor.close()
+        db.close()
+        return {"nft": nft}                     
+    except mysql.connector.Error as e:
+        return {"error fetching NFT data:": str(e)}
+
 
 if __name__ == "__main__":              #RUN ON PORT 8000
     uvicorn.run(app, host="0.0.0.0", port=8000)

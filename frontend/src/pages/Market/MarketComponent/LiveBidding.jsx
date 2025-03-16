@@ -41,6 +41,8 @@ const Bidding = () => {
     //ON PAGE RELOAD
   }, [page]);
 
+
+  // THIS HELPS TO DIVIDE THE PAGES INTO AN ARRAY OF [1, 2, 3, 4, 5, ..., 10]
   const pageList = Array.from({length: totalPage}, (_, i) => i +1 )
   const handlePageClick = (num) => {setPage(num)}
 
@@ -78,13 +80,13 @@ const Bidding = () => {
               className={`bidding-item ${index >= 4 ? "hidden-sm" : ""}`}
               name={item.nft_name}
               image={`http://127.0.0.1:8000${item.image_path}`}
-              text={item.description}
+              text={item.short_description}
               address={item.own_by}
-              onClick={() => {  navigate(path)}}
+              onClick={() => {  navigate(`${path}/${item.nft_id}`)}}
             />
           ))) :
           // IF NO NFTs, DISPLAY A MESSAGE
-           (<p>No NFTs Available.</p>)
+          (<p>No NFTs Available.</p>)
         }
         </div>
       </div>
@@ -94,6 +96,7 @@ const Bidding = () => {
 
 
         {/* ==========PAGINATION========== */}
+        {/* Doesn't have ..., so if too many pages, it would list forever. */}
         <div>
           {pageList.map((num) => (
             <button
