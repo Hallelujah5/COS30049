@@ -7,6 +7,7 @@ import Market from "./pages/Market/Market";
 import Buy from "./pages/Buy/BuyPage";
 import Profile from "./pages/Profile/ProfilePage";
 import Search from "./pages/Search/SearchPage";
+import Create from "./pages/Create/Create";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
