@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { validateForm } from "./CreateComponent/ValidateForm";
+import { uploadImg } from "./CreateComponent/upload";
 import "./CreateComponent/create.css";
 import Footer from "../../components/Footer/footer";
 
@@ -33,7 +34,7 @@ const Create = () => {
         </p>
 
         {/* Form submit validation */}
-        <form action="#" method="POST" onSubmit={handleSubmit}>
+        <form action="#" method="POST" onSubmit={uploadImg}>
           <div className="row mt-4 d-flex justify-content-center">
             {/* File Upload */}
             <div className="image-container col-lg-5 d-flex justify-content-center">
