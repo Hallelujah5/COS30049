@@ -114,11 +114,6 @@ const Create = () => {
 
 
               </div>
-
-            <p>Minted successfully!</p>
-            <br /><br /><br />
-            <p>Auction now?</p>
-            <button>List immediately?</button>
             </div>
 
           </div>
