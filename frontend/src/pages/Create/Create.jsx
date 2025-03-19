@@ -10,7 +10,7 @@ const Create = () => {
 
   const toggleCreateOption = (type) => {
     // Toggle type: Sell or Auction
-    setListingType(type);3
+    setListingType(type);
   };
 
   const handleSubmit = (event) => {
