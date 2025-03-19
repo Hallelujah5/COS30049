@@ -20,7 +20,6 @@ CREATE TABLE Users(
     username VARCHAR(255) NOT NULL UNIQUE DEFAULT 'Unnamed',
     user_wallet VARCHAR(255) NOT NULL UNIQUE,
     date_join TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    short_address VARCHAR(6) NOT NULL
 );
 
 CREATE TABLE NFTs(
@@ -35,12 +34,14 @@ CREATE TABLE NFTs(
 );
 
 CREATE TABLE Transactions(
-    transac_id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
     nft_id INT NOT NULL,
     from_address VARCHAR(255) NOT NULL,
     to_address VARCHAR(255) NOT NULL,
     time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     price DECIMAL(18,8) NOT NULL,
+    tx_hash VARCHAR(66),
+    transaction_type ENUM('auction', 'sale','transfer') NOT NULL,
     FOREIGN KEY (nft_id) REFERENCES NFTs(nft_id) ON DELETE CASCADE
 
 );
