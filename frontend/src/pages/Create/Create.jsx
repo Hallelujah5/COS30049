@@ -9,7 +9,7 @@ const Create = () => {
 
   const toggleCreateOption = (type) => {
     // Toggle type: Sell or Auction
-    setListingType(type);
+    setListingType(type);3
   };
 
   const handleSubmit = (event) => {
@@ -32,16 +32,18 @@ const Create = () => {
           Once your item is minted, you cannot change any of its information.
         </p>
 
-        {/* Form submit validation */}
+        {/* =================Form submit validation================= */}
         <form action="#" method="POST" onSubmit={handleSubmit}>
           <div className="row mt-4 d-flex justify-content-center">
+
             {/* File Upload */}
             <div className="image-container col-lg-5 d-flex justify-content-center">
               <label
                 htmlFor="nft_image"
                 className="upload-box position-relative"
               > 
-              {/* show uploaded img preview */}
+              
+              {/* =================show uploaded img preview================= */}
                 {selectedImage ? (
                   <img
                     src={selectedImage}
@@ -66,7 +68,7 @@ const Create = () => {
               </label>
             </div>
 
-            {/* Details Input Form */}
+            {/*=================Details Input Form=================*/}
             <div className="col-lg-5">
               <div className="mb-4">
                 <label htmlFor="nft_name" className="form-label">
@@ -115,7 +117,10 @@ const Create = () => {
                   Auction
                 </label>
               </div>
-              {/* Sell or Auction */}
+
+
+
+              {/*=================Sell or Auction=================*/}
               {listingType === "sell" && (
                 <div className="mb-4">
                   <label htmlFor="price" className="form-label">
@@ -163,6 +168,8 @@ const Create = () => {
                 >
                   Reset
                 </button>
+
+
               </div>
             </div>
           </div>

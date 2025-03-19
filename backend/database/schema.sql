@@ -26,13 +26,12 @@ CREATE TABLE Users(
 CREATE TABLE NFTs(
     nft_id INT AUTO_INCREMENT PRIMARY KEY,
     nft_name VARCHAR(255) NOT NULL,
-    own_by INT,
+    own_by VARCHAR(255),
     current_price DECIMAL(18, 8) NOT NULL,
-    short_description TEXT,
     description TEXT,
     image_path VARCHAR(255),
-    exp_date INT NOT NULL,
-    FOREIGN KEY (own_by) REFERENCES Users(user_id) ON DELETE SET NULL
+    token_id INT UNIQUE,
+    FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
 );
 
 CREATE TABLE Transactions(

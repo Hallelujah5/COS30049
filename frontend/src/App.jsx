@@ -24,7 +24,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/search" element={<Search />} />
-        {/* <Route path="/create" element={<Create />} /> */}
+        <Route path="/create" element={<Create />} />
       </Routes>
     </Router>
   );
