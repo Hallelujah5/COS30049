@@ -18,25 +18,26 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE DEFAULT 'Unnamed',
-    user_wallet VARCHAR(255) NOT NULL UNIQUE,
-    date_join TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_wallet VARCHAR(255) UNIQUE,
+    date_join TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE NFTs(
     nft_id INT AUTO_INCREMENT PRIMARY KEY,
     nft_name VARCHAR(255) NOT NULL,
-    own_by VARCHAR(255),
+    own_by VARCHAR(255) NULL,    
     current_price DECIMAL(18, 8),
     description TEXT,       
     image_path VARCHAR(255),
-    token_id INT UNIQUE,
-    list_status BOOL NOT NULL DEFAULT FALSE,
-    FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
+    -- token_id INT UNIQUE,             --created through the process of minting NFT, then auto-assign to NFTs
+    auction_status BOOL NOT NULL DEFAULT FALSE,
+    list_status BOOL NOT NULL DEFAULT FALSE
+    -- FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
 );
 
 CREATE TABLE Transactions(
     transaction_id INT AUTO_INCREMENT PRIMARY KEY,
-    nft_id INT NOT NULL,
+    nft_id INT,
     from_address VARCHAR(255) NOT NULL,
     to_address VARCHAR(255) NOT NULL,
     time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -20,7 +20,7 @@ const Bidding = () => {
   useEffect(() => {
     const fetchNFTs = async() => {
       try {
-        const response = await api.get(`/nfts?page=${page}&limit=${limit}`)
+        const response = await api.get(`/nfts?auction_status=false&page=${page}&limit=${limit}`)
         setBiddingItems(response.data.nfts)           
         setTotalPage(response.data.totalPage)
 

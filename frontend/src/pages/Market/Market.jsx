@@ -3,6 +3,7 @@ import LiveBidding from "./MarketComponent/LiveBidding";
 import Newest from "./MarketComponent/Newest";
 import CreateNFT from "./MarketComponent/CreateNFT";
 import Footer from "../../components/Footer/footer";
+import Auction from "./MarketComponent/Auction"
 import { motion } from "motion/react";
 
 const fadeInVariant = {
@@ -25,6 +26,17 @@ const Market = () => {
       >
         <LiveBidding />
       </motion.div>
+
+      <motion.div
+        variants={fadeInVariant}
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+      <Auction />
+      </motion.div>
+
+
       <motion.div
         variants={fadeInVariant}
         initial="offscreen"
@@ -33,6 +45,8 @@ const Market = () => {
       >
       <Newest />
       </motion.div>
+
+
       <motion.div
         variants={fadeInVariant}
         initial="offscreen"

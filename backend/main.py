@@ -19,7 +19,7 @@ app.add_middleware(             #CORS TO ALLOW HTTP REQUEST
 )
 
 @app.get("/nfts")
-def get_nfts(page: int = Query(1, alias="page", description="Page number"), limit: int = Query(8, description="NFTs per page")):    #LIMIT HOW MANY NFTS CAN BE SHOWN IN LIVE BIDDING SECTION, MARKETPLACE.
+def get_nfts(auction_status: bool, page: int = Query(1, alias="page", description="Page number"), limit: int = Query(8, description="NFTs per page")):    #LIMIT HOW MANY NFTS CAN BE SHOWN IN LIVE BIDDING SECTION, MARKETPLACE.
 
     # TRY EXCEPT BLOCK
     try:       
@@ -34,10 +34,10 @@ def get_nfts(page: int = Query(1, alias="page", description="Page number"), limi
         
         offset = (page - 1) * limit         #FETCH THE NEXT SET OF 8 NFTS WHEN USER CLICK ON A NEW PAGE.
 
-        cursor.execute("SELECT * FROM nfts LIMIT %s OFFSET %s",(limit, offset))         
+        cursor.execute("SELECT * FROM nfts WHERE auction_status = %s LIMIT %s OFFSET %s",(auction_status, limit, offset))         
         nfts = cursor.fetchall()
-        query = "SELECT COUNT(*) AS total FROM nfts"
-        cursor.execute(query)
+        query = "SELECT COUNT(*) AS total FROM nfts WHERE auction_status = %s"
+        cursor.execute(query, (auction_status,))
         totalNFTs = cursor.fetchone()["total"]
         totalPage = (totalNFTs + limit - 1) // limit        #// DIVISON TO ROUND UP THE TOTAL OF PAGES
 
