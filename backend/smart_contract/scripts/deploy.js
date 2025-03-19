@@ -15,6 +15,11 @@ async function main() {
     const marketplace = await Marketplace.deploy(myNFT.target);
     await marketplace.waitForDeployment();
     console.log("Marketplace deployed to:", marketplace.target);
+
+    const Auction = await hre.ethers.getContractFactory("Auction");
+    const auction = await Auction.deploy(myNFT.target);
+    await auction.waitForDeployment();
+    console.log("Auction deployed to:", auction.target);
 }
 
 const runMain = async () => {
