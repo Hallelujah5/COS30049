@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { validateForm } from "./CreateComponent/ValidateForm";
+import { uploadImg } from "./CreateComponent/upload";
 import "./CreateComponent/create.css";
 import Footer from "../../components/Footer/footer";
 
@@ -32,8 +33,8 @@ const Create = () => {
           Once your item is minted, you cannot change any of its information.
         </p>
 
-        {/* =================Form submit validation================= */}
-        <form action="#" method="POST" onSubmit={handleSubmit}>
+        {/* Form submit validation */}
+        <form action="#" method="POST" onSubmit={uploadImg}>
           <div className="row mt-4 d-flex justify-content-center">
 
             {/* File Upload */}
