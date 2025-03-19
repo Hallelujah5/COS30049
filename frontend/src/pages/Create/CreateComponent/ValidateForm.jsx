@@ -86,6 +86,39 @@ export function validateForm(event) {
   if (errors.length > 0) {
     alert(errors.join("\n"));
   } else {
-    event.target.submit();
+    // upload img to Pinata
+    uploadToPinata(nftImage);
+    //event.target.submit();
+  }
+}
+
+async function uploadToPinata(file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const API_KEY = "c6ead4e45285600631c3";  // Pinata API key
+  const API_SECRET = "7bea20f22f1e9da8628c47f52f2e98f03884dd3299bb8a7daf19c051a1efbef9";  // Secret key
+
+  try {
+      const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
+          method: "POST",
+          body: formData,
+          headers: {
+              "pinata_api_key": API_KEY,
+              "pinata_secret_api_key": API_SECRET
+          }
+      });
+
+      const data = await res.json();
+      if (data.IpfsHash) {
+          // Display the result in an alert
+          alert(`✅ File Uploaded! CID: ${data.IpfsHash}\n🌍 Image URL: https://ipfs.io/ipfs/${data.IpfsHash}`);
+      } else {
+          // If upload fails
+          alert("❌ Upload failed!");
+      }
+  } catch (err) {
+      // Show upload error message 
+      alert(`❌ Error uploading file: ${err.message}`);
   }
 }
