@@ -40,6 +40,11 @@ const tabTitles = {
 const TransactionTable = () => {
   const [activeTab, setActiveTab] = useState("collected");
 
+    // List button click
+    const handleListClick = (id) => {
+      alert(`NFT ID: ${id}`);
+    };
+
   return (
     <>
       <div className="transaction-container">
@@ -77,15 +82,16 @@ const TransactionTable = () => {
                     <th>Owner</th>
                     <th>Price (ETH)</th>
                     <th>Acquired</th>
+                    <th>Action</th>
                   </>
                 )}
                 {activeTab === "offers" && (
                   <>
                     <th>ID</th>
-                    <th>Transaction Hash</th>
+                    <th>NFT Name</th>
                     <th>Receiver</th>
                     <th>Price (ETH)</th>
-                    <th>Time</th>
+                    <th>Status</th>
                   </>
                 )}
                 {activeTab === "history" && (
@@ -111,15 +117,23 @@ const TransactionTable = () => {
                         <td>{item.owner}</td>
                         <td>{item.price}</td>
                         <td>{item.acquired}</td>
+                        <td>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleListClick(item.id)}
+                          >
+                            List
+                          </button>
+                        </td>
                       </>
                     )}
                     {activeTab === "offers" && (
                       <>
                         <td>{item.id}</td>
-                        <td>{item.hash}</td>
+                        <td>{item.name}</td>
                         <td>{item.receiver}</td>
                         <td>{item.price}</td>
-                        <td>{item.time}</td>
+                        <td>{item.status}</td>
                       </>
                     )}
                     {activeTab === "history" && (
