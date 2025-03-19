@@ -1,4 +1,4 @@
-export function validateForm(event) {
+export async function validateForm(event) {
   event.preventDefault();
 
   const errors = []; // Array to print out errors
@@ -10,18 +10,6 @@ export function validateForm(event) {
   const nftDescription = document
     .getElementById("nft_description")
     .value.trim();
-  const listingType = document.querySelector(
-    'input[name="listing_type"]:checked'
-  );
-  const price = document.getElementById("price")
-    ? document.getElementById("price").value.trim()
-    : null;
-  const startingPrice = document.getElementById("starting_price")
-    ? document.getElementById("starting_price").value.trim()
-    : null;
-  const offerTime = document.getElementById("offer_time")
-    ? document.getElementById("offer_time").value.trim()
-    : null;
 
   // Validate NFT name
   if (!nftName || nftName.length > 30) {
@@ -40,85 +28,57 @@ export function validateForm(event) {
     }
   }
 
-  // Validate description & length
+  // Validate description
   if (!nftDescription || nftDescription.length > 250) {
     errors.push(
       "Description is required and must be less than 250 characters."
     );
   }
 
-  // Validate listing type
-  if (!listingType) {
-    errors.push("Please select a listing type.");
-  }
-
-  // Validate sell price (float, >0)
-  if (listingType && listingType.value === "sell") {
-    if (!price || isNaN(price) || parseFloat(price) <= 0) {
-      errors.push("Price must be a valid number greater than 0.");
-    }
-  }
-
-  // Validate auction starting price (float, >0)
-  if (listingType && listingType.value === "auction") {
-    if (
-      !startingPrice ||
-      isNaN(startingPrice) ||
-      parseFloat(startingPrice) <= 0
-    ) {
-      errors.push("Starting price must be a valid number greater than 0.");
-    }
-
-    // Validate auction time limit
-    if (
-      !offerTime ||
-      isNaN(offerTime) ||
-      parseInt(offerTime) <= 0 ||
-      !Number.isInteger(Number(offerTime))
-    ) {
-      errors.push(
-        "Offer duration (minutes) must be a valid number greater than 0."
-      );
-    }
-  }
-
-  //If no error -> submit form
+  // Show errors if validation fails
   if (errors.length > 0) {
     alert(errors.join("\n"));
-  } else {
-    // upload img to Pinata
-    uploadToPinata(nftImage);
-    //event.target.submit();
+    return false; // Validation failed
   }
+
+  // Upload image to Pinata
+  const success = await uploadToPinata(nftImage);
+  return success;
+  //event.target.submit();
 }
 
+// ---------UPLOAD TO PINATA
 async function uploadToPinata(file) {
   const formData = new FormData();
   formData.append("file", file);
 
-  const API_KEY = "c6ead4e45285600631c3";  // Pinata API key
-  const API_SECRET = "7bea20f22f1e9da8628c47f52f2e98f03884dd3299bb8a7daf19c051a1efbef9";  // Secret key
+  const API_KEY = "c6ead4e45285600631c3";
+  const API_SECRET =
+    "7bea20f22f1e9da8628c47f52f2e98f03884dd3299bb8a7daf19c051a1efbef9";
 
   try {
-      const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
-          method: "POST",
-          body: formData,
-          headers: {
-              "pinata_api_key": API_KEY,
-              "pinata_secret_api_key": API_SECRET
-          }
-      });
+    const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
+      method: "POST",
+      body: formData,
+      headers: {
+        pinata_api_key: API_KEY,
+        pinata_secret_api_key: API_SECRET,
+      },
+    });
 
-      const data = await res.json();
-      if (data.IpfsHash) {
-          // Display the result in an alert
-          alert(`✅ File Uploaded! CID: ${data.IpfsHash}\n🌍 Image URL: https://ipfs.io/ipfs/${data.IpfsHash}`);
-      } else {
-          // If upload fails
-          alert("❌ Upload failed!");
-      }
+    const data = await res.json();
+    if (data.IpfsHash) {
+      const cid = data.IpfsHash; // Store the CID
+      alert(
+        `✅ File Uploaded! CID: ${cid}\n🌍 Image URL: https://ipfs.io/ipfs/${cid}`
+      );
+      return { success: true, cid }; // Return cid
+    } else {
+      alert("❌ Upload failed!");
+      return { success: false };
+    }
   } catch (err) {
-      // Show upload error message 
-      alert(`❌ Error uploading file: ${err.message}`);
+    alert(`❌ Error uploading file: ${err.message}`);
+    return { success: false };
   }
 }
