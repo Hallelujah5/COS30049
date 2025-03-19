@@ -1,4 +1,3 @@
-// frontend/src/context/AuctionContext.jsx
 import React, { createContext, useContext, useState } from "react";
 import { ethers } from "ethers";
 import { myNFTAddress, myNFTABI, auctionAddress, auctionABI } from "../utils/constants";
