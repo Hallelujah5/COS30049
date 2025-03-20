@@ -6,6 +6,7 @@ import wallet2 from "../../assets/wallet.svg";
 import logo from "../../../../backend/static/images/navbar/xyora2.png";
 import logouticon from "../../../../backend/static/images/navbar/logout.png";
 import profileicon from "../../../../backend/static/images/navbar/user.png";
+import transfer from "../../../../backend/static/images/navbar/transfer.png";
 import userIcon from "../../assets/images/user-icon.svg";
 import { motion } from "framer-motion";
 
@@ -116,6 +117,12 @@ const IsLoggedIn = () => {
                     <p>
                       <img src={profileicon} alt="profile" />
                       &nbsp;&nbsp; Profile
+                    </p>
+                  </Link>
+                  <Link to="/transfer" className="profile-link">
+                    <p>
+                      <img src={transfer} alt="transfer" />
+                      &nbsp;&nbsp; Transfer
                     </p>
                   </Link>
                   <hr />
