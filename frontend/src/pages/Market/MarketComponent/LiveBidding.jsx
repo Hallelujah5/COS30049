@@ -1,34 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import api from "../../../api"
 import { useNavigate } from 'react-router-dom'
 import "./marketplace.css";
-import img1 from "../../../../../backend/static/images/market/image-1.png";
-import img2 from "../../../../../backend/static/images/market/image-2.png";
-import img3 from "../../../../../backend/static/images/market/image-3.png";
-import img4 from "../../../../../backend/static/images/market/image-4.png";
-import img5 from "../../../../../backend/static/images/market/image-5.png";
-import img6 from "../../../../../backend/static/images/market/image-6.png";
-import img7 from "../../../../../backend/static/images/market/image-10.png";
-import img8 from "../../../../../backend/static/images/market/image.png";
 import BiddingItem from "./LiveBidding-item";
 
 
-
-
-const biddingItems = [
-  { name: "G-bean", image: img7, text: "Highest bid 1/16", day: "14d", address: "0.477wETH" },
-  { name: "DooBeanz", image: img1, text: "Highest bid 1/31.", day: "6d", address: "0.477wETH" },
-  { name: "GLHFers", image: img3, text: "Highest bid 5/25.", day: "21d", address: "0.477wETH" },
-  { name: "Noxus", image: img5, text: "Highest bid 3/16.", day: "23d", address: "0.477wETH" },
-  { name: "Pixelbeasts", image: img8, text: "Highest bid 1/20.", day: "2d", address: "0.477wETH" },
-  { name: "Honey jar", image: img2, text: "Highest bid 1/52.", day: "56d", address: "0.477wETH" },
-  { name: "Tootsies", image: img4, text: "Highest bid 2/24.", day: "39d", address: "0.477wETH" },
-  { name: "Persona", image: img6, text: "Highest bid 1/20.", day: "35d", address: "0.477wETH" },
-];
-
-
 const Bidding = () => {
+  const limit = 8;
+  const [biddingItems, setBiddingItems] = useState([]); 
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
+  
+
+  //NAVIGATE TO BUY
   let navigate = useNavigate();
-  let path = '/buy'
+  let path = '/buy'   
+
+  // FETCH 8 NFTS PER PAGE LOAD, FETCH TOTAL NUMBER OF PAGES.
+  useEffect(() => {
+    const fetchNFTs = async() => {
+      try {
+        const response = await api.get(`/nfts?auction_status=false&page=${page}&limit=${limit}`)
+        setBiddingItems(response.data.nfts)           
+        setTotalPage(response.data.totalPage)
+
+
+        //CONSOLE DEBUG
+        console.log("NFT data response:",biddingItems)
+        console.log("Total page:", totalPage)
+      }
+      catch (error) {
+          console.log("Error fetching NFT data:" , error)
+      }
+    };
+
+    //run it
+    fetchNFTs()
+
+
+    //ON PAGE RELOAD
+  }, [page]);
+
+
+  // THIS HELPS TO DIVIDE THE PAGES INTO AN ARRAY OF [1, 2, 3, 4, 5, ..., 10]
+  const pageList = Array.from({length: totalPage}, (_, i) => i +1 )
+  const handlePageClick = (num) => {setPage(num)}
+
   return (
     <div className="container py-5 text-white">
       <div className="d-flex justify-content-between mt-5">
@@ -51,22 +68,54 @@ const Bidding = () => {
       </div>
 
 
-      <div className="text-center mb-5"></div>
-        <div className="row justify-content-center mt-5" id="navbar-example">
-          {biddingItems.map((item, index) => (
+      {/* LIVE BIDDING SECTION */}
+      <div className="text-center mb-5">
+        <div className="row mt-5" id="navbar-example">
+
+          {/* LOOP EACH NFTs */}
+          { biddingItems.length > 0 ? 
+            (biddingItems.map((item, index) => (
             <BiddingItem
-              key={index}
+              key={item.nft_id}
               className={`bidding-item ${index >= 4 ? "hidden-sm" : ""}`}
-              name={item.name}
-              image={item.image}
-              text={item.text}
-              day={item.day}
-              address={item.address}
-              onClick={() => {  navigate(path)}}
+              name={item.nft_name}
+              image={`http://127.0.0.1:8000${item.image_path}`}
+              text={item.short_description}
+              address={item.own_by}
+              onClick={() => {  navigate(`${path}/${item.nft_id}`)}}
             />
-          ))}
+          ))) :
+          // IF NO NFTs, DISPLAY A MESSAGE
+          (<p>No NFTs Available.</p>)
+        }
+        </div>
       </div>
-      <p className="gray mx-3">Bidding updates every 10s</p>
+      <div className="d-flex justify-content-between mx-3">
+        <p className="gray mx-3">Bidding updates every 10s</p>
+
+
+
+        {/* ==========PAGINATION========== */}
+        {/* Doesn't have ..., so if too many pages, it would list forever. */}
+        <div>
+          {pageList.map((num) => (
+            <button
+              key={num}
+              className={`btn mx-1 ${
+                num === page ? "btn-primary" : "btn-outline-secondary"
+              }`}
+              onClick={() => handlePageClick(num)}
+            >
+              {num}
+            </button>
+          ))}
+        </div>
+
+    
+
+      </div>
+      
+
     </div>
   );
 };

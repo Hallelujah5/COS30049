@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import Heart from "../../../components/heart";
 import {motion} from "motion/react"
 
-const BiddingItem = ({ name, image, text, day, address, onClick }) => {
+const BiddingItem = ({ name, image, text, onClick }) => {
   return (
     <motion.div whileHover={{scale:1.03}}
       className="col-sm-12 col-md-4 col-lg-3   d-flex justify-content-center mb-3"
@@ -24,14 +24,14 @@ const BiddingItem = ({ name, image, text, day, address, onClick }) => {
         <div className="item-descript">
           <div className="d-flex justify-content-between">
             <h5 className="outfit">{name}</h5>
-            <p>{day}</p>
+            
           </div>
           <div className="d-flex">
             <p className="bodytext gray mb-2">{text}</p>
           </div>
           <div className="d-flex justify-content-between">
             <p style={{ color: "#00B7FF" }} className="mb-0">
-              {address}
+            BongBearDestroyer
             </p>
             <Heart />
           </div>
@@ -45,8 +45,6 @@ BiddingItem.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  day: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
 

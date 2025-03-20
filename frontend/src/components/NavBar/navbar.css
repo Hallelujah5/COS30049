@@ -1,116 +1,205 @@
-
 :root {
-    --search-bar-color: #615ab5;
+  --search-bar-color: #615ab5;
 }
 
-
-.ml-3{
-    margin-left: 1.7rem;
+.ml-3 {
+  margin-left: 1.7rem;
 }
 
+/* Search bar */
 #searchbar {
-    background-color: var(--search-bar-color);
-    border-color: var(--search-bar-color);
-    border-radius: 1rem;    
-    padding: 0.75rem 1.85rem;
-    padding-left: 2.6rem;
-    color: rgb(228, 227, 227);
-    font-size: 1.1rem;
+  background-color: var(--search-bar-color);
+  border-color: var(--search-bar-color);
+  border-radius: 1rem;
+  padding: 0.75rem 1.85rem;
+  padding-left: 2.6rem;
+  color: rgb(228, 227, 227);
+  font-size: 1.1rem;
 }
 #searchbar::placeholder {
-    color: rgb(211, 211, 211);
+  color: rgb(211, 211, 211);
 }
 
 #searchbar:focus::placeholder {
-    color: transparent; 
+  color: transparent;
 }
-#searchbar:focus{
-    outline: none;
+#searchbar:focus {
+  outline: none;
 }
-#searchbar:hover{
-    background-color: #7871c9;
-    transition: 0.3s;
+#searchbar:hover {
+  background-color: #7871c9;
+  transition: 0.3s;
 }
 
-.search-container{
-    position: relative;
+.search-container {
+  position: relative;
 }
 .search-icon {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-    pointer-events: none; 
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .navbar-container {
-    border-radius: 1em 1em 1em 1em;
-    -webkit-border-radius: 1em 1em 1em 1em;
-    -moz-border-radius: 1em 1em 1em 1em;
-    background: #1e1a52;
-    border: 0.8em solid #1e1a52;
-} 
+  border-radius: 1em 1em 1em 1em;
+  -webkit-border-radius: 1em 1em 1em 1em;
+  -moz-border-radius: 1em 1em 1em 1em;
+  background: #1e1a52;
+  border: 0.8em solid #1e1a52;
+}
 
 #wallet {
-    background: #1e1a52;
-    border: 0.1em solid #1e1a52;
-    color: rgb(229, 229, 229);
-    padding-right: 0;
+  background: #1e1a52;
+  border: 0.1em solid #1e1a52;
+  color: rgb(229, 229, 229);
+  padding-right: 0;
 }
 
 #wallet img {
-    margin-right: 0.8em;
-    margin-bottom:0.2em;
+  margin-right: 0.8em;
+  margin-bottom: 0.2em;
 }
 
 .nav-link {
-    color: rgb(214, 214, 214) !important;
-    margin: 0 .8rem !important;
-    font-size: large !important;
+  color: rgb(214, 214, 214) !important;
+  margin: 0 0.8rem !important;
+  font-size: large !important;
 }
 
+/*  Balance & Profile */
+.balance-container {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  background: #ffffff1a;
+  border: 1px solid white;
+  border-radius: 15px;
+  padding: 0.5rem 1rem;
+  margin-left: 10px;
+}
+
+.balance-container p {
+  margin: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balance-container img {
+  width: 20px;
+  margin: 0;
+  margin-right: 3px;
+}
+
+.balance-profile-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  align-items: center;
+}
 
 #user-icon {
-    margin-right: 0 !important;
-    margin-left: 1rem !important;
+  margin-right: 0 !important;
+  margin-left: 1rem !important;
+}
+
+.profile-link {
+  text-decoration: none;
+}
+
+@media (max-width: 992px) {
+  .loggedin-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .balance-profile-container {
+    display: flex;
+  }
+}
+
+/* Profile hover */
+.profile-container {
+  position: relative;
+}
+
+.hover-menu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: #1a0e4d;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px #00000033;
+  padding: 15px;
+  width: 200px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+}
+
+.hover-menu h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.hover-menu p {
+  margin: 15px;
+}
+
+.hover-menu hr {
+  margin: 2px;
+}
+
+.hover-menu img {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px;
+}
+
+.logout-btn {
+  display: flex !important;
+  position: relative;
+  padding: 15px !important;
+  align-items: center;
+}
+
+.mobile-logout {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hover-menu {
+    display: none;
+  }
+
+  .mobile-logout {
+    display: block;
+    align-items: center;
+  }
+
+  .mobile-logout img {
+    width: 20px;
+  }
 }
 
 
-
-
-/* -------------OFFCANVAS------------- */
-
-
-.offcanvas {
-    background: linear-gradient(to bottom, #272a85e3, #2c569f) !important;
-    
-}
-
-.offcanvas-body {
-    padding: 0em 0em !important;
-}
-
-.offcanvas hr {
-    margin: 0;
-}
-
-.offcanvas a {
-    text-decoration: none;
-    color: white !important;
-}
-.offcanvas h4 {
-    padding: 0.7em 1em;
-    margin: 0;
-}
-
-.offcanvas p {
-    padding: 0 1em;
-    margin: 0;
-    margin-bottom: 1rem;
-    font-size: large;
-}
-
-.logout-btn{
-    margin-top: 2rem;
-    margin-left: 1rem;
-}
