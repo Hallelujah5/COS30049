@@ -33,15 +33,17 @@ const Create = () => {
         </p>
 
         {/* Form submit validation */}
-        <form action="" method="POST" onSubmit={validateForm}>
+        <form action="" method="POST" onSubmit={validateForm} >
           <div className="row mt-4 d-flex justify-content-center">
+
             {/* File Upload */}
             <div className="image-container col-lg-5 d-flex justify-content-center">
               <label
                 htmlFor="nft_image"
                 className="upload-box position-relative"
               > 
-              {/* show uploaded img preview */}
+              
+              {/* =================show uploaded img preview================= */}
                 {selectedImage ? (
                   <img
                     src={selectedImage}
@@ -66,7 +68,7 @@ const Create = () => {
               </label>
             </div>
 
-            {/* Details Input Form */}
+            {/*=================Details Input Form=================*/}
             <div className="col-lg-5">
               <div className="mb-4">
                 <label htmlFor="nft_name" className="form-label">
@@ -90,68 +92,12 @@ const Create = () => {
                   placeholder="Enter a description for your NFT.."
                 ></textarea>
               </div>
-              <div className="mb-4">
-                <label className="form-label">Listing Type:</label>
-                <br />
-                <input
-                  type="radio"
-                  id="sell"
-                  name="listing_type"
-                  value="sell"
-                  onChange={() => toggleCreateOption("sell")}
-                />
-                <label htmlFor="sell" className="ms-2">
-                  Sell
-                </label>
-                <input
-                  type="radio"
-                  id="auction"
-                  name="listing_type"
-                  value="auction"
-                  onChange={() => toggleCreateOption("auction")}
-                  className="ms-4"
-                />
-                <label htmlFor="auction" className="ms-2">
-                  Auction
-                </label>
-              </div>
-              {/* Sell or Auction */}
-              {listingType === "sell" && (
-                <div className="mb-4">
-                  <label htmlFor="price" className="form-label">
-                    Price:
-                  </label>
-                  <input
-                    type="text"
-                    id="price"
-                    name="price"
-                    className="form-control"
-                    min="0"
-                  />
-                </div>
-              )}
-              {listingType === "auction" && (
-                <div className="mb-4">
-                  <label htmlFor="starting_price" className="form-label">
-                    Starting Price:
-                  </label>
-                  <input
-                    type="text"
-                    id="starting_price"
-                    name="starting_price"
-                    className="form-control"
-                  />
-                  <label htmlFor="offer_time" className="form-label mt-3">
-                    Offer Duration (Minutes):
-                  </label>
-                  <input
-                    type="text"
-                    id="offer_time"
-                    name="offer_time"
-                    className="form-control"
-                  />
-                </div>
-              )}
+            
+
+
+
+              {/*=================Sell or Auction=================*/}
+            
               <div className="d-flex justify-content-left">
                 <button type="submit" className="btn btn-primary">
                   Create NFT
@@ -163,8 +109,13 @@ const Create = () => {
                 >
                   Reset
                 </button>
+
+
+
+
               </div>
             </div>
+
           </div>
         </form>
       </div>

@@ -36,7 +36,7 @@
 
 /* SVG */
 
-@media (min-width: 1000px)  {
+@media (max-width: 1000px)  {
     .svg-icon {
     width: 5%;
     margin-bottom: 0.2em;
@@ -49,17 +49,19 @@
 }
 
 
-@media (max-width: 999px)  {
-    .svg-icon {
-    width: 9%;
-    margin-bottom: 0.2em;
-    margin-right: 0.2em;
-    }
-    .svg-icon-sm {
-        width: 4%;
-        margin-right: 0.3em;
-    }
+/* @media (max-width: 2px) 
+
+*/
+
+.svg-icon {
+    width: 5%;
 }
+
+.svg-icon-sm {
+    width: 4%;
+    margin-bottom: 0.3em;
+    margin-right: 0.2em;
+} 
 
 
 

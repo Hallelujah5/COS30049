@@ -113,6 +113,7 @@ async function uploadToPinata(file) {
       if (data.IpfsHash) {
           // Display the result in an alert
           alert(`✅ File Uploaded! CID: ${data.IpfsHash}\n🌍 Image URL: https://ipfs.io/ipfs/${data.IpfsHash}`);
+          console.log(`CID: ${data.IpfsHash}\n🌍 URL: https://ipfs.io/ipfs/${data.IpfsHash}`)
       } else {
           // If upload fails
           alert("❌ Upload failed!");
