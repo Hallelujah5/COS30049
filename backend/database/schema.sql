@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE DEFAULT 'Unnamed',
-    user_wallet VARCHAR(255) UNIQUE,
+    user_wallet VARCHAR(255) UNIQUE,    -- MetaMask address
     date_join TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
