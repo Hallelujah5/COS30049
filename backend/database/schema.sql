@@ -31,8 +31,8 @@ CREATE TABLE NFTs(
     image_path VARCHAR(255),
     -- token_id INT UNIQUE,             --created through the process of minting NFT, then auto-assign to NFTs
     auction_status BOOL NOT NULL DEFAULT FALSE,
-    list_status BOOL NOT NULL DEFAULT FALSE
-    -- FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
+    list_status BOOL NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
 );
 
 CREATE TABLE Transactions(
