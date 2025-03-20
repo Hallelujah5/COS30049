@@ -72,7 +72,7 @@ uvicorn main:app --reload
 deactivate
 ```
 
-#### Delete the virtual environment (this is unneeded as one can add venv/ folder to .gitignore)
+#### (Unnecessary) Delete the virtual environment (venv/ folder added to .gitignore)
 
 ```bash
 Remove-Item -Recurse -Force venv

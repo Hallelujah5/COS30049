@@ -66,6 +66,7 @@ async function uploadToPinata(file) {
       },
     });
 
+
     const data = await res.json();
     if (data.IpfsHash) {
       const cid = data.IpfsHash; // Store the CID
@@ -77,6 +78,7 @@ async function uploadToPinata(file) {
       alert("❌ Upload failed!");
       return { success: false };
     }
+
   } catch (err) {
     alert(`❌ Error uploading file: ${err.message}`);
     return { success: false };

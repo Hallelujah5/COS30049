@@ -43,6 +43,7 @@ const Create = () => {
         {/* Form submit validation */}
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="row mt-4 d-flex justify-content-center">
+
             {/* File Upload */}
             <div className="image-container col-lg-5 d-flex justify-content-center">
               <label
@@ -75,7 +76,7 @@ const Create = () => {
               </label>
             </div>
 
-            {/* Details Input Form */}
+            {/*=================Details Input Form=================*/}
             <div className="col-lg-5">
               <div className="mb-4">
                 <label htmlFor="nft_name" className="form-label">
@@ -136,7 +137,9 @@ const Create = () => {
                   </button>
                 </div>
               )}
+
             </div>
+
           </div>
         </form>
       </div>
