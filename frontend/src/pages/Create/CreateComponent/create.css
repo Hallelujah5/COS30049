@@ -48,3 +48,59 @@
     margin-bottom: 15px;
   }
 }
+
+.mint-success {
+  border: #615eb9 2px dashed;
+  padding: 5px;
+  letter-spacing: 0.04em ;
+}
+
+/* ----POPUP BOX---- */
+
+
+.modal.custom {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+  padding: 30px !important;
+}
+
+.modal-dialog {
+  transform: translateY(150px) !important;
+}
+
+
+.modal-content {
+  background-color: #1e153f !important;
+  color: #ffffff;
+  border-radius: 12px;
+  border: none;
+}
+
+.close-btn {
+  color: #ffffff;
+  opacity: 0.8;
+  margin-right: 0;
+}
+
+.close-btn:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+
+input[type="radio"] {
+  accent-color: #560595;
+}
+
+.btn-create {
+  --bs-btn-padding-y: .65em !important;
+  background-color: #8686D8 !important;
+  border: 1px solid #8686D8 !important;
+  letter-spacing: 0.03em ;
+}
+
+.btn-create:hover {
+  background-color: #5b5baf !important;
+}

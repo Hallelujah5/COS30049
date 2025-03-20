@@ -10,6 +10,7 @@ import Search from "./pages/Search/SearchPage";
 import Test from "./pages/Test/Test";
 import TestMintNFTContext from "./pages/TestMintNFTContext/TestMintNFTContext";
 import Create from "./pages/Create/Create";
+import Transfer from "./pages/Transfer/Transfer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/test-mint-nft-context" element={<TestMintNFTContext />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/transfer" element={<Transfer />} />
       </Routes>
     </Router>
   );

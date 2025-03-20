@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./profile.css";
 import { transactionHistory } from "../data/transactionHistory";
 import { offersMade } from "../data/offersMade";
+import Popup from "../../Create/CreateComponent/ListingPopup";
 
-// Sample data for "Collected" (NFTs)
+// Sample data for Collected NFTs
 const collectedNFTs = [
   {
     id: 1,
@@ -40,10 +41,15 @@ const tabTitles = {
 const TransactionTable = () => {
   const [activeTab, setActiveTab] = useState("collected");
 
-    // List button click
-    const handleListClick = (id) => {
-      alert(`NFT ID: ${id}`);
-    };
+  // State for popup
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedNFT, setSelectedNFT] = useState(null);
+
+  // Handle "List" button click
+  const handleListClick = (nft) => {
+    setSelectedNFT(nft); // Set the selected NFT data
+    setShowPopup(true); // Show the popup
+  };
 
   return (
     <>
@@ -120,7 +126,7 @@ const TransactionTable = () => {
                         <td>
                           <button
                             className="btn btn-danger"
-                            onClick={() => handleListClick(item.id)}
+                            onClick={() => handleListClick(item)}
                           >
                             List
                           </button>
@@ -149,18 +155,25 @@ const TransactionTable = () => {
                 ))
               ) : (
                 <tr>
-                  <td
-                    style={{ textAlign: "center"}}
-                  >
-                    No Data Available
-                  </td>
+                  <td style={{ textAlign: "center" }}>No Data Available</td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
       </div>
-      {/* Pagination Buttons (----temporary----)*/}
+
+      {/* Popup Component */}
+      {showPopup && selectedNFT && (
+        <Popup
+          image="https://picsum.photos/200" // Temporary random image
+          nftName={selectedNFT.name}
+          cid={`CID-${selectedNFT.id}`} // Fake CID for now
+          onClose={() => setShowPopup(false)}
+        />
+      )}
+
+      {/* Pagination (----temporary----) */}
       <div className="pagination outfit">
         <button className="pagination-btn">Previous</button>
         <span className="pagination-info">Page 1...</span>
