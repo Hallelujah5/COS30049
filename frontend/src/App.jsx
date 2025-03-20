@@ -7,6 +7,8 @@ import Market from "./pages/Market/Market";
 import Buy from "./pages/Buy/BuyPage";
 import Profile from "./pages/Profile/ProfilePage";
 import Search from "./pages/Search/SearchPage";
+import Test from "./pages/Test/Test";
+import TestMintNFTContext from "./pages/TestMintNFTContext/TestMintNFTContext";
 import Create from "./pages/Create/Create";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -24,6 +26,8 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/test" element={<Test />} />
+        <Route path="/test-mint-nft-context" element={<TestMintNFTContext />} />
         <Route path="/create" element={<Create />} />
       </Routes>
     </Router>
