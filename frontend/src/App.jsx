@@ -8,6 +8,7 @@ import Buy from "./pages/Buy/BuyPage";
 import Profile from "./pages/Profile/ProfilePage";
 import Search from "./pages/Search/SearchPage";
 import Create from "./pages/Create/Create";
+import Transfer from "./pages/Transfer/Transfer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/search" element={<Search />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/transfer" element={<Transfer />} />
       </Routes>
     </Router>
   );
