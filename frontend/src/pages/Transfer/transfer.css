@@ -1,0 +1,88 @@
+.transfer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  width: fit-content;
+  border: 1px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.transfer-grid-item {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.transfer-grid-item:nth-child(3n) {
+  border-right: none;
+}
+
+.transfer-grid-item:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+@media (max-width: 400px) {
+  .transfer-grid-item {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+  }
+}
+
+.transfer-card {
+  background: linear-gradient(to right, #360c71, #190780);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.custom-card {
+  width: 375px !important;
+  height: 200px !important;
+  background-color: #a099ff;
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(152, 231, 156) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsla(357, 94%, 71%, 1) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsla(222, 81%, 65%, 1) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsla(9, 61%, 61%, 1) 0, transparent 52%),
+    radial-gradient(at 27% 71%, hsla(336, 91%, 65%, 1) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsla(30, 98%, 65%, 1) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsla(174, 94%, 68%, 1) 0, transparent 45%);
+  border-radius: 15px;
+}
+
+.icon-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.info-icon {
+  font-size: 17px;
+}
+
+.btn-send {
+  border: white 1px solid !important;
+  border-radius: 20px !important;
+}
+
+.btn-send:hover {
+  background-color: #4e3dad !important;
+}
+
+.btn-connect {
+  border: white 1px solid !important;
+  border-radius: 20px !important;
+  width: 200px;
+  background-color: #1a0495 !important;
+}
+
+.btn-connect:hover {
+  background-color: #391cdc !important;
+}
