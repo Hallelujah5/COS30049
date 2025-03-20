@@ -1,10 +1,29 @@
 import React from "react";
 import Footer from "../../components/Footer/footer";
 import { motion } from "motion/react";
-import "./transfer.css"; // Custom CSS file
-import ethereum from "./ethereum.png";
+import "./transfer.css";
+import ethereum from "../../../../backend/static/images/transfer/ethereum.png";
+import { validateTransfer } from "./validateTransfer";
 
 const Transfer = () => {
+  const handleTransferSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(event.target);
+    const transferData = {
+      address_to: formData.get("address_to"),
+      amount: formData.get("amount"),
+      keyword: formData.get("keyword"),
+      message: formData.get("message"),
+    };
+
+    console.log("Transfer Data:", transferData); // Log data
+
+    if (validateTransfer(transferData)) {
+      console.log("Transfer Successful");
+    }
+  };
+
   return (
     <>
       <motion.div
@@ -18,9 +37,10 @@ const Transfer = () => {
         }}
       >
         <div className="row flex-wrap flex-lg-row-reverse align-items-center g-5 py-5">
-          {/* Left Column: Form Section */}
+          {/* Form Section */}
           <div className="col-10 col-sm-8 col-lg-6">
             <div className="container d-flex justify-content-center align-items-center">
+                {/* Card Wallet Details */}
               <div className="card custom-card mt-5">
                 <div className="card-body d-flex flex-column justify-content-between h-100">
                   <div className="d-flex justify-content-between align-items-start">
@@ -49,9 +69,10 @@ const Transfer = () => {
 
             <br />
 
+{/* Credit Transfer Form */}
             <div className="d-block mx-lg-auto">
-              <div className="crypto-card">
-                <form className="mt-3">
+              <div className="transfer-card">
+                <form className="mt-3" onSubmit={handleTransferSubmit}>
                   <div className="row mb-2">
                     <label
                       htmlFor="address_to"
@@ -126,10 +147,9 @@ const Transfer = () => {
             </div>
           </div>
 
-          {/* Right Column: Hero Text and Buttons */}
+          {/* Hero Text */}
           <div className="col-lg-6">
             <h1
-              id="hero-trade"
               className="display-5 fw-bold lh-1 mb-3 outfit-bold"
             >
               Send Crypto across the World!
@@ -140,13 +160,13 @@ const Transfer = () => {
               your wallet, enter details, and transfer with ease.
             </p>
             <button className="btn btn-connect mt-3">Connect Wallet</button>
-            <div className="crypto-grid mt-4">
-              <div className="crypto-grid-item">Reliability</div>
-              <div className="crypto-grid-item">Security</div>
-              <div className="crypto-grid-item">Ethereum</div>
-              <div className="crypto-grid-item">Web 3.0</div>
-              <div className="crypto-grid-item">Low Fees</div>
-              <div className="crypto-grid-item">Blockchain</div>
+            <div className="transfer-grid mt-4">
+              <div className="transfer-grid-item">Reliability</div>
+              <div className="transfer-grid-item">Security</div>
+              <div className="transfer-grid-item">Ethereum</div>
+              <div className="transfer-grid-item">Web 3.0</div>
+              <div className="transfer-grid-item">Low Fees</div>
+              <div className="transfer-grid-item">Blockchain</div>
             </div>
           </div>
         </div>
