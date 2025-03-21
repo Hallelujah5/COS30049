@@ -32,6 +32,12 @@
   }
 }
 
+@media (max-width: 890px) {
+  .form-container {
+    padding: 0 !important;
+  }
+}
+
 .transfer-card {
   background: linear-gradient(to right, #360c71, #190780);
   padding: 15px;

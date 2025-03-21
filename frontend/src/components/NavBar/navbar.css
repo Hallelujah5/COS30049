@@ -187,7 +187,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .hover-menu {
     display: none;
   }
@@ -202,4 +202,12 @@
   }
 }
 
+.btn-transfer p {
+  margin: 0 !important;
+}
+
+.btn-transfer {
+  margin-right: 1px;
+  background-color: #422e9a !important;
+}
 

@@ -49,7 +49,7 @@ const TransactionTable = () => {
   const handleListClick = (nft) => {
     setSelectedNFT(nft); // Set the selected NFT data
     setShowPopup(true); // Show the popup
-  };
+    };
 
   return (
     <>
@@ -125,7 +125,7 @@ const TransactionTable = () => {
                         <td>{item.acquired}</td>
                         <td>
                           <button
-                            className="btn btn-danger"
+                            className="btn btn-list"
                             onClick={() => handleListClick(item)}
                           >
                             List

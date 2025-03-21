@@ -131,6 +131,7 @@ const IsLoggedIn = () => {
                     onClick={() => {
                       setUser(false);
                       localStorage.removeItem("user");
+                      navigate("/"); // Redirect to homepage
                     }}
                   >
                     <img src={logouticon} alt="log out" />
@@ -143,11 +144,21 @@ const IsLoggedIn = () => {
 
           {/* Logout button for mobile view */}
           <div className="mobile-logout">
+          <Link
+              to="/transfer"
+              className="btn btn-transfer align-items-center"
+            >
+              <p>
+                <img src={transfer} alt="Transfer" className="btn-icon" />
+                &nbsp;&nbsp;Transfer
+              </p>
+            </Link>
             <button
               className="btn btn-danger"
               onClick={() => {
                 setUser(false);
                 localStorage.removeItem("user");
+                navigate("/");
               }}
             >
               <img src={logouticon} alt="log out" />

@@ -36,11 +36,11 @@ const Transfer = () => {
           ease: [0, 0.1, 0.2, 1.01],
         }}
       >
-        <div className="row flex-wrap flex-lg-row-reverse align-items-center g-5 py-5">
+        <div className="row flex-wrap flex-lg-row-reverse align-items-center justify-content-center g-5 py-5 flex-column-reverse">
           {/* Form Section */}
-          <div className="col-10 col-sm-8 col-lg-6">
+          <div className="form-container col-10 col-sm-8 col-lg-6">
             <div className="container d-flex justify-content-center align-items-center">
-                {/* Card Wallet Details */}
+              {/* Card Wallet Details */}
               <div className="card custom-card mt-5">
                 <div className="card-body d-flex flex-column justify-content-between h-100">
                   <div className="d-flex justify-content-between align-items-start">
@@ -159,13 +159,12 @@ const Transfer = () => {
               Send and receive cryptocurrency securely across the world. Connect
               your wallet, enter details, and transfer with ease.
             </p>
-            <button className="btn btn-connect mt-3">Connect Wallet</button>
             <div className="transfer-grid mt-4">
               <div className="transfer-grid-item">Reliability</div>
               <div className="transfer-grid-item">Security</div>
               <div className="transfer-grid-item">Ethereum</div>
               <div className="transfer-grid-item">Web 3.0</div>
-              <div className="transfer-grid-item">Low Fees</div>
+              <div className="transfer-grid-item">Low Fee</div>
               <div className="transfer-grid-item">Blockchain</div>
             </div>
           </div>
