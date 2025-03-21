@@ -7,8 +7,8 @@ describe("MyNFT", function () {
   beforeEach(async function () {
     [owner, addr1, addr2] = await ethers.getSigners();
     MyNFT = await ethers.getContractFactory("MyNFT");
-    myNFT = await MyNFT.deploy(addr1.address); // Dummy marketplace address
-    await myNFT.deployed();
+    myNFT = await MyNFT.deploy(addr1.address); // Use addr1 as dummy marketplace address
+    await myNFT.waitForDeployment(); // Updated from deployed()
   });
 
   it("Should deploy with correct initial state", async function () {
@@ -25,12 +25,16 @@ describe("MyNFT", function () {
       expect(await myNFT.tokenURI(1)).to.equal("ipfs://test1");
       expect(await myNFT.balanceOf(addr1.address)).to.equal(1);
       expect(await myNFT.tokenIdCounter()).to.equal(2);
-      expect(receipt).to.emit(myNFT, "Minted").withArgs(addr1.address, 1, "ipfs://test1");
-      expect(receipt).to.emit(myNFT, "Transfer").withArgs(ethers.constants.AddressZero, addr1.address, 1);
+      expect(receipt)
+        .to.emit(myNFT, "Minted")
+        .withArgs(addr1.address, 1, "ipfs://test1");
+      expect(receipt)
+        .to.emit(myNFT, "Transfer")
+        .withArgs(ethers.ZeroAddress, addr1.address, 1); // Updated
     });
 
     it("Should revert when minting to zero address", async function () {
-      await expect(myNFT.mintNFT(ethers.constants.AddressZero, "ipfs://test1"))
+      await expect(myNFT.mintNFT(ethers.ZeroAddress, "ipfs://test1")) // Updated
         .to.be.revertedWith("Recipient cannot be zero address");
     });
   });
@@ -40,13 +44,16 @@ describe("MyNFT", function () {
       await myNFT.mintNFT(owner.address, "ipfs://test1");
       const tx = await myNFT.approve(addr1.address, 1);
       expect(await myNFT.getApproved(1)).to.equal(addr1.address);
-      expect(tx).to.emit(myNFT, "Approval").withArgs(owner.address, addr1.address, 1);
+      expect(tx)
+        .to.emit(myNFT, "Approval")
+        .withArgs(owner.address, addr1.address, 1);
     });
 
     it("Should revert if non-owner tries to approve", async function () {
       await myNFT.mintNFT(addr1.address, "ipfs://test1");
-      await expect(myNFT.connect(addr2).approve(owner.address, 1))
-        .to.be.revertedWith("Only owner can approve");
+      await expect(
+        myNFT.connect(addr2).approve(owner.address, 1)
+      ).to.be.revertedWith("Only owner can approve");
     });
   });
 
@@ -57,8 +64,10 @@ describe("MyNFT", function () {
       expect(await myNFT.ownerOf(1)).to.equal(addr1.address);
       expect(await myNFT.balanceOf(owner.address)).to.equal(0);
       expect(await myNFT.balanceOf(addr1.address)).to.equal(1);
-      expect(await myNFT.getApproved(1)).to.equal(ethers.constants.AddressZero);
-      expect(tx).to.emit(myNFT, "Transfer").withArgs(owner.address, addr1.address, 1);
+      expect(await myNFT.getApproved(1)).to.equal(ethers.ZeroAddress); // Updated
+      expect(tx)
+        .to.emit(myNFT, "Transfer")
+        .withArgs(owner.address, addr1.address, 1);
     });
 
     it("Should transfer as approved", async function () {
@@ -70,13 +79,14 @@ describe("MyNFT", function () {
 
     it("Should revert if unauthorized", async function () {
       await myNFT.mintNFT(owner.address, "ipfs://test1");
-      await expect(myNFT.connect(addr1).transfer(addr2.address, 1))
-        .to.be.revertedWith("Only owner or approved address can transfer");
+      await expect(
+        myNFT.connect(addr1).transfer(addr2.address, 1)
+      ).to.be.revertedWith("Only owner or approved address can transfer");
     });
 
     it("Should revert if transferring to zero address", async function () {
       await myNFT.mintNFT(owner.address, "ipfs://test1");
-      await expect(myNFT.transfer(ethers.constants.AddressZero, 1))
+      await expect(myNFT.transfer(ethers.ZeroAddress, 1)) // Updated
         .to.be.revertedWith("Cannot transfer to zero address");
     });
   });
@@ -96,7 +106,7 @@ describe("MyNFT", function () {
     it("Should return correct balanceOf", async function () {
       await myNFT.mintNFT(addr1.address, "ipfs://test1");
       expect(await myNFT.balanceOf(addr1.address)).to.equal(1);
-      await expect(myNFT.balanceOf(ethers.constants.AddressZero))
+      await expect(myNFT.balanceOf(ethers.ZeroAddress)) // Updated
         .to.be.revertedWith("Cannot query zero address");
     });
   });
