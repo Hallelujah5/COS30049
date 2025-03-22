@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import api from "../../../api"
+import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
+import { useAuction } from "../../../context/AuctionContext"; // For auction
 
-const ListingPopup = ({ image, nftName, cid, nft_id, onClose }) => {
+const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit }) => {  
   const [listingType, setListingType] = useState("list");
   const [price, setPrice] = useState(""); // Sell price
-  // const [startingPrice, setStartingPrice] = useState(""); // Auction starting price
-  // const [finalPrice, setFinalPrice] = useState();
+ 
+  const { listNFT } = useMarketplace();
+  const { startAuction } = useAuction();
 
-  // ====================HANDLE SELL LOGIC===========================
-  const handleSell = async () => {
-    //validate
-    const parsedPrice = parseFloat(price);
-    if (isNaN(parsedPrice) || parsedPrice <= 0) {
-      alert("Please enter a valid price greater than 0.");
+  
+  // Handle submit for Sell or Auction
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!tokenId) {
+      alert("No token ID available. Please mint an NFT first.");
       return;
     }
+    
+     //FORM DATA TO UPDATE NFT PRICE AND STATUS
     const formData = new FormData();
     formData.append("nft_status", listingType);
     formData.append("current_price", parsedPrice);
@@ -32,31 +38,18 @@ const ListingPopup = ({ image, nftName, cid, nft_id, onClose }) => {
     } catch (error) {
       console.error("Error updating NFT:", error.message, error.response?.status, error.response?.data);
     }
-
-    onClose();
+    //================================================================================================
+      const listingData = {
+        nftName,
+        listingType: listingType,
+        price: price,
+        cid: cid,
+        tokenId: tokenId,
+      };
+      await onSubmit(listingData); // Call the parent handler
+    } 
+    
   };
-  //=====================================================================
-
-  // ====================HANDLE AUCTION LOGIC===========================
-  // const handleAuction = (event) => {
-  //   event.preventDefault();
-
-  //   //validate
-  //   const parsedStartingPrice = parseFloat(startingPrice);
-  //   if (isNaN(parsedStartingPrice) || parsedStartingPrice <= 0) {
-  //     alert("Please enter a valid starting price greater than 0.");
-  //     return;
-  //   }
-
-  //   setFinalPrice(parsedStartingPrice);
-  //   alert(`NFT "${nftName}" auction started successfully with CID: ${cid}!`);
-  //   onClose();
-  // };
-  //=====================================================================
-
-  //======================HANDLE UPDATE ROW LOGIC======================
-
-  const handleSubmit = async () => {};
 
   //===================================================================
 
@@ -104,8 +97,11 @@ const ListingPopup = ({ image, nftName, cid, nft_id, onClose }) => {
                 <h5 className="mt-3">
                   NFT Name: <span className="fw-bold"> {nftName}</span>
                 </h5>
+                {/* Display tokenId */}
+                <p>
+                  <strong>Token ID:</strong> {tokenId}
+                </p>{" "}
                 <br />
-
                 {/* Select listing type */}
                 <label className="form-label">Listing Type:</label>
                 <div>
@@ -150,7 +146,6 @@ const ListingPopup = ({ image, nftName, cid, nft_id, onClose }) => {
                     />
                   </div>
                 )}
-
                 {/* Input for Auction */}
                 {listingType === "auction" && (
                   <div className="mb-3">
@@ -175,7 +170,7 @@ const ListingPopup = ({ image, nftName, cid, nft_id, onClose }) => {
             <button
               type="button"
               className="btn btn-create"
-              onClick={handleSell}
+              onClick={handleSubmit}
             >
               {buttonText}
             </button>

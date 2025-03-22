@@ -2,10 +2,10 @@ export function validateTransfer(transferData) {
     const errors = []; 
 
     // Get form inputs from transferData instead of document.getElementById
-    const { address_to, amount, keyword, message } = transferData;
+    const { addressTo, amount, keyword, message } = transferData;
 
     // address
-    if (!address_to || address_to.length < 0) {
+    if (!addressTo || addressTo.length < 0) {
         errors.push("Invalid Ethereum address.");
     }
 

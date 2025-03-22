@@ -171,19 +171,7 @@
   border-radius: 10px;
 }
 
-.logout-btn:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-radius: 10px;
-}
-
-.logout-btn {
-  display: flex !important;
-  position: relative;
-  padding: 15px !important;
-  align-items: center;
-}
-
-.mobile-logout {
+.mobile-nav {
   display: none;
 }
 
