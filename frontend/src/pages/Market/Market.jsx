@@ -6,6 +6,9 @@ import Footer from "../../components/Footer/footer";
 import Auction from "./MarketComponent/Auction"
 import { motion } from "motion/react";
 
+import OfferPopup from "./OfferPopup"; 
+import { useState } from "react";
+
 const fadeInVariant = {
   offscreen: { opacity: 0, y: 50 },
   onscreen: {
@@ -16,6 +19,14 @@ const fadeInVariant = {
 };
 
 const Market = () => {
+  const [showPopup, setShowPopup] = useState(false); //consts for the popup
+  const nftData = {
+    nft: { current_price: 0.5 },
+    image: "https://picsum.photos/200",
+    name: "Sample NFT",
+    owner: "Sample Owner",
+  };
+
   return (
     <div>
       <motion.div
@@ -25,6 +36,20 @@ const Market = () => {
         viewport={{ once: true, amount: 0.2 }}
       >
         <LiveBidding />
+
+        <button
+          className="btn btn-create"
+          onClick={(e) => {
+            e.preventDefault();
+            setShowPopup(true); //show popup when this button is clicked
+          }}
+        >
+          Make Offer
+        </button>
+
+        {showPopup && (
+          <OfferPopup nftData={nftData} onClose={() => setShowPopup(false)} />
+        )}
       </motion.div>
 
       <motion.div
@@ -33,7 +58,7 @@ const Market = () => {
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
       >
-      <Auction />
+        <Auction />
       </motion.div>
 
 
@@ -43,7 +68,7 @@ const Market = () => {
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
       >
-      <Newest />
+        <Newest />
       </motion.div>
 
 
@@ -53,7 +78,7 @@ const Market = () => {
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
       >
-      <CreateNFT />
+        <CreateNFT />
       </motion.div>
       <Footer />
     </div>

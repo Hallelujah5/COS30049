@@ -61,7 +61,7 @@ if not exist venv (
 
 @REM === Start Backend in New Window ===
 echo Starting FastAPI backend...
-start cmd /k "uvicorn main:app --reload --port 8000"
+start cmd /k "uvicorn main:app --reload --port 9000"
 
 @REM === Start Frontend in New Window ===
 cd ..\frontend

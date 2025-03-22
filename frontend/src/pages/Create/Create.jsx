@@ -3,6 +3,7 @@ import { validateForm } from "./CreateComponent/ValidateForm";
 import "./CreateComponent/create.css";
 import Footer from "../../components/Footer/footer";
 import ListingPopup from "./CreateComponent/ListingPopup";
+import api from "../../api";
 import { useMintNFT } from "../../context/MintNFTContext";
 import { useMarketplace } from "../../context/MarketplaceContext";
 import { useAuction } from "../../context/AuctionContext";
@@ -13,6 +14,7 @@ const Create = () => {
   const [isMinted, setIsMinted] = useState(false); // Minted state
   const [showPopup, setShowPopup] = useState(false); // Popup
   const [nftName, setNftName] = useState(""); // NFT name
+    const [nft_description, setNftDesc] = useState("");
   const [cid, setCid] = useState(""); // IPFS CID
 
   // Context hooks
@@ -22,19 +24,51 @@ const Create = () => {
   const navigate = useNavigate(); // Hook for navigation
 
   // handle minting
+   //====HANDLE FORM SUBMISSON => CREATES NFT AND INSERT INTO DATABASE
   const handleSubmit = async (event) => {
     event.preventDefault();
     const result = await validateForm(event); // Validate and upload to Pinata
     if (result.success) {
       const tokenURI = `ipfs://${result.cid}`; // Format URI as an IPFS link
       setCid(result.cid);
+
+      
+    //APPEND FORMDATA TO SEND OVER TO MAIN.API @APP.POST() TO PUSH IT ON DATABASE
+      const formData = new FormData();
+      formData.append("nft_name", nftName || "Unnamed");
+      formData.append("description", nft_description || "No description");
+      formData.append("image_path", result.cid);
+      formData.append("own_by", "0x1234567890abcdef1234567890abcdef12345678");    //HARDCODE AT THE MOMENT
+      
+      
+      //1st TRY-CATCH BLOCK, MINT NFT
       try {
         await mintNFT(tokenURI); 
         setIsMinted(true); 
       } catch (error) {
         console.error("Minting failed:", error);
       }
+       //================================================
+      
+      
+      //2nd TRY-CATCH BLOCK, PUSH TO DATABASE
+        try {
+        const res = await api.post("/create-nft",formData);     //SEND IT OVER TO /CREATE-NFT
+        //=======DEBUG PROCESS=======
+        console.log("Response:", res.data);
+        if (res.data.success) {
+          console.log("Successfully created NFT:", res.data);
+          console.log("nft_id is: ", res.data.nft_id);
+          setnftId(res.data.nft_id)
+        } else {
+          console.error("Creation failed:", res.data.error);
+        }
+      } catch (error) {
+        console.error("Error creating NFT:", JSON.stringify(error.response?.data, null, 2));
+      }
+      //================================================================================================
     }
+
   };
 
   const handleImageChange = (event) => {
@@ -59,7 +93,7 @@ const Create = () => {
     const tokenId = lastMintedNFT.tokenId; // Use the last minted token ID
 
     try {
-      if (listingData.listingType === "sell") {
+      if (listingData.listingType === "list") {
         await listNFT(tokenId, listingData.price);
         alert(`NFT ${tokenId} listed successfully!`);
         navigate("/market"); // Redirect to /market after sale listing
@@ -74,6 +108,10 @@ const Create = () => {
       alert(`Error: ${error.message}`);
     }
   };
+  
+   const handleDescChange = (event) => {
+    setNftDesc(event.target.value);
+   };
 
   return (
     <>
@@ -140,6 +178,8 @@ const Create = () => {
                   id="nft_description"
                   name="nft_description"
                   className="form-control"
+                  value={nft_description}
+                  onChange={handleDescChange}
                   placeholder="Enter a description for your NFT.."
                   disabled={isMinted}
                 ></textarea>
@@ -186,6 +226,7 @@ const Create = () => {
             </div>
           </div>
         </form>
+
       </div>
 
       <Footer />
@@ -197,6 +238,7 @@ const Create = () => {
           nftName={nftName}
           cid={cid}
           tokenId={lastMintedNFT?.tokenId} // Pass tokenId to popup
+          nft_id = {nftId}
           onClose={() => setShowPopup(false)}
           onSubmit={handleListingSubmit} // Pass submit handler
         />
@@ -206,3 +248,4 @@ const Create = () => {
 };
 
 export default Create;
+

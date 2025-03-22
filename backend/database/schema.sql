@@ -26,13 +26,11 @@ CREATE TABLE NFTs(
     nft_id INT AUTO_INCREMENT PRIMARY KEY,
     nft_name VARCHAR(255) NOT NULL,
     own_by VARCHAR(255) NULL,    
-    current_price DECIMAL(18, 8),
+    current_price DECIMAL(18, 8) NULL,
     description TEXT,       
-    image_path VARCHAR(255),
-    -- token_id INT UNIQUE,             --created through the process of minting NFT, then auto-assign to NFTs
-    auction_status BOOL NOT NULL DEFAULT FALSE,
-    list_status BOOL NOT NULL DEFAULT FALSE,
-    FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
+    image_path VARCHAR(255) NOT NULL,
+    nft_status ENUM('list','auction','none') NOT NULL DEFAULT 'none'     -- DETERMINE WHETHER AN NFT IS IN LISTING OR NOT
+    -- FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
 );
 
 CREATE TABLE Transactions(

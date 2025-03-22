@@ -12,15 +12,16 @@ const Bidding = () => {
   const [totalPage, setTotalPage] = useState();
   
 
-  //NAVIGATE TO BUY
+  //NAVIGATE TO BUY 
   let navigate = useNavigate();
   let path = '/buy'   
 
   // FETCH 8 NFTS PER PAGE LOAD, FETCH TOTAL NUMBER OF PAGES.
+  //FETCHING NFT WITH 'LIST' STATUS
   useEffect(() => {
     const fetchNFTs = async() => {
       try {
-        const response = await api.get(`/nfts?auction_status=false&page=${page}&limit=${limit}`)
+        const response = await api.get(`/nfts?nft_status=list&page=${page}&limit=${limit}`)
         setBiddingItems(response.data.nfts)           
         setTotalPage(response.data.totalPage)
 
@@ -80,7 +81,7 @@ const Bidding = () => {
               key={item.nft_id}
               className={`bidding-item ${index >= 4 ? "hidden-sm" : ""}`}
               name={item.nft_name}
-              image={`http://127.0.0.1:8000${item.image_path}`}
+              image={`https://ipfs.io/ipfs/${item.image_path.replace("ipfs://","")}`}
               text={item.short_description}
               address={item.own_by}
               onClick={() => {  navigate(`${path}/${item.nft_id}`)}}

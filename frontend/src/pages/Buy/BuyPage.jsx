@@ -38,7 +38,6 @@ const Buy = () => {
   if (!nftData) return <p>Loading...</p>;
 
   const usd_price = nftData.nft.current_price * 1944.6;
-
   return (
     <>
       <div className=" container">
@@ -61,7 +60,7 @@ const Buy = () => {
             {/*---------------IMAGE---------------*/}
 
             <img
-              src={`http://127.0.0.1:8000${nftData.nft.image_path}`}
+              src={`https://ipfs.io/ipfs/${nftData.nft.image_path.replace("ipfs://","")}`}
               alt="image of the chosen NFT item"
               className="item-img"
             />
@@ -180,20 +179,20 @@ const Buy = () => {
               <hr className="mt-0" />
 
               <div className="mx-3 mt-1">
-                <h2>{nftData.nft.current_price} ETH</h2>
+                <h2>{nftData.nft.current_price == null ? "--" : nftData.nft.current_price} ETH</h2>
                 {/* USD EQUIVALENT */}
                 <p className="light-gray" style={{ fontSize: "large" }}>
-                  ${usd_price}
+                  {usd_price == 0 ? "--" : usd_price}$
                 </p>
 
                 {/* IF AUCTION STATUS == FALSE, DISPLAY ORDER NOW BUTTON, ELSE, DISPLAY MAKE OFFER BUTTON */}
-                {nftData.nft.auction_status ? 
-                (<button className="btn btn-outline-secondary btn-large text-white subheading-text mx-lg-4 ">
-                    MAKE OFFER
-                  </button>
-                ) : (
+                {nftData.nft.nft_status == "list" ?  (
                   <button className="btn btn-primary btn-large subheading-text">
                     ORDER NOW
+                  </button>
+                ) :
+                (<button className="btn btn-outline-secondary btn-large text-white subheading-text mx-lg-4 ">
+                    MAKE OFFER
                   </button>
                 )}
               </div>
