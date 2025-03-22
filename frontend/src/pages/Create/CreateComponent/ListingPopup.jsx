@@ -1,58 +1,57 @@
 import React, { useState } from "react";
+import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
+import { useAuction } from "../../../context/AuctionContext"; // For auction
 
-const ListingPopup = ({ image, nftName, cid, onClose }) => {
+const ListingPopup = ({ image, nftName, cid, tokenId, onClose, onSubmit }) => {
   const [listingType, setListingType] = useState("sell");
   const [price, setPrice] = useState(""); // Sell price
   const [startingPrice, setStartingPrice] = useState(""); // Auction starting price
 
-  // Handle submit for Sell
-  const handleSubmitSell = (event) => {
+  const { listNFT } = useMarketplace();
+  const { startAuction } = useAuction();
+
+  // Handle submit for Sell or Auction
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    //validate
-    const parsedPrice = parseFloat(price);
-    if (isNaN(parsedPrice) || parsedPrice <= 0) {
-      alert("Please enter a valid price greater than 0.");
+    if (!tokenId) {
+      alert("No token ID available. Please mint an NFT first.");
       return;
     }
 
-    // Collect listing data
-    const listingData = {
-      nftName,
-      listingType: "sell",
-      price: price,
-      cid: cid,
-    };
+    if (listingType === "sell") {
+      const parsedPrice = parseFloat(price);
+      if (isNaN(parsedPrice) || parsedPrice <= 0) {
+        alert("Please enter a valid price greater than 0.");
+        return;
+      }
 
-    console.log("NFT Listed:", listingData);
+      const listingData = {
+        nftName,
+        listingType: "sell",
+        price: price,
+        cid: cid,
+        tokenId: tokenId,
+      };
 
-    alert(`NFT "${nftName}" listed successfully with CID: ${cid}!`);
-    onClose();
-  };
+      await onSubmit(listingData); // Call the parent handler
+    } else if (listingType === "auction") {
+      const parsedStartingPrice = parseFloat(startingPrice);
+      if (isNaN(parsedStartingPrice) || parsedStartingPrice <= 0) {
+        alert("Please enter a valid starting price greater than 0.");
+        return;
+      }
 
-  // Handle submit for Auction
-  const handleSubmitAuction = (event) => {
-    event.preventDefault();
+      const listingData = {
+        nftName,
+        listingType: "auction",
+        startingPrice: startingPrice,
+        cid: cid,
+        tokenId: tokenId,
+      };
 
-    //validate
-    const parsedStartingPrice = parseFloat(startingPrice);
-    if (isNaN(parsedStartingPrice) || parsedStartingPrice <= 0) {
-      alert("Please enter a valid starting price greater than 0.");
-      return;
+      await onSubmit(listingData); // Call the parent handler
     }
-
-    // Collect listing data
-    const listingData = {
-      nftName,
-      listingType: "auction",
-      startingPrice: startingPrice,
-      cid: cid, 
-    };
-
-    console.log("NFT Auction Started:", listingData);
-
-    alert(`NFT "${nftName}" auction started successfully with CID: ${cid}!`);
-    onClose();
   };
 
   // Update button text based on listing type
@@ -99,8 +98,11 @@ const ListingPopup = ({ image, nftName, cid, onClose }) => {
                 <h5 className="mt-3">
                   NFT Name: <span className="fw-bold"> {nftName}</span>
                 </h5>
+                <p>
+                  <strong>Token ID:</strong> {tokenId}
+                </p>{" "}
+                {/* Display tokenId */}
                 <br />
-
                 {/* Select listing type */}
                 <label className="form-label">Listing Type:</label>
                 <div>
@@ -145,7 +147,6 @@ const ListingPopup = ({ image, nftName, cid, onClose }) => {
                     />
                   </div>
                 )}
-
                 {/* Input for Auction */}
                 {listingType === "auction" && (
                   <div className="mb-3">
@@ -170,9 +171,7 @@ const ListingPopup = ({ image, nftName, cid, onClose }) => {
             <button
               type="button"
               className="btn btn-create"
-              onClick={
-                listingType === "sell" ? handleSubmitSell : handleSubmitAuction
-              }
+              onClick={handleSubmit}
             >
               {buttonText}
             </button>

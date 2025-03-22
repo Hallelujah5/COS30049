@@ -3,7 +3,10 @@ import { validateForm } from "./CreateComponent/ValidateForm";
 import "./CreateComponent/create.css";
 import Footer from "../../components/Footer/footer";
 import ListingPopup from "./CreateComponent/ListingPopup";
-import { useMintNFT } from "../../context/MintNFTContext"; // Import the context hook
+import { useMintNFT } from "../../context/MintNFTContext";
+import { useMarketplace } from "../../context/MarketplaceContext";
+import { useAuction } from "../../context/AuctionContext";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 
 const Create = () => {
   const [selectedImage, setSelectedImage] = useState(null); // Store the uploaded image
@@ -11,7 +14,12 @@ const Create = () => {
   const [showPopup, setShowPopup] = useState(false); // Popup
   const [nftName, setNftName] = useState(""); // NFT name
   const [cid, setCid] = useState(""); // IPFS CID
-  const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT(); // Use MintNFT context
+
+  // Context hooks
+  const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT();
+  const { listNFT, status: marketStatus } = useMarketplace();
+  const { startAuction, status: auctionStatus } = useAuction();
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,7 +28,7 @@ const Create = () => {
       const tokenURI = `ipfs://${result.cid}`; // Format the URI as an IPFS link
       setCid(result.cid);
       try {
-        await mintNFT(tokenURI); // Call mintNFT from context with the IPFS URI
+        await mintNFT(tokenURI); // Mint the NFT
         setIsMinted(true); // Update state on successful mint
       } catch (error) {
         console.error("Minting failed:", error);
@@ -38,6 +46,32 @@ const Create = () => {
 
   const handleNameChange = (event) => {
     setNftName(event.target.value);
+  };
+
+  // Handle listing or auction from the popup
+  const handleListingSubmit = async (listingData) => {
+    if (!lastMintedNFT || !lastMintedNFT.tokenId) {
+      alert("No minted NFT found. Please mint an NFT first.");
+      return;
+    }
+
+    const tokenId = lastMintedNFT.tokenId; // Use the last minted token ID
+
+    try {
+      if (listingData.listingType === "sell") {
+        await listNFT(tokenId, listingData.price);
+        alert(`NFT ${tokenId} listed successfully!`);
+        navigate("/market"); // Redirect to /market after listing
+      } else if (listingData.listingType === "auction") {
+        await startAuction(tokenId, listingData.startingPrice);
+        alert(`Auction for NFT ${tokenId} started successfully!`);
+        navigate("/market"); // Redirect to /market after starting auction
+      }
+      setShowPopup(false); // Close popup on success
+    } catch (error) {
+      console.error("Error in listing/auction:", error);
+      alert(`Error: ${error.message}`);
+    }
   };
 
   return (
@@ -136,6 +170,7 @@ const Create = () => {
                       <p><strong>Token URI:</strong> {lastMintedNFT.tokenURI}</p>
                     </div>
                   )}
+                  <p>{marketStatus || auctionStatus}</p> {/* Display listing/auction status */}
                   <button
                     className="btn btn-create"
                     onClick={(e) => {
@@ -159,7 +194,9 @@ const Create = () => {
           image={selectedImage}
           nftName={nftName}
           cid={cid}
+          tokenId={lastMintedNFT?.tokenId} // Pass tokenId to popup
           onClose={() => setShowPopup(false)}
+          onSubmit={handleListingSubmit} // Pass submit handler
         />
       )}
     </>
