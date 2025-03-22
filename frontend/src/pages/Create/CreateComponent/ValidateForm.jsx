@@ -45,7 +45,6 @@ export async function validateForm(event) {
   // Upload image to Pinata
   const success = await uploadToPinata(nftImage);
   return success;
-  //event.target.submit();
 }
 
 
@@ -83,26 +82,16 @@ async function uploadToPinata(file) {
     const data = await res.json();
     if (data.IpfsHash) {
       const cid = data.IpfsHash; // Store the CID
-      alert(
-        `✅ File Uploaded! CID: ${cid}\n🌍 Image URL: https://ipfs.io/ipfs/${cid}`
-      );
-      console.log(`URL: https://ipfs.io/ipfs/${cid}`)
-
-      
       return { success: true, cid }; // Return cid
     } 
-  
-    
-    else {
-      alert("❌ Upload failed!");
-      return { success: false };
-    }
+      else {
+          alert("Upload failed!");
+          return { success: false };
+      }
 
-  }
-  
-  
-  catch (err) {
-    alert(`❌ Error uploading file: ${err.message}`);
+  } catch (err) {
+    alert(`Error uploading file: ${err.message}`);
+
     return { success: false };
   }
 }
