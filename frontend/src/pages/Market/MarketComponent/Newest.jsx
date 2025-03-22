@@ -1,3 +1,10 @@
+//=================================================================
+//=THIS ARE JUST DUMMY NFTS FOR SHOW, NAVIGATING TO 404 ERROR PAGE=
+//=================================================================
+//=================================================================
+//=THIS ARE JUST DUMMY NFTS FOR SHOW, NAVIGATING TO 404 ERROR PAGE=
+//=================================================================
+
 import React from "react";
 import "./marketplace.css";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +25,7 @@ const NewItems = [
 
 const Newest = () => {
   let navigate = useNavigate();
-  let path = '/buy'
+  let path = '/market'
   
   return (
     <div className="container py-5 text-white">

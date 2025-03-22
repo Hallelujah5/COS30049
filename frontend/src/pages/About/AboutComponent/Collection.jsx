@@ -1,3 +1,10 @@
+//=================================================================
+//=THIS ARE JUST DUMMY NFTS FOR SHOW, NAVIGATING TO 404 ERROR PAGE=
+//=================================================================
+//=================================================================
+//=THIS ARE JUST DUMMY NFTS FOR SHOW, NAVIGATING TO 404 ERROR PAGE=
+//=================================================================
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Market/MarketComponent/marketplace.css";
@@ -20,7 +27,7 @@ const NewItems = [
 
 const Collection = () => {
   let navigate = useNavigate();
-  let path = '/buy'
+  let path = '/about'
   return (
     <div className="container py-5 text-white">
       <div className="d-flex justify-content-between">
@@ -45,6 +52,7 @@ const Collection = () => {
             checkmark={item.check}
             address={item.address}
             onClick={() => navigate(path)}
+            
           />
         ))}
       </div>

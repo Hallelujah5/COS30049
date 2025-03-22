@@ -1,4 +1,12 @@
--- USE DATABASE
+
+-- =====================================
+-- ======= UNNEEDED, DO NOT USE=========
+-- =====================================
+
+
+
+
+
 USE nft_db;
 
 -- INSERT USERS
@@ -12,15 +20,15 @@ INSERT INTO Users (username) VALUES
 
 
 -- INSERT NFTs
-INSERT INTO NFTs (nft_name, own_by, current_price, description, image_path, auction_status, list_status) VALUES
-('G-Bean', 1, 2.81, 'By GreenGuru\n500 G-Beans Growing on the Ethereum Vine', '/static/images/market/image-10.png', TRUE, FALSE ),
-('DooBeanz', 2, 3.75, 'By BeanMaster\n1000 DooBeanz Sprouting on Polygon Soil' , '/static/images/market/image-1.png', TRUE, FALSE ),
-('GLHFers', 3, 2.23, 'By GameLord\n3000 GLHFers Battling on Solana Fields', '/static/images/market/image-3.png' , FALSE, FALSE),
-('Noxus', 4, 3.24,'By DarkForge\n1500 Noxus Warriors Forged on BeraChain', '/static/images/market/image-5.png', FALSE, FALSE),
-('PixelBeasts', 5, 4.86, 'By PixelPioneer\n2000 PixelBeasts Roaming the Binance Plains',  '/static/images/market/image.png', FALSE, FALSE),
-('Honey Jar', 4, 2.17, 'By SweetScribe\n800 Honey Jars Buzzing on Avalanche', '/static/images/market/image-2.png', TRUE, FALSE),
-('Tootsies', 2, 5.33, 'By FootFreak\n1200 Tootsies Dancing on Cardano Streets','/static/images/market/image-4.png', FALSE, FALSE),
-('Persona', 1, 3.89, 'By MaskMaker\n2500 Personas Unveiled on Ethereum Stages', '/static/images/market/image-6.png', FALSE, FALSE);
+INSERT INTO NFTs (nft_name, own_by, current_price, description, image_path, nft_status) VALUES
+('G-Bean', 1, 2.81, 'By GreenGuru\n500 G-Beans Growing on the Ethereum Vine', '/static/images/market/image-10.png', 'auction' ),
+('DooBeanz', 2, 3.75, 'By BeanMaster\n1000 DooBeanz Sprouting on Polygon Soil' , '/static/images/market/image-1.png', 'auction'),
+('GLHFers', 3, 2.23, 'By GameLord\n3000 GLHFers Battling on Solana Fields', '/static/images/market/image-3.png' , 'auction'),
+('Noxus', 4, 3.24,'By DarkForge\n1500 Noxus Warriors Forged on BeraChain', '/static/images/market/image-5.png', 'auction'),
+('PixelBeasts', 5, 4.86, 'By PixelPioneer\n2000 PixelBeasts Roaming the Binance Plains',  '/static/images/market/image.png','auction' ),
+('Honey Jar', 4, 2.17, 'By SweetScribe\n800 Honey Jars Buzzing on Avalanche', '/static/images/market/image-2.png', 'list'),
+('Tootsies', 2, 5.33, 'By FootFreak\n1200 Tootsies Dancing on Cardano Streets','/static/images/market/image-4.png','list'),
+('Persona', 1, 3.89, 'By MaskMaker\n2500 Personas Unveiled on Ethereum Stages', '/static/images/market/image-6.png','list');
 
 
 

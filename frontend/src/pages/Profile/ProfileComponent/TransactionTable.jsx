@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./profile.css";
 import { transactionHistory } from "../data/transactionHistory";
-import { offersMade } from "../data/offersMade";
+// import { offersMade } from "../data/offersMade";
 import Popup from "../../Create/CreateComponent/ListingPopup";
 
 // Sample data for Collected NFTs
@@ -25,7 +25,7 @@ const collectedNFTs = [
 // Tab data mapping
 const tabData = {
   collected: collectedNFTs,
-  offers: offersMade,
+  // offers: offersMade,
   history: transactionHistory,
   more: [],
 };
@@ -33,7 +33,7 @@ const tabData = {
 // Tab title mapping
 const tabTitles = {
   collected: "NFTs Collected",
-  offers: "Pending Offers",
+  // offers: "Pending Offers",
   history: "Transaction History",
   more: "More",
 };
@@ -133,7 +133,7 @@ const TransactionTable = () => {
                         </td>
                       </>
                     )}
-                    {activeTab === "offers" && (
+                    {/* {activeTab === "offers" && (
                       <>
                         <td>{item.id}</td>
                         <td>{item.name}</td>
@@ -141,7 +141,7 @@ const TransactionTable = () => {
                         <td>{item.price}</td>
                         <td>{item.status}</td>
                       </>
-                    )}
+                    )} */}
                     {activeTab === "history" && (
                       <>
                         <td>{item.id}</td>

@@ -1,63 +1,68 @@
 import React, { useState } from "react";
+import api from "../../../api"
 
-const ListingPopup = ({ image, nftName, cid, onClose }) => {
-  const [listingType, setListingType] = useState("sell");
+const ListingPopup = ({ image, nftName, cid, nft_id, onClose }) => {
+  const [listingType, setListingType] = useState("list");
   const [price, setPrice] = useState(""); // Sell price
-  const [startingPrice, setStartingPrice] = useState(""); // Auction starting price
+  // const [startingPrice, setStartingPrice] = useState(""); // Auction starting price
+  // const [finalPrice, setFinalPrice] = useState();
 
-  // Handle submit for Sell
-  const handleSubmitSell = (event) => {
-    event.preventDefault();
-
+  // ====================HANDLE SELL LOGIC===========================
+  const handleSell = async () => {
     //validate
     const parsedPrice = parseFloat(price);
     if (isNaN(parsedPrice) || parsedPrice <= 0) {
       alert("Please enter a valid price greater than 0.");
       return;
     }
-
-    // Collect listing data
-    const listingData = {
-      nftName,
-      listingType: "sell",
-      price: price,
-      cid: cid,
-    };
-
-    console.log("NFT Listed:", listingData);
-
-    alert(`NFT "${nftName}" listed successfully with CID: ${cid}!`);
-    onClose();
-  };
-
-  // Handle submit for Auction
-  const handleSubmitAuction = (event) => {
-    event.preventDefault();
-
-    //validate
-    const parsedStartingPrice = parseFloat(startingPrice);
-    if (isNaN(parsedStartingPrice) || parsedStartingPrice <= 0) {
-      alert("Please enter a valid starting price greater than 0.");
-      return;
+    const formData = new FormData();
+    formData.append("nft_status", listingType);
+    formData.append("current_price", parsedPrice);
+    formData.append("nft_id", nft_id);
+    try {
+      const response = await api.post("/update-nft", formData); //CALLING /UPDATE-NFT FROM MAIN.PY
+      if (response.data.success) {
+        console.log("Successully updated NFT row.", response.data.nft_status);
+        alert(
+          `NFT "${nftName}" price updated and listed successfully with CID: ${cid}!`
+        );
+      } else {
+        console.log("Error updating row.");
+      }
+    } catch (error) {
+      console.error("Error updating NFT:", error.message, error.response?.status, error.response?.data);
     }
 
-    // Collect listing data
-    const listingData = {
-      nftName,
-      listingType: "auction",
-      startingPrice: startingPrice,
-      cid: cid, 
-    };
-
-    console.log("NFT Auction Started:", listingData);
-
-    alert(`NFT "${nftName}" auction started successfully with CID: ${cid}!`);
     onClose();
   };
+  //=====================================================================
+
+  // ====================HANDLE AUCTION LOGIC===========================
+  // const handleAuction = (event) => {
+  //   event.preventDefault();
+
+  //   //validate
+  //   const parsedStartingPrice = parseFloat(startingPrice);
+  //   if (isNaN(parsedStartingPrice) || parsedStartingPrice <= 0) {
+  //     alert("Please enter a valid starting price greater than 0.");
+  //     return;
+  //   }
+
+  //   setFinalPrice(parsedStartingPrice);
+  //   alert(`NFT "${nftName}" auction started successfully with CID: ${cid}!`);
+  //   onClose();
+  // };
+  //=====================================================================
+
+  //======================HANDLE UPDATE ROW LOGIC======================
+
+  const handleSubmit = async () => {};
+
+  //===================================================================
 
   // Update button text based on listing type
-  const buttonText = listingType === "sell" ? "List NFT" : "Start NFT Auction";
-
+  const buttonText = listingType === "list" ? "List NFT" : "Start NFT Auction";
+  const handleOnClick = () => {};
   return (
     <div
       className="modal custom fade show outfit"
@@ -106,14 +111,14 @@ const ListingPopup = ({ image, nftName, cid, onClose }) => {
                 <div>
                   <input
                     type="radio"
-                    id="sell"
+                    id="list"
                     name="listingType"
-                    value="sell"
-                    checked={listingType === "sell"}
-                    onChange={() => setListingType("sell")}
+                    value="list"
+                    checked={listingType === "list"}
+                    onChange={() => setListingType("list")}
                   />
-                  <label htmlFor="sell" className="ms-2">
-                    Sell
+                  <label htmlFor="list" className="ms-2">
+                    List on Market
                   </label>
 
                   <input
@@ -131,7 +136,7 @@ const ListingPopup = ({ image, nftName, cid, onClose }) => {
                 </div>
                 <br />
                 {/* Input for Sell */}
-                {listingType === "sell" && (
+                {listingType === "list" && (
                   <div className="mb-3">
                     <label htmlFor="price" className="form-label">
                       Price (ETH):
@@ -156,8 +161,8 @@ const ListingPopup = ({ image, nftName, cid, onClose }) => {
                       type="text"
                       id="starting_price"
                       className="form-control"
-                      value={startingPrice}
-                      onChange={(e) => setStartingPrice(e.target.value)}
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
                 )}
@@ -170,9 +175,7 @@ const ListingPopup = ({ image, nftName, cid, onClose }) => {
             <button
               type="button"
               className="btn btn-create"
-              onClick={
-                listingType === "sell" ? handleSubmitSell : handleSubmitAuction
-              }
+              onClick={handleSell}
             >
               {buttonText}
             </button>

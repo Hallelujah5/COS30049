@@ -3,21 +3,61 @@ import { validateForm } from "./CreateComponent/ValidateForm";
 import "./CreateComponent/create.css";
 import Footer from "../../components/Footer/footer";
 import ListingPopup from "./CreateComponent/ListingPopup";
+import api from "../../api";
+
 
 const Create = () => {
-  const [selectedImage, setSelectedImage] = useState(null); // store the uploaded image
-  const [isMinted, setIsMinted] = useState(false); // minted state
-  const [showPopup, setShowPopup] = useState(false); // popup
-  const [nftName, setNftName] = useState(""); // nft name
-  const [cid, setCid] = useState(""); // ipfs cid
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isMinted, setIsMinted] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [nftName, setNftName] = useState("");
+  const [nft_description, setNftDesc] = useState("");
+  const [cid, setCid] = useState("");
+  const [nftId, setnftId] = useState();
 
+
+
+  //====HANDLE FORM SUBMISSON => CREATES NFT AND INSERT INTO DATABASE
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await validateForm(event); // Ensure validation succeeds
+    const result = await validateForm(event);       //FETCHING IPFS URI
+
+
     if (result.success) {
       setIsMinted(true);
-      setCid(result.cid);
-    }
+      setCid(result.cid);           //THE IPFS URI 
+      console.log("Validation result:", result);    //DEBUG
+
+
+      //APPEND FORMDATA TO SEND OVER TO MAIN.API @APP.POST() TO PUSH IT ON DATABASE
+      const formData = new FormData();
+      formData.append("nft_name", nftName || "Unnamed");
+      formData.append("description", nft_description || "No description");
+      formData.append("image_path", result.cid);
+      formData.append("own_by", "0x1234567890abcdef1234567890abcdef12345678");    //HARDCODE AT THE MOMENT
+
+
+      
+      try {
+        const res = await api.post("/create-nft",formData);     //SEND IT OVER TO /CREATE-NFT
+
+
+        //=======DEBUG PROCESS=======
+        console.log("Response:", res.data);
+        if (res.data.success) {
+          console.log("Successfully created NFT:", res.data);
+          console.log("nft_id is: ", res.data.nft_id);
+          setnftId(res.data.nft_id)
+        } else {
+          console.error("Creation failed:", res.data.error);
+        }
+      } catch (error) {
+        console.error("Error creating NFT:", JSON.stringify(error.response?.data, null, 2));
+      }
+  };
+
+
+
   };
 
   const handleImageChange = (event) => {
@@ -32,6 +72,10 @@ const Create = () => {
     setNftName(event.target.value);
   };
 
+  const handleDescChange = (event) => {
+    setNftDesc(event.target.value);
+  };
+
   return (
     <>
       <div className="container py-5 outfit">
@@ -43,7 +87,6 @@ const Create = () => {
         {/* Form submit validation */}
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="row mt-4 d-flex justify-content-center">
-
             {/* File Upload */}
             <div className="image-container col-lg-5 d-flex justify-content-center">
               <label
@@ -102,6 +145,8 @@ const Create = () => {
                   id="nft_description"
                   name="nft_description"
                   className="form-control"
+                  value={nft_description}
+                  onChange={handleDescChange}
                   placeholder="Enter a description for your NFT.."
                   disabled={isMinted}
                 ></textarea>
@@ -137,11 +182,10 @@ const Create = () => {
                   </button>
                 </div>
               )}
-
             </div>
-
           </div>
         </form>
+
       </div>
 
       <Footer />
@@ -151,6 +195,7 @@ const Create = () => {
           image={selectedImage}
           nftName={nftName}
           cid={cid}
+          nft_id = {nftId}
           onClose={() => setShowPopup(false)}
         />
       )}
@@ -159,3 +204,7 @@ const Create = () => {
 };
 
 export default Create;
+
+
+
+
