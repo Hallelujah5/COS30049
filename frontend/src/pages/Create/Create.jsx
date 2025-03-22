@@ -3,20 +3,28 @@ import { validateForm } from "./CreateComponent/ValidateForm";
 import "./CreateComponent/create.css";
 import Footer from "../../components/Footer/footer";
 import ListingPopup from "./CreateComponent/ListingPopup";
+import { useMintNFT } from "../../context/MintNFTContext"; // Import the context hook
 
 const Create = () => {
-  const [selectedImage, setSelectedImage] = useState(null); // store the uploaded image
-  const [isMinted, setIsMinted] = useState(false); // minted state
-  const [showPopup, setShowPopup] = useState(false); // popup
-  const [nftName, setNftName] = useState(""); // nft name
-  const [cid, setCid] = useState(""); // ipfs cid
+  const [selectedImage, setSelectedImage] = useState(null); // Store the uploaded image
+  const [isMinted, setIsMinted] = useState(false); // Minted state
+  const [showPopup, setShowPopup] = useState(false); // Popup
+  const [nftName, setNftName] = useState(""); // NFT name
+  const [cid, setCid] = useState(""); // IPFS CID
+  const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT(); // Use MintNFT context
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await validateForm(event); // Ensure validation succeeds
+    const result = await validateForm(event); // Validate and upload to Pinata
     if (result.success) {
-      setIsMinted(true);
+      const tokenURI = `ipfs://${result.cid}`; // Format the URI as an IPFS link
       setCid(result.cid);
+      try {
+        await mintNFT(tokenURI); // Call mintNFT from context with the IPFS URI
+        setIsMinted(true); // Update state on successful mint
+      } catch (error) {
+        console.error("Minting failed:", error);
+      }
     }
   };
 
@@ -43,14 +51,9 @@ const Create = () => {
         {/* Form submit validation */}
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="row mt-4 d-flex justify-content-center">
-
             {/* File Upload */}
             <div className="image-container col-lg-5 d-flex justify-content-center">
-              <label
-                htmlFor="nft_image"
-                className="upload-box position-relative"
-              >
-                {/* Show uploaded img preview */}
+              <label htmlFor="nft_image" className="upload-box position-relative">
                 {selectedImage ? (
                   <img
                     src={selectedImage}
@@ -76,7 +79,7 @@ const Create = () => {
               </label>
             </div>
 
-            {/*=================Details Input Form=================*/}
+            {/* Details Input Form */}
             <div className="col-lg-5">
               <div className="mb-4">
                 <label htmlFor="nft_name" className="form-label">
@@ -107,7 +110,7 @@ const Create = () => {
                 ></textarea>
               </div>
 
-              {/* After minting successful */}
+              {/* Minting Status and Buttons */}
               {!isMinted ? (
                 <div className="d-flex justify-content-left">
                   <button type="submit" className="btn btn-primary">
@@ -126,20 +129,25 @@ const Create = () => {
                   <p className="mint-success fw-bold">
                     NFT minted successfully!
                   </p>
+                  <p>{mintStatus}</p> {/* Display minting status */}
+                  {lastMintedNFT && (
+                    <div>
+                      <p><strong>Token ID:</strong> {lastMintedNFT.tokenId}</p>
+                      <p><strong>Token URI:</strong> {lastMintedNFT.tokenURI}</p>
+                    </div>
+                  )}
                   <button
                     className="btn btn-create"
                     onClick={(e) => {
                       e.preventDefault();
-                      setShowPopup(true); //show popup when this button is clicked
+                      setShowPopup(true); // Show popup when this button is clicked
                     }}
                   >
                     List this collection?
                   </button>
                 </div>
               )}
-
             </div>
-
           </div>
         </form>
       </div>

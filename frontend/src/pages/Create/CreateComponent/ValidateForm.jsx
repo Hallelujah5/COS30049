@@ -70,9 +70,6 @@ async function uploadToPinata(file) {
     const data = await res.json();
     if (data.IpfsHash) {
       const cid = data.IpfsHash; // Store the CID
-      alert(
-        `✅ File Uploaded! CID: ${cid}\n🌍 Image URL: https://ipfs.io/ipfs/${cid}`
-      );
       return { success: true, cid }; // Return cid
     } else {
       alert("❌ Upload failed!");
