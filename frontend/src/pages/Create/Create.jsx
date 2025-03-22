@@ -7,7 +7,7 @@ import api from "../../api";
 import { useMintNFT } from "../../context/MintNFTContext";
 import { useMarketplace } from "../../context/MarketplaceContext";
 import { useAuction } from "../../context/AuctionContext";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { use } from "react";
 
 const Create = () => {
@@ -26,51 +26,34 @@ const Create = () => {
   const navigate = useNavigate(); // Hook for navigation
 
   // handle minting
-   //====HANDLE FORM SUBMISSON => CREATES NFT AND INSERT INTO DATABASE
+  //====HANDLE FORM SUBMISSON => CREATES NFT AND INSERT INTO DATABASE
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await validateForm(event); // Validate and upload to Pinata
+    const result = await validateForm(event);
+    console.log("Validation result:", result);
     if (result.success) {
-      const tokenURI = `ipfs://${result.cid}`; // Format URI as an IPFS link
+      const tokenURI = `ipfs://${result.cid}`;
+      console.log("Token URI:", tokenURI);
       setCid(result.cid);
-
-      
-    //APPEND FORMDATA TO SEND OVER TO MAIN.API @APP.POST() TO PUSH IT ON DATABASE
-      const formData = new FormData();
-      formData.append("nft_name", nftName || "Unnamed");
-      formData.append("description", nft_description || "No description");
-      formData.append("image_path", result.cid);
-      formData.append("own_by", "0x1234567890abcdef1234567890abcdef12345678");    //HARDCODE AT THE MOMENT
-      
-      
-      //1st TRY-CATCH BLOCK, MINT NFT
       try {
-        await mintNFT(tokenURI); 
-        setIsMinted(true); 
-      } catch (error) {
-        console.error("Minting failed:", error);
-      }
-       //================================================
-      
-      
-      //2nd TRY-CATCH BLOCK, PUSH TO DATABASE
-        try {
-        const res = await api.post("/create-nft",formData);     //SEND IT OVER TO /CREATE-NFT
-        //=======DEBUG PROCESS=======
-        console.log("Response:", res.data);
+        await mintNFT(tokenURI);
+        setIsMinted(true);
+        console.log("Minted NFT, lastMintedNFT:", lastMintedNFT);
+
+        const formData = new FormData();
+        formData.append("nft_name", nftName || "Unnamed");
+        formData.append("description", nft_description || "No description");
+        formData.append("image_path", result.cid);
+        formData.append("own_by", "0x1234567890abcdef1234567890abcdef12345678");
+        const res = await api.post("/create-nft", formData);
+        console.log("Database response:", res.data);
         if (res.data.success) {
-          console.log("Successfully created NFT:", res.data);
-          console.log("nft_id is: ", res.data.nft_id);
-          setnftId(res.data.nft_id)
-        } else {
-          console.error("Creation failed:", res.data.error);
+          setnftId(res.data.nft_id);
         }
       } catch (error) {
-        console.error("Error creating NFT:", JSON.stringify(error.response?.data, null, 2));
+        console.error("Error during minting or DB operation:", error);
       }
-      //================================================================================================
     }
-
   };
 
   const handleImageChange = (event) => {
@@ -85,7 +68,7 @@ const Create = () => {
     setNftName(event.target.value);
   };
 
-  // Handle listing or auction 
+  // Handle listing or auction
   const handleListingSubmit = async (listingData) => {
     if (!lastMintedNFT || !lastMintedNFT.tokenId) {
       alert("No minted NFT found. Please mint an NFT first.");
@@ -110,10 +93,10 @@ const Create = () => {
       alert(`Error: ${error.message}`);
     }
   };
-  
-   const handleDescChange = (event) => {
+
+  const handleDescChange = (event) => {
     setNftDesc(event.target.value);
-   };
+  };
 
   return (
     <>
@@ -128,7 +111,10 @@ const Create = () => {
           <div className="row mt-4 d-flex justify-content-center">
             {/* File Upload */}
             <div className="image-container col-lg-5 d-flex justify-content-center">
-              <label htmlFor="nft_image" className="upload-box position-relative">
+              <label
+                htmlFor="nft_image"
+                className="upload-box position-relative"
+              >
                 {selectedImage ? (
                   <img
                     src={selectedImage}
@@ -209,11 +195,16 @@ const Create = () => {
                   <p>{mintStatus}</p> {/* Display minting status */}
                   {lastMintedNFT && (
                     <div>
-                      <p><strong>Token ID:</strong> {lastMintedNFT.tokenId}</p>
-                      <p><strong>Token URI:</strong> {lastMintedNFT.tokenURI}</p>
+                      <p>
+                        <strong>Token ID:</strong> {lastMintedNFT.tokenId}
+                      </p>
+                      <p>
+                        <strong>Token URI:</strong> {lastMintedNFT.tokenURI}
+                      </p>
                     </div>
                   )}
-                  <p>{marketStatus || auctionStatus}</p> {/* Display listing/auction status */}
+                  <p>{marketStatus || auctionStatus}</p>{" "}
+                  {/* Display listing/auction status */}
                   <button
                     className="btn btn-create"
                     onClick={(e) => {
@@ -228,11 +219,9 @@ const Create = () => {
             </div>
           </div>
         </form>
-
       </div>
 
       <Footer />
-
 
       {showPopup && (
         <ListingPopup
@@ -240,7 +229,7 @@ const Create = () => {
           nftName={nftName}
           cid={cid}
           tokenId={lastMintedNFT?.tokenId} // Pass tokenId to popup
-          nft_id = {lastMintedNFT?.tokenId}
+          nft_id={nftId}
           onClose={() => setShowPopup(false)}
           onSubmit={handleListingSubmit} // Pass submit handler
         />
@@ -250,4 +239,3 @@ const Create = () => {
 };
 
 export default Create;
-
