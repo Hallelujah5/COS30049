@@ -5,9 +5,8 @@ import CreateNFT from "./MarketComponent/CreateNFT";
 import Footer from "../../components/Footer/footer";
 import Auction from "./MarketComponent/Auction"
 import { motion } from "motion/react";
-
-import OfferPopup from "./OfferPopup"; 
-import { useState } from "react";
+// import OfferPopup from "./OfferPopup"; 
+// import { useState } from "react";
 
 const fadeInVariant = {
   offscreen: { opacity: 0, y: 50 },
@@ -19,13 +18,13 @@ const fadeInVariant = {
 };
 
 const Market = () => {
-  const [showPopup, setShowPopup] = useState(false); //consts for the popup
-  const nftData = {
-    nft: { current_price: 0.5 },
-    image: "https://picsum.photos/200",
-    name: "Sample NFT",
-    owner: "Sample Owner",
-  };
+  // const [showPopup, setShowPopup] = useState(false); //consts for the popup
+  // const nftData = {
+  //   nft: { current_price: 0.5 },
+  //   image: "https://picsum.photos/200",
+  //   name: "Sample NFT",
+  //   owner: "Sample Owner",
+  // };
 
   return (
     <div>
@@ -37,7 +36,7 @@ const Market = () => {
       >
         <LiveBidding />
 
-        <button
+        {/* <button
           className="btn btn-create"
           onClick={(e) => {
             e.preventDefault();
@@ -49,7 +48,7 @@ const Market = () => {
 
         {showPopup && (
           <OfferPopup nftData={nftData} onClose={() => setShowPopup(false)} />
-        )}
+        )} */}
       </motion.div>
 
       <motion.div

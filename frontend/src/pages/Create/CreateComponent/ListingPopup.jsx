@@ -3,12 +3,12 @@ import api from "../../../api"
 import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
 import { useAuction } from "../../../context/AuctionContext"; // For auction
 
+
 const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit }) => {  
   const [listingType, setListingType] = useState("list");
   const [price, setPrice] = useState(""); // Sell price
- 
-  const { listNFT } = useMarketplace();
-  const { startAuction } = useAuction();
+  // const { listNFT } = useMarketplace();
+  // const { startAuction } = useAuction();
 
   
   // Handle submit for Sell or Auction
@@ -20,7 +20,14 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
       return;
     }
     
-     //FORM DATA TO UPDATE NFT PRICE AND STATUS
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice) || parsedPrice <= 0) {
+      alert("Please enter a valid price greater than 0.");
+      return;
+    }
+
+
+    //FORM DATA TO UPDATE NFT PRICE AND STATUS
     const formData = new FormData();
     formData.append("nft_status", listingType);
     formData.append("current_price", parsedPrice);
@@ -49,13 +56,12 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
       await onSubmit(listingData); // Call the parent handler
     } 
     
-  };
+  
 
   //===================================================================
 
   // Update button text based on listing type
   const buttonText = listingType === "list" ? "List NFT" : "Start NFT Auction";
-  const handleOnClick = () => {};
   return (
     <div
       className="modal custom fade show outfit"

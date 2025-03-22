@@ -5,23 +5,23 @@ import Popup from "../../Create/CreateComponent/ListingPopup";
 import api from "../../../api";
 
 
-// // Sample data for Collected NFTs
-// const collectedNFTs = [
-//   {
-//     id: 1,
-//     name: "CryptoPunk #1234",
-//     owner: "0xA12bC34D...",
-//     price: "3.5",
-//     acquired: "2025-01-30",
-//   },
-//   {
-//     id: 2,
-//     name: "Bored Ape #5678",
-//     owner: "0xD56eF78A...",
-//     price: "5.2",
-//     acquired: "2025-01-29",
-//   },
-// ];
+// Sample data for Collected NFTs
+const collectedNFTs = [
+  {
+    id: 1,
+    name: "CryptoPunk #1234",
+    owner: "0xA12bC34D...",
+    price: "3.5",
+    acquired: "2025-01-30",
+  },
+  {
+    id: 2,
+    name: "Bored Ape #5678",
+    owner: "0xD56eF78A...",
+    price: "5.2",
+    acquired: "2025-01-29",
+  },
+];
 
 
 // Tab data mapping

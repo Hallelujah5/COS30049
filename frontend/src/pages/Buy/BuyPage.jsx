@@ -8,9 +8,21 @@ import more from "../../assets/more.svg";
 import share from "../../assets/share.svg";
 import Heart from "../../components/heart";
 import api from "../../api";
+import OfferPopup from "./OfferPopup"; 
+
+
 
 const Buy = () => {
   // FETCH THE ID OF THE NFT THAT THE USER CLICKED ON IN /MARKET
+
+  const [showPopup, setShowPopup] = useState(false); //consts for the popup
+  const nftPoppin = {
+    nft: { current_price: 0.5 },
+    image: "https://picsum.photos/200",
+    name: "Sample NFT",
+    owner: "Sample Owner",
+  };
+
   const { nft_id } = useParams();
   const [nftData, setNftData] = useState();
 
@@ -191,10 +203,19 @@ const Buy = () => {
                     ORDER NOW
                   </button>
                 ) :
-                (<button className="btn btn-outline-secondary btn-large text-white subheading-text mx-lg-4 ">
-                    MAKE OFFER
+                (<button
+                  className="btn btn-outline-secondary btn-large text-white subheading-text mx-lg-4"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowPopup(true); //show popup when this button is clicked
+                  }}
+                  >
+                  MAKE OFFER
                   </button>
                 )}
+                {showPopup && (
+                  <OfferPopup nftData={nftPoppin} onClose={() => setShowPopup(false)} />
+                  )}
               </div>
             </div>
             <div></div>
@@ -265,7 +286,7 @@ const Buy = () => {
                 <div class="d-flex w-100 justify-content-between px-3">
                   <p>1.3 ETH</p>
                   <p>In 9 minute</p>
-                  <p>ARGAS</p>
+                  <p>GraGAS</p>
                 </div>
               </div>
             </div>

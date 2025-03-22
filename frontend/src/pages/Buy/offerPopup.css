@@ -19,8 +19,8 @@
 }
 
 .custom-size {
-  max-width: 600px;
-  width: 95%;
+  max-width: 45em !important;
+  width: 95% !important;
 }
 
 .modal-content {
@@ -28,6 +28,7 @@
   color: #ffffff;
   border-radius: 12px;
   border: none;
+  /* width: 120%; */
 }
 
 /* ---- Close Button ---- */
