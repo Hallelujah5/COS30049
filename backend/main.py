@@ -143,5 +143,9 @@ async def update_nft(nft_status: str = Form(...), current_price: float = Form(..
         return {"Error!": f"Failed to update row NFT: {str(e)}"}
 
 
+
+
+
+
 if __name__ == "__main__":              #RUN ON PORT 9000
     uvicorn.run(app, host="0.0.0.0", port=9000)
