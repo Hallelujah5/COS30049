@@ -113,13 +113,13 @@ exit /b 1
 
 @REM === Run schema.sql to Setup Database ===
 echo Checking and setting up database...
-mysql -u root -proot -P 3306 -e "CREATE DATABASE IF NOT EXISTS nft_db;" 2>nul
+mysql -u root -proot -P 3306 -e "CREATE DATABASE IF NOT EXISTS nft_db;"
 if %ERRORLEVEL% NEQ 0 (
     echo Error: MySQL connection failed. Ensure MySQL is running on port 3306 with credentials root/root.
     pause
     exit /b 1
 ) else (
-    mysql -u root -proot -P 3306 nft_db < backend\database\schema.sql 2>nul
+    mysql -u root -proot -P 3306 nft_db < database\schema.sql 
     if %ERRORLEVEL% NEQ 0 (
         echo Error: Failed to run schema.sql. Check file path or MySQL credentials.
         pause
