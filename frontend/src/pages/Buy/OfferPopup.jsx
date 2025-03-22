@@ -33,10 +33,10 @@ const OfferPopup = ({ onClose, nftData }) => {
               {/* NFT Image */}
               <div className="col-12 col-md-3 text-center">
                 <img
-                  src={nftData.image}
+                  src={`https://ipfs.io/ipfs/${nftData.image}`}
                   alt="NFT Preview"
                   className="popup-img rounded"
-                  style={{ width: "100px", height: "100px" }}
+                  style={{ width: "140px", height: "140px" }}
                 />
               </div>
 
@@ -44,14 +44,14 @@ const OfferPopup = ({ onClose, nftData }) => {
               <div className="col-12 col-md-9 d-flex justify-content-between align-items-center">
                 <div>
                   {/* NFT Details */}
-                  <h5 className="mt-3">{nftData.name || "NFT Name"}</h5>
-                  <p>Owner: {nftData.owner || "Unknown"}</p>
+                  <h4 className="mt-1">{nftData.name || "NFT Name"}</h4>
+                  <p>Owner: {nftData.own_by || "Unknown"}</p>
                 </div>
 
                 {/* Price and USD */}
                 <div className="text-end">
-                  <h5 className="mt-3">{current_price || "--"} ETH</h5>
-                  <p>${usdPrice}</p>
+                  <h4 className="mt-1">{current_price || "--"} ETH</h4>
+                  <p className="gray">${usdPrice}</p>
                 </div>
               </div>
             </div>

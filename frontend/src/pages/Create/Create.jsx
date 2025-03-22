@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import { validateForm } from "./CreateComponent/ValidateForm";
 import "./CreateComponent/create.css";
 import Footer from "../../components/Footer/footer";
@@ -8,7 +8,7 @@ import { useMintNFT } from "../../context/MintNFTContext";
 import { useMarketplace } from "../../context/MarketplaceContext";
 import { useAuction } from "../../context/AuctionContext";
 import { useNavigate } from "react-router-dom";
-import { use } from "react";
+import { TransactionContext } from "../../context/TransactionContext";
 
 const Create = () => {
   const [selectedImage, setSelectedImage] = useState(null); // Store the uploaded image
@@ -23,6 +23,8 @@ const Create = () => {
   const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT();
   const { listNFT, status: marketStatus } = useMarketplace();
   const { startAuction, status: auctionStatus } = useAuction();
+  const { connectWallet, currentAccount } = useContext(TransactionContext);
+  
   const navigate = useNavigate(); // Hook for navigation
 
   // handle minting
@@ -44,7 +46,8 @@ const Create = () => {
         formData.append("nft_name", nftName || "Unnamed");
         formData.append("description", nft_description || "No description");
         formData.append("image_path", result.cid);
-        formData.append("own_by", "0x1234567890abcdef1234567890abcdef12345678");
+        formData.append("own_by", currentAccount); 
+
         const res = await api.post("/create-nft", formData);
         console.log("Database response:", res.data);
         if (res.data.success) {

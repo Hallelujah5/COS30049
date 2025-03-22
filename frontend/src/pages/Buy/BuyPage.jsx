@@ -16,12 +16,7 @@ const Buy = () => {
   // FETCH THE ID OF THE NFT THAT THE USER CLICKED ON IN /MARKET
 
   const [showPopup, setShowPopup] = useState(false); //consts for the popup
-  const nftPoppin = {
-    nft: { current_price: 0.5 },
-    image: "https://picsum.photos/200",
-    name: "Sample NFT",
-    owner: "Sample Owner",
-  };
+
 
   const { nft_id } = useParams();
   const [nftData, setNftData] = useState();
@@ -48,8 +43,13 @@ const Buy = () => {
 
   // DEBUG PURPOSES
   if (!nftData) return <p>Loading...</p>;
-
+  const short_wallet = nftData.nft?.own_by?.substring(0, 8)
   const usd_price = nftData.nft.current_price * 1944.6;
+  const nftPoppin = {
+    image: nftData.nft.image_path,
+    name: nftData.nft.nft_name,
+    own_by: short_wallet
+  };
   return (
     <>
       <div className=" container">
@@ -134,9 +134,8 @@ const Buy = () => {
             <div className="d-none d-lg-flex justify-content-between mt-5 mx-5 mb-3">
               <div>
                 <h2>{nftData.nft.nft_name}</h2>
-                {/* nftData.nft.own_by */}
                 <p>
-                  Owned by <span className="blue">5FB92B</span>
+                  Owned by <span className="blue">{nftData.nft?.own_by?.substring(0, 8)}</span>
                 </p>
               </div>
 

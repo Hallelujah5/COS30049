@@ -40,8 +40,8 @@ def get_nfts(nft_status: str, page: int = Query(1, alias="page", description="Pa
             password="root",
             database="nft_db"
         )
+
         cursor = db.cursor(dictionary=True)
-        
         offset = (page - 1) * limit         #FETCH THE NEXT SET OF 8 NFTS WHEN USER CLICK ON A NEW PAGE.
 
         cursor.execute("SELECT * FROM nfts WHERE nft_status = %s LIMIT %s OFFSET %s",(nft_status, limit, offset))         
