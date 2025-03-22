@@ -1,0 +1,73 @@
+
+/* ---- Modal (Pop up box) ---- */
+
+.modal.custom {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+  padding: 30px !important;
+}
+
+.modal-dialog {
+  transform: translateY(150px) !important;
+}
+
+.modal p {
+  padding: 0;
+  margin: 0;
+}
+
+.custom-size {
+  max-width: 600px;
+  width: 95%;
+}
+
+.modal-content {
+  background-color: #1e153f !important;
+  color: #ffffff;
+  border-radius: 12px;
+  border: none;
+}
+
+/* ---- Close Button ---- */
+.close-btn {
+  color: #ffffff;
+  opacity: 0.8;
+  margin-right: 0;
+}
+
+.close-btn:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+/* ---- Image Section ---- */
+.popup-img {
+  padding: 0;
+}
+
+/* ---- Input Fields ---- */
+.txt-input {
+  color: black !important;
+  background-color: #c7bbf1;
+}
+
+.offer-input p {
+  color: rgb(139, 139, 139) !important;
+}
+
+/* ---- Buttons ---- */
+.btn-offer {
+  --bs-btn-padding-y: 0.65em !important;
+  background-color: #8686d8 !important;
+  border: 1px solid #8686d8 !important;
+  letter-spacing: 0.03em;
+  width: 100%;
+  padding: 9px;
+  border-radius: 15px;
+}
+
+.btn-offer:hover {
+    background-color: #7575b2 !important;
+}
