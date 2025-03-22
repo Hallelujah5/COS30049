@@ -98,10 +98,10 @@ const ListingPopup = ({ image, nftName, cid, tokenId, onClose, onSubmit }) => {
                 <h5 className="mt-3">
                   NFT Name: <span className="fw-bold"> {nftName}</span>
                 </h5>
+                {/* Display tokenId */}
                 <p>
                   <strong>Token ID:</strong> {tokenId}
                 </p>{" "}
-                {/* Display tokenId */}
                 <br />
                 {/* Select listing type */}
                 <label className="form-label">Listing Type:</label>

@@ -6,7 +6,7 @@ import ListingPopup from "./CreateComponent/ListingPopup";
 import { useMintNFT } from "../../context/MintNFTContext";
 import { useMarketplace } from "../../context/MarketplaceContext";
 import { useAuction } from "../../context/AuctionContext";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom"; 
 
 const Create = () => {
   const [selectedImage, setSelectedImage] = useState(null); // Store the uploaded image
@@ -21,15 +21,16 @@ const Create = () => {
   const { startAuction, status: auctionStatus } = useAuction();
   const navigate = useNavigate(); // Hook for navigation
 
+  // handle minting
   const handleSubmit = async (event) => {
     event.preventDefault();
     const result = await validateForm(event); // Validate and upload to Pinata
     if (result.success) {
-      const tokenURI = `ipfs://${result.cid}`; // Format the URI as an IPFS link
+      const tokenURI = `ipfs://${result.cid}`; // Format URI as an IPFS link
       setCid(result.cid);
       try {
-        await mintNFT(tokenURI); // Mint the NFT
-        setIsMinted(true); // Update state on successful mint
+        await mintNFT(tokenURI); 
+        setIsMinted(true); 
       } catch (error) {
         console.error("Minting failed:", error);
       }
@@ -48,7 +49,7 @@ const Create = () => {
     setNftName(event.target.value);
   };
 
-  // Handle listing or auction from the popup
+  // Handle listing or auction 
   const handleListingSubmit = async (listingData) => {
     if (!lastMintedNFT || !lastMintedNFT.tokenId) {
       alert("No minted NFT found. Please mint an NFT first.");
@@ -61,7 +62,7 @@ const Create = () => {
       if (listingData.listingType === "sell") {
         await listNFT(tokenId, listingData.price);
         alert(`NFT ${tokenId} listed successfully!`);
-        navigate("/market"); // Redirect to /market after listing
+        navigate("/market"); // Redirect to /market after sale listing
       } else if (listingData.listingType === "auction") {
         await startAuction(tokenId, listingData.startingPrice);
         alert(`Auction for NFT ${tokenId} started successfully!`);
@@ -188,6 +189,7 @@ const Create = () => {
       </div>
 
       <Footer />
+
 
       {showPopup && (
         <ListingPopup
