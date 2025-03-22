@@ -1,19 +1,11 @@
--- Active: 1730779438518@@127.0.0.1@3307@nft_db
-----------------------------------------
-----------SQL TO CREATE TABLES----------
-
-
---CREATE DATABASE IF NOT EXIST--
+-- CREATE DATABASE IF NOT EXISTS
 CREATE DATABASE IF NOT EXISTS nft_db;
 USE nft_db;
 
-
-----DROP TABLE IF EXISTS----
-
+-- DROP TABLE IF EXISTS
 DROP TABLE IF EXISTS Transactions;
 DROP TABLE IF EXISTS NFTs;
 DROP TABLE IF EXISTS Users;
-
 
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,5 +35,4 @@ CREATE TABLE Transactions(
     tx_hash VARCHAR(66),
     transaction_type ENUM('auction', 'sale','transfer') NOT NULL,
     FOREIGN KEY (nft_id) REFERENCES NFTs(nft_id) ON DELETE CASCADE
-
 );

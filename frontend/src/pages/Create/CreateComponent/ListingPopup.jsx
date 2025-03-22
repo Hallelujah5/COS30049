@@ -1,16 +1,23 @@
 import React, { useState } from "react";
-import api from "../../../api"
+import api from "../../../api";
 import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
 import { useAuction } from "../../../context/AuctionContext"; // For auction
 
-const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit }) => {  
+const ListingPopup = ({
+  image,
+  nftName,
+  cid,
+  tokenId,
+  nft_id,
+  onClose,
+  onSubmit,
+}) => {
   const [listingType, setListingType] = useState("list");
   const [price, setPrice] = useState(""); // Sell price
- 
+
   const { listNFT } = useMarketplace();
   const { startAuction } = useAuction();
 
-  
   // Handle submit for Sell or Auction
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,8 +26,8 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
       alert("No token ID available. Please mint an NFT first.");
       return;
     }
-    
-     //FORM DATA TO UPDATE NFT PRICE AND STATUS
+
+    //FORM DATA TO UPDATE NFT PRICE AND STATUS
     const formData = new FormData();
     formData.append("nft_status", listingType);
     formData.append("current_price", parsedPrice);
@@ -36,19 +43,22 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
         console.log("Error updating row.");
       }
     } catch (error) {
-      console.error("Error updating NFT:", error.message, error.response?.status, error.response?.data);
+      console.error(
+        "Error updating NFT:",
+        error.message,
+        error.response?.status,
+        error.response?.data
+      );
     }
     //================================================================================================
-      const listingData = {
-        nftName,
-        listingType: listingType,
-        price: price,
-        cid: cid,
-        tokenId: tokenId,
-      };
-      await onSubmit(listingData); // Call the parent handler
-    } 
-    
+    const listingData = {
+      nftName,
+      listingType: listingType,
+      price: price,
+      cid: cid,
+      tokenId: tokenId,
+    };
+    await onSubmit(listingData); // Call the parent handler
   };
 
   //===================================================================
@@ -180,5 +190,4 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
     </div>
   );
 };
-
 export default ListingPopup;

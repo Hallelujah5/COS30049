@@ -20,13 +20,13 @@ app.add_middleware(             #CORS TO ALLOW HTTP REQUEST
 
 
 def get_db():
-    return  mysql.connector.connect(
-            host="localhost",
-            port=3307,
-            user="root",
-            password="root",
-            database="nft_db"
-            )       
+    return mysql.connector.connect(
+        host="localhost",
+        port=3306,  # Changed from 3307 to 3306
+        user="root",
+        password="root",
+        database="nft_db"
+    )     
 
 @app.get("/nfts")
 def get_nfts(nft_status: str, page: int = Query(1, alias="page", description="Page number"), limit: int = Query(8, description="NFTs per page")):    #LIMIT HOW MANY NFTS CAN BE SHOWN IN LIVE BIDDING SECTION, MARKETPLACE.
@@ -35,7 +35,7 @@ def get_nfts(nft_status: str, page: int = Query(1, alias="page", description="Pa
     try:       
         db = mysql.connector.connect(
             host="localhost",
-            port=3307,
+            port=3306,  # Changed from 3307 to 3306
             user="root",
             password="root",
             database="nft_db"
@@ -72,7 +72,7 @@ def get_nft(nft_id: int):
     try:
         db = mysql.connector.connect(
             host="localhost",
-            port=3307,
+            port=3306,  # Changed from 3307 to 3306
             user="root",
             password="root",
             database="nft_db"
@@ -104,7 +104,7 @@ async def create_nft(
     try:
         db = mysql.connector.connect(           #DATABASE CONNECT
             host="localhost",
-            port=3307,
+            port=3306,  # Changed from 3307 to 3306
             user="root",
             password="root",
             database="nft_db"

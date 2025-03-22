@@ -238,7 +238,7 @@ const Create = () => {
           nftName={nftName}
           cid={cid}
           tokenId={lastMintedNFT?.tokenId} // Pass tokenId to popup
-          nft_id = {nftId}
+          nft_id = {lastMintedNFT?.tokenId}
           onClose={() => setShowPopup(false)}
           onSubmit={handleListingSubmit} // Pass submit handler
         />
