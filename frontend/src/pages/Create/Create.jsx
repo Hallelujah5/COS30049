@@ -8,14 +8,16 @@ import { useMintNFT } from "../../context/MintNFTContext";
 import { useMarketplace } from "../../context/MarketplaceContext";
 import { useAuction } from "../../context/AuctionContext";
 import { useNavigate } from "react-router-dom"; 
+import { use } from "react";
 
 const Create = () => {
   const [selectedImage, setSelectedImage] = useState(null); // Store the uploaded image
   const [isMinted, setIsMinted] = useState(false); // Minted state
   const [showPopup, setShowPopup] = useState(false); // Popup
   const [nftName, setNftName] = useState(""); // NFT name
-    const [nft_description, setNftDesc] = useState("");
+  const [nft_description, setNftDesc] = useState("");
   const [cid, setCid] = useState(""); // IPFS CID
+  const [nftId, setnftId] = useState();
 
   // Context hooks
   const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT();

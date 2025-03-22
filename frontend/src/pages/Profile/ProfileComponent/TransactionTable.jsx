@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { transactionHistory } from "../data/transactionHistory";
-// import { offersMade } from "../data/offersMade";
 import Popup from "../../Create/CreateComponent/ListingPopup";
+import api from "../../../api";
+
 
 // Sample data for Collected NFTs
 const collectedNFTs = [
@@ -22,10 +23,10 @@ const collectedNFTs = [
   },
 ];
 
+
 // Tab data mapping
 const tabData = {
-  collected: collectedNFTs,
-  // offers: offersMade,
+  collected: collectedNFTs, 
   history: transactionHistory,
   more: [],
 };
@@ -33,12 +34,18 @@ const tabData = {
 // Tab title mapping
 const tabTitles = {
   collected: "NFTs Collected",
-  // offers: "Pending Offers",
   history: "Transaction History",
   more: "More",
 };
 
 const TransactionTable = () => {
+  useEffect(() => {
+    
+  }, []);
+
+
+
+
   const [activeTab, setActiveTab] = useState("collected");
 
   // State for popup
@@ -69,7 +76,7 @@ const TransactionTable = () => {
           ))}
           <div
             className="active-bg"
-            style={{ left: `${Object.keys(tabData).indexOf(activeTab) * 25}%` }}
+            style={{ left: `${Object.keys(tabData).indexOf(activeTab) * 33.33333}%`, width: "33.333%"}}
           ></div>
         </div>
       </div>
@@ -85,19 +92,9 @@ const TransactionTable = () => {
                   <>
                     <th>ID</th>
                     <th>NFT Name</th>
-                    <th>Owner</th>
                     <th>Price (ETH)</th>
                     <th>Acquired</th>
                     <th>Action</th>
-                  </>
-                )}
-                {activeTab === "offers" && (
-                  <>
-                    <th>ID</th>
-                    <th>NFT Name</th>
-                    <th>Receiver</th>
-                    <th>Price (ETH)</th>
-                    <th>Status</th>
                   </>
                 )}
                 {activeTab === "history" && (
@@ -120,7 +117,6 @@ const TransactionTable = () => {
                       <>
                         <td>{item.id}</td>
                         <td>{item.name}</td>
-                        <td>{item.owner}</td>
                         <td>{item.price}</td>
                         <td>{item.acquired}</td>
                         <td>
@@ -133,15 +129,6 @@ const TransactionTable = () => {
                         </td>
                       </>
                     )}
-                    {/* {activeTab === "offers" && (
-                      <>
-                        <td>{item.id}</td>
-                        <td>{item.name}</td>
-                        <td>{item.receiver}</td>
-                        <td>{item.price}</td>
-                        <td>{item.status}</td>
-                      </>
-                    )} */}
                     {activeTab === "history" && (
                       <>
                         <td>{item.id}</td>
@@ -176,7 +163,7 @@ const TransactionTable = () => {
       {/* Pagination (----temporary----) */}
       <div className="pagination outfit">
         <button className="pagination-btn">Previous</button>
-        <span className="pagination-info">Page 1...</span>
+        <span className="pagination-info">Page 1</span>
         <button className="pagination-btn">Next</button>
       </div>
     </>

@@ -3,20 +3,12 @@ import api from "../../../api";
 import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
 import { useAuction } from "../../../context/AuctionContext"; // For auction
 
-const ListingPopup = ({
-  image,
-  nftName,
-  cid,
-  tokenId,
-  nft_id,
-  onClose,
-  onSubmit,
-}) => {
+
+const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit }) => {  
   const [listingType, setListingType] = useState("list");
   const [price, setPrice] = useState(""); // Sell price
-
-  const { listNFT } = useMarketplace();
-  const { startAuction } = useAuction();
+  // const { listNFT } = useMarketplace();
+  // const { startAuction } = useAuction();
 
   // Handle submit for Sell or Auction
   const handleSubmit = async (event) => {
@@ -26,6 +18,13 @@ const ListingPopup = ({
       alert("No token ID available. Please mint an NFT first.");
       return;
     }
+    
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice) || parsedPrice <= 0) {
+      alert("Please enter a valid price greater than 0.");
+      return;
+    }
+
 
     //FORM DATA TO UPDATE NFT PRICE AND STATUS
     const formData = new FormData();
@@ -51,21 +50,22 @@ const ListingPopup = ({
       );
     }
     //================================================================================================
-    const listingData = {
-      nftName,
-      listingType: listingType,
-      price: price,
-      cid: cid,
-      tokenId: tokenId,
-    };
-    await onSubmit(listingData); // Call the parent handler
-  };
+      const listingData = {
+        nftName,
+        listingType: listingType,
+        price: price,
+        cid: cid,
+        tokenId: tokenId,
+      };
+      await onSubmit(listingData); // Call the parent handler
+    } 
+    
+  
 
   //===================================================================
 
   // Update button text based on listing type
   const buttonText = listingType === "list" ? "List NFT" : "Start NFT Auction";
-  const handleOnClick = () => {};
   return (
     <div
       className="modal custom fade show outfit"
