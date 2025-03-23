@@ -7,6 +7,7 @@ import Testimony from "./HomeComponent/Testimonial/testimony";
 import Footer from "../../components/Footer/footer";
 import { motion } from "motion/react";
 
+// Define animation variants for the fade-in effect
 const fadeInVariant = {
   offscreen: { opacity: 0, y: 50 },
   onscreen: {
@@ -16,6 +17,7 @@ const fadeInVariant = {
   },
 };
 
+// Homepage component
 const Homepage = () => {
   return (
     <div>
