@@ -68,7 +68,7 @@ const Buy = () => {
                 <h2>{nftData.nft.nft_name}</h2>
                 <p>
                   Owned by{" "}
-                  <span className="blue">{nftData.nft.own_by || "5FB92B"}</span>
+                  <span className="blue">{nftData.nft?.own_by?.substring(0, 8) || "0x5FB92B"}</span>
                 </p>
               </div>
               <Heart />

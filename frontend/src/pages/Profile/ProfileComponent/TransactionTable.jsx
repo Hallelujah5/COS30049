@@ -4,6 +4,7 @@ import { transactionHistory } from "../data/transactionHistory";
 import Popup from "../../Create/CreateComponent/ListingPopup";
 import api from "../../../api";
 import { TransactionContext } from "../../../context/TransactionContext";
+import { useMintNFT } from "../../../context/MintNFTContext";
 import { useNavigate } from "react-router-dom";
 
 const TransactionTable = () => {
@@ -15,6 +16,7 @@ const TransactionTable = () => {
   const [showPopup, setShowPopup] = useState(false);
   // STATE FOR SELECTED NFT IN POPUP
   const [selectedNFT, setSelectedNFT] = useState(null);
+  const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT();
 
   // CONTEXT TO ACCESS WALLET CONNECTION & ACCOUNT INFO
   const { connectWallet, currentAccount } = useContext(TransactionContext);
@@ -51,13 +53,12 @@ const TransactionTable = () => {
 
   const handleListingSubmit = async (listingData) => {
     if (!lastMintedNFT || !lastMintedNFT.tokenId) {
-      alert("No minted NFT found. Please mint an NFT first.");
+      alert("No minted NFT found.    mint an NFT first.");
       return;
     }
 
     const tokenId = lastMintedNFT.tokenId; // Use the last minted token ID
 
-    try {
       if (listingData.listingType === "list") {
         await listNFT(tokenId, listingData.price);
         alert(`NFT ${tokenId} listed successfully!`);
@@ -68,10 +69,6 @@ const TransactionTable = () => {
         navigate("/market"); // Redirect to /market after starting auction
       }
       setShowPopup(false); // Close popup on success
-    } catch (error) {
-      console.error("Error in listing/auction:", error);
-      alert(`Error: ${error.message}`);
-    }
   };
 
   // FUNCTION TO HANDLE "LIST" BUTTON CLICK

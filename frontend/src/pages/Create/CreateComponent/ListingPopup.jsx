@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from "../../../api";
-// import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
-// import { useAuction } from "../../../context/AuctionContext"; // For auction
+import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
+import { useAuction } from "../../../context/AuctionContext"; // For auction
 
 const ListingPopup = ({
   image,

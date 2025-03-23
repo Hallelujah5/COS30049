@@ -80,7 +80,7 @@ const OfferPopup = ({ onClose, nftData }) => {
             <div className="row align-items-center">
               <div className="col-12 col-md-3 text-center">
                 <img
-                  src={`https://ipfs.io/ipfs/${nftData.image}`}
+                  src={nftData.image}
                   alt="NFT Preview"
                   className="popup-img rounded"
                   style={{ width: "140px", height: "140px" }}
@@ -89,7 +89,7 @@ const OfferPopup = ({ onClose, nftData }) => {
               <div className="col-12 col-md-9 d-flex justify-content-between align-items-center">
                 <div>
                   <h5 className="mt-3">{nftData.name || "NFT Name"}</h5>
-                  <p>Owner: {nftData.owner || "Unknown"}</p>
+                  <p>Owner: {nftData.owner.substring(0, 8) || "Unknown"}</p>
                 </div>
                 <div className="text-end">
                   <h5 className="mt-3">{bidAmount || "--"} ETH</h5>
@@ -98,7 +98,7 @@ const OfferPopup = ({ onClose, nftData }) => {
               </div>
             </div>
             {nftData.isAuction && (
-              <p className="mt-3 text-center">Time Left: {timeLeft} seconds</p>
+              <p className="mt-0 text-center">Time Left: {timeLeft} seconds</p>
             )}
             <div className="mt-4 offer-input">
               <label htmlFor="bid_amount" className="form-label">

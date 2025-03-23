@@ -44,7 +44,7 @@ const Create = () => {
       formData.append("description", nft_description || "No description");
       formData.append("image_path", result.cid);
       formData.append("own_by", currentAccount || "0xDefaultAddress");
-
+      
       const res = await api.post("/create-nft", formData);
       console.log("Database response:", res.data);
       if (res.data.success) {
@@ -58,12 +58,22 @@ const Create = () => {
     }
   };
 
+
+
+
+
   useEffect(() => {
     if (lastMintedNFT?.tokenId && nftId) {
       console.log("lastMintedNFT updated:", lastMintedNFT);
       handleTokenUpdate(lastMintedNFT.tokenId, nftId);
     }
   }, [lastMintedNFT, nftId]);
+
+
+
+
+
+
 
   const handleTokenUpdate = async (tokenId, nftId) => {
     if (!tokenId || !nftId) {
