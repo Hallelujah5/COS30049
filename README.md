@@ -25,7 +25,7 @@ To explore Xyora, follow these steps:
    - **Start the Network**:
      - Open a terminal and navigate to the smart contract directory:
        ```sh
-       cd backend/smart_contract
+       cd /backend/smart_contract
        npx hardhat node
        ```
      - This starts a local Ethereum node for testing.
@@ -33,7 +33,7 @@ To explore Xyora, follow these steps:
    - **Deploy Smart Contracts**:
      - In a new terminal (keep the node running), deploy the contracts:
        ```sh
-       cd backend/smart_contract
+       cd /backend/smart_contract
        npx hardhat run scripts/deploy.js --network gochain
        ```
      - This deploys Auction, Marketplace, MyNFT, and Transactions to your local network (assumed as "gochain" per your instruction).
@@ -48,10 +48,11 @@ To explore Xyora, follow these steps:
 
 5. **Interact with Xyora**:
    - Access the app (typically at `http://localhost:5173`) to:
-     - Mint NFTs via MyNFT.
-     - List or buy NFTs in the Marketplace.
-     - Bid on or end auctions in Auction.
+     - Mint NFTs via Create.
+     - List or buy NFTs in the Marketplace - Buy page.
+     - Bid on or end auctions in Marketplace - Buy page.
      - Record ETH transactions with metadata in Transactions.
+     - List the transaction in the Profile page
 
 ## How It Works
 - **MyNFT**: A custom ERC-721 contract for minting, transferring, and managing NFTs with unique token URIs.
@@ -69,7 +70,7 @@ To run Xyora locally, ensure you have:
 - Python 3.8+
 
 ## Repository Structure
-- **backend/**: Smart contracts, Hardhat config, and tests (see [backend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/backend/ReadMe.md)).
+- **backend/**: Smart contracts, Hardhat config, Database and API (see [backend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/backend/ReadMe.md)).
 - **frontend/**: React app for user interaction (see [frontend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/frontend/ReadMe.md)).
 - **README.md**: This file—your starting point!
 
