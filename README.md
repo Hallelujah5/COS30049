@@ -66,7 +66,7 @@ To run Xyora locally, ensure you have:
 
 - Git
 - Node.js (includes npm)
-- A Web3 wallet (e.g., MetaMask) with test ETH (e.g., Sepolia network)
+- A Web3 wallet (e.g., MetaMask) with test ETH (e.g., Local ETH network (named GoChain)
 - Python 3.8+
 
 ## Repository Structure
