@@ -151,8 +151,10 @@ These wallets come with test ETH for your local network.
    cd group-project-spr-2025-g6
 Run the Startup Script: Execute the batch file to create a blank database and install dependencies:
 
-sh
+```sh
 .\project_start.bat
+```
+
 Notes:
 
 This installs dependencies from requirements.txt (assumed Python-based).
