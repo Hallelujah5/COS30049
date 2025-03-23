@@ -1,19 +1,11 @@
--- Active: 1730779438518@@127.0.0.1@3307@nft_db
-----------------------------------------
-----------SQL TO CREATE TABLES----------
-
-
---CREATE DATABASE IF NOT EXIST--
+-- CREATE DATABASE IF NOT EXISTS
 CREATE DATABASE IF NOT EXISTS nft_db;
 USE nft_db;
 
-
-----DROP TABLE IF EXISTS----
-
+-- DROP TABLE IF EXISTS
 DROP TABLE IF EXISTS Transactions;
 DROP TABLE IF EXISTS NFTs;
 DROP TABLE IF EXISTS Users;
-
 
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,13 +18,12 @@ CREATE TABLE NFTs(
     nft_id INT AUTO_INCREMENT PRIMARY KEY,
     nft_name VARCHAR(255) NOT NULL,
     own_by VARCHAR(255) NULL,    
-    current_price DECIMAL(18, 8),
+    current_price DECIMAL(18, 8) NULL,
     description TEXT,       
-    image_path VARCHAR(255),
-    -- token_id INT UNIQUE,             --created through the process of minting NFT, then auto-assign to NFTs
-    auction_status BOOL NOT NULL DEFAULT FALSE,
-    list_status BOOL NOT NULL DEFAULT FALSE
-    -- FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
+    image_path VARCHAR(255) NOT NULL,
+    token_id VARCHAR(255),
+    nft_status ENUM('list','auction','none') NOT NULL DEFAULT 'none',     -- DETERMINE WHETHER AN NFT IS IN LISTING OR NOT
+    date_created DATE DEFAULT (CURRENT_DATE)
 );
 
 CREATE TABLE Transactions(
@@ -45,5 +36,4 @@ CREATE TABLE Transactions(
     tx_hash VARCHAR(66),
     transaction_type ENUM('auction', 'sale','transfer') NOT NULL,
     FOREIGN KEY (nft_id) REFERENCES NFTs(nft_id) ON DELETE CASCADE
-
 );

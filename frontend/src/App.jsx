@@ -10,27 +10,28 @@ import Search from "./pages/Search/SearchPage";
 import Test from "./pages/Test/Test";
 import TestMintNFTContext from "./pages/TestMintNFTContext/TestMintNFTContext";
 import Create from "./pages/Create/Create";
+import Transfer from "./pages/Transfer/Transfer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; // Remove BrowserRouter import
 
 const App = () => {
   return (
-    // ALL THE POSSIBLE PATHS IN THE WEBSITE, ANYTHING ELSE WILL RESULT IN THE 404 ERROR PAGE.
-    <Router>
-      <Navbar />
+    <>
+      <Navbar /> {/* Navbar remains outside Routes for global visibility */}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
         <Route path="/market" element={<Market />} />
-        <Route path="/buy/:nft_id" element={<Buy />}/>
+        <Route path="/buy/:nft_id" element={<Buy />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/search" element={<Search />} />
         <Route path="/test" element={<Test />} />
         <Route path="/test-mint-nft-context" element={<TestMintNFTContext />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/transfer" element={<Transfer />} />
       </Routes>
-    </Router>
+    </>
   );
 };
 

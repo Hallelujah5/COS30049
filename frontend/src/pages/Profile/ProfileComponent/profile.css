@@ -115,6 +115,14 @@
   z-index: 1;
 }
 
+.btn-list {
+  background-color: #2300a3 !important;
+}
+
+.btn-list:hover {
+  background-color: #381ba1 !important;
+}
+
 .table-container {
   width: 90%;
   margin: auto;
