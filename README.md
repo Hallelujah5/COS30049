@@ -14,10 +14,10 @@ To explore Xyora, follow these steps:
      ```
 
 2. **Set Up the Backend**:
-   - Deploy the smart contracts and configure the blockchain backend. See detailed instructions in the backend README.
+   - Deploy the smart contracts and configure the blockchain backend. See detailed instructions in the [backend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/backend/ReadMe.md).
 
 3. **Set Up the Frontend**:
-   - Launch the React interface to interact with the platform. Follow the setup guide in the frontend README.
+   - Launch the React interface to interact with the platform. Follow the setup guide in the [frontend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/frontend/ReadMe.md).
 
 4. **Run the Platform Locally**:
    - After following all instructions in the backend and frontend READMEs, you are now ready to run our platform locally:
@@ -69,8 +69,8 @@ To run Xyora locally, ensure you have:
 - Python 3.8+
 
 ## Repository Structure
-- **backend/**: Smart contracts, Hardhat config, and tests (see backend README).
-- **frontend/**: React app for user interaction (see frontend README).
+- **backend/**: Smart contracts, Hardhat config, and tests (see [backend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/backend/ReadMe.md)).
+- **frontend/**: React app for user interaction (see [frontend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/frontend/ReadMe.md)).
 - **README.md**: This file—your starting point!
 
 ## License
