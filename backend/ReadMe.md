@@ -1,6 +1,3 @@
-Here is the full markdown code for your `README.md` file in the `/backend` folder:
-
-```markdown
 # Xyora Backend Setup
 
 This README guides you through setting up the backend for Xyora, a decentralized NFT trading platform. The backend includes Ethereum smart contracts managed with Hardhat, plus a database and API (covered in a separate section).
@@ -132,6 +129,3 @@ These wallets come with test ETH for your local network.
 
 ## 3. Setting Up the Database and API
 *Complete later*
-```
-
-You can now use this content for your `README.md` file in the `/backend` directory.
