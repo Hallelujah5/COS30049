@@ -17,7 +17,7 @@ const Create = () => {
   const [nftName, setNftName] = useState("");
   const [nft_description, setNftDesc] = useState("");
   const [cid, setCid] = useState("");
-  const [nftId, setNftId] = useState(); // Fixed typo
+  const [nftId, setNftId] = useState();
 
   const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT();
   const { listNFT, status: marketStatus } = useMarketplace();
@@ -36,31 +36,50 @@ const Create = () => {
 
     try {
       console.log("Minting with URI:", tokenURI);
-      await mintNFT(tokenURI);
+      await mintNFT(tokenURI); // This now uses the updated mintNFT
       console.log("Mint requested, waiting for lastMintedNFT...");
-
-      const formData = new FormData();
-      formData.append("nft_name", nftName || "Unnamed");
-      formData.append("description", nft_description || "No description");
-      formData.append("image_path", result.cid);
-      formData.append("own_by", currentAccount || "0xDefaultAddress");
-      
-      const res = await api.post("/create-nft", formData);
-      console.log("Database response:", res.data);
-      if (res.data.success) {
-        setNftId(res.data.nft_id);
-        setIsMinted(true); // Set after DB success
-      } else {
-        console.error("Failed to create NFT in DB:", res.data.error);
-      }
     } catch (error) {
-      console.error("Error during minting or DB operation:", error);
+      console.error("Error during minting:", error);
     }
   };
 
+  useEffect(() => {
+    if (mintStatus === "Minting NFT...") {
+      console.log("Minting in progress...");
+    } else if (mintStatus.startsWith("NFT minted!") && lastMintedNFT?.tokenId) {
+      // Move DB logic here to ensure minting is complete
+      const updateDB = async () => {
+        const formData = new FormData();
+        formData.append("nft_name", nftName || "Unnamed");
+        formData.append("description", nft_description || "No description");
+        formData.append("image_path", cid);
+        formData.append("own_by", currentAccount || "0xDefaultAddress");
 
-
-
+        try {
+          const res = await api.post("/create-nft", formData);
+          console.log("Database response:", res.data);
+          if (res.data.success) {
+            setNftId(res.data.nft_id);
+            setIsMinted(true);
+          } else {
+            console.error("Failed to create NFT in DB:", res.data.error);
+          }
+        } catch (error) {
+          console.error("DB update failed:", error);
+        }
+      };
+      updateDB();
+    } else if (mintStatus.startsWith("Error:")) {
+      console.error("Minting failed:", mintStatus);
+    }
+  }, [
+    mintStatus,
+    lastMintedNFT,
+    nftName,
+    nft_description,
+    cid,
+    currentAccount,
+  ]);
 
   useEffect(() => {
     if (lastMintedNFT?.tokenId && nftId) {
@@ -68,12 +87,6 @@ const Create = () => {
       handleTokenUpdate(lastMintedNFT.tokenId, nftId);
     }
   }, [lastMintedNFT, nftId]);
-
-
-
-
-
-
 
   const handleTokenUpdate = async (tokenId, nftId) => {
     if (!tokenId || !nftId) {
@@ -122,7 +135,7 @@ const Create = () => {
         alert(`NFT ${tokenId} listed successfully!`);
         navigate("/market");
       } else if (listingData.listingType === "auction") {
-        await startAuction(tokenId, listingData.price); // Fixed from startingPrice
+        await startAuction(tokenId, listingData.price);
         alert(`Auction for NFT ${tokenId} started successfully!`);
         navigate("/market");
       }
@@ -144,9 +157,16 @@ const Create = () => {
         <form action="" method="POST" onSubmit={handleSubmit}>
           <div className="row mt-4 d-flex justify-content-center">
             <div className="image-container col-lg-5 d-flex justify-content-center">
-              <label htmlFor="nft_image" className="upload-box position-relative">
+              <label
+                htmlFor="nft_image"
+                className="upload-box position-relative"
+              >
                 {selectedImage ? (
-                  <img src={selectedImage} alt="Uploaded preview" className="upload-preview" />
+                  <img
+                    src={selectedImage}
+                    alt="Uploaded preview"
+                    className="upload-preview"
+                  />
                 ) : (
                   <div className="upload-content text-center">
                     <i className="bi bi-upload fs-1"></i>
@@ -168,7 +188,9 @@ const Create = () => {
 
             <div className="col-lg-5">
               <div className="mb-4">
-                <label htmlFor="nft_name" className="form-label">NFT Name:</label>
+                <label htmlFor="nft_name" className="form-label">
+                  NFT Name:
+                </label>
                 <input
                   type="text"
                   id="nft_name"
@@ -181,7 +203,9 @@ const Create = () => {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="nft_description" className="form-label">Description:</label>
+                <label htmlFor="nft_description" className="form-label">
+                  Description:
+                </label>
                 <textarea
                   id="nft_description"
                   name="nft_description"
@@ -195,24 +219,42 @@ const Create = () => {
 
               {!isMinted ? (
                 <div className="d-flex justify-content-left">
-                  <button type="submit" className="btn btn-primary">Mint NFT</button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={mintStatus === "Minting NFT..."}
+                  >
+                    {mintStatus === "Minting NFT..."
+                      ? "Minting..."
+                      : "Mint NFT"}
+                  </button>
                   <button
                     type="reset"
                     className="btn btn-danger ms-2"
                     onClick={() => setSelectedImage(null)}
+                    disabled={mintStatus === "Minting NFT..."}
                   >
                     Reset
                   </button>
                 </div>
               ) : (
                 <div className="text-center mt-3">
-                  <p className="mint-success fw-bold">NFT minted successfully!</p>
+                  <p className="mint-success fw-bold">
+                    NFT minted successfully!
+                  </p>
                   <p>{mintStatus}</p>
                   {lastMintedNFT && (
                     <div>
-                      <p><strong>Token ID:</strong> {lastMintedNFT.tokenId}</p>
-                      <p><strong>Token URI:</strong> {lastMintedNFT.tokenURI}</p>
+                      <p>
+                        <strong>Token ID:</strong> {lastMintedNFT.tokenId}
+                      </p>
+                      <p>
+                        <strong>Token URI:</strong> {lastMintedNFT.tokenURI}
+                      </p>
                     </div>
+                  )}
+                  {mintStatus.startsWith("Error:") && (
+                    <p className="text-danger">Minting failed: {mintStatus}</p>
                   )}
                   <p>{marketStatus || auctionStatus}</p>
                   <button
@@ -220,12 +262,14 @@ const Create = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       if (!lastMintedNFT?.tokenId) {
-                        alert("Minting incomplete. Please wait or check minting status.");
+                        alert(
+                          "Minting incomplete. Please wait or check minting status."
+                        );
                         return;
                       }
                       setShowPopup(true);
                     }}
-                    disabled={!lastMintedNFT}
+                    disabled={!lastMintedNFT || mintStatus.startsWith("Error:")}
                   >
                     List this collection?
                   </button>
