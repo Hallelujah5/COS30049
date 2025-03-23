@@ -68,6 +68,8 @@ To run Xyora locally, ensure you have:
 - Node.js (includes npm)
 - A Web3 wallet (e.g., MetaMask) with test ETH (e.g., Local ETH network (named GoChain)
 - Python 3.8+
+- MySQL (You should install MySQL workbench for easier tracking the proccess)
+- Metamask wallet extension on chrome
 
 ## Repository Structure
 - **backend/**: Smart contracts, Hardhat config, Database and API (see [backend README](https://github.com/COS30049-SUVHN/group-project-spr-2025-g6/blob/main/backend/ReadMe.md)).
