@@ -128,4 +128,44 @@ Import them into MetaMask: [How to Import an Account](https://metamask.io/downlo
 These wallets come with test ETH for your local network.
 
 ## 3. Setting Up the Database and API
-*Complete later*
+
+### Prerequisites
+- **MySQL Workbench**: For managing the database.
+- **Python**: Required for the API (v3.8+ recommended, installed from [python.org](https://www.python.org/)).
+- **Node.js and npm**: Already installed from Section 1.
+
+### Install and Set Up MySQL Workbench
+1. **Install MySQL Workbench**:
+   Follow this guide to download and install MySQL Workbench: [MySQL Workbench Installation](https://dev.mysql.com/downloads/workbench/).
+
+2. **Check MySQL Status**:
+   - Open the Services panel:
+     ```sh
+     Press Windows + R, type services.msc, and hit Enter.
+     ```
+   - Find “MySQL80” (or your MySQL service name), ensure it’s running. Start it if stopped.
+
+### Start the Database and API
+1. **Navigate to Project Root**:
+   ```sh
+   cd group-project-spr-2025-g6
+Run the Startup Script: Execute the batch file to create a blank database and install dependencies:
+
+sh
+.\project_start.bat
+Notes:
+
+This installs dependencies from requirements.txt (assumed Python-based).
+Creates a database with default credentials:
+Username: root
+Password: root
+Default port is 3306. If your MySQL uses a different port, modify main.py accordingly.
+Verify Setup:
+
+Check MySQL Workbench to confirm the database exists (e.g., connect with root:root@localhost:3306).
+The API should now be running (port unspecified—assumed started by project_start.bat).
+Notes
+Keep npx hardhat node running for MetaMask and deployment.
+Update .env and constants.js if redeploying to a new network.
+If MySQL port differs from 3306, edit main.py with your port.
+Return to the main README to run the full platform!
