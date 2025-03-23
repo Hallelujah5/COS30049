@@ -10,7 +10,9 @@ import { useAuction } from "../../context/AuctionContext";
 import { useNavigate } from "react-router-dom";
 import { TransactionContext } from "../../context/TransactionContext";
 
+// Component for creating an NFT
 const Create = () => {
+  // State variables for form inputs and status
   const [selectedImage, setSelectedImage] = useState(null);
   const [isMinted, setIsMinted] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -19,12 +21,14 @@ const Create = () => {
   const [cid, setCid] = useState("");
   const [nftId, setNftId] = useState();
 
+  // Context hooks for interacting with other parts of the application
   const { mintNFT, status: mintStatus, lastMintedNFT } = useMintNFT();
   const { listNFT, status: marketStatus } = useMarketplace();
   const { startAuction, status: auctionStatus } = useAuction();
   const { connectWallet, currentAccount } = useContext(TransactionContext);
   const navigate = useNavigate();
 
+  // Handle form submission for creating an NFT
   const handleSubmit = async (event) => {
     event.preventDefault();
     const result = await validateForm(event);
@@ -43,6 +47,7 @@ const Create = () => {
     }
   };
 
+  // Effect to handle updates after minting an NFT
   useEffect(() => {
     if (mintStatus === "Minting NFT...") {
       console.log("Minting in progress...");
@@ -81,6 +86,7 @@ const Create = () => {
     currentAccount,
   ]);
 
+  // Effect to handle updates after minting an NFT and setting the NFT ID
   useEffect(() => {
     if (lastMintedNFT?.tokenId && nftId) {
       console.log("lastMintedNFT updated:", lastMintedNFT);
@@ -88,6 +94,7 @@ const Create = () => {
     }
   }, [lastMintedNFT, nftId]);
 
+  // Handle updates to the token information in the database
   const handleTokenUpdate = async (tokenId, nftId) => {
     if (!tokenId || !nftId) {
       console.error("Cannot update token: missing data", { tokenId, nftId });
@@ -105,6 +112,7 @@ const Create = () => {
     }
   };
 
+  // Handle changes to the selected image
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -113,14 +121,17 @@ const Create = () => {
     }
   };
 
+  // Handle changes to the NFT name input
   const handleNameChange = (event) => {
     setNftName(event.target.value);
   };
 
+  // Handle changes to the NFT description input
   const handleDescChange = (event) => {
     setNftDesc(event.target.value);
   };
 
+  // Handle submission of the listing form
   const handleListingSubmit = async (listingData) => {
     if (!lastMintedNFT || !lastMintedNFT.tokenId) {
       alert("No minted NFT found. Please mint an NFT first.");
