@@ -28,6 +28,22 @@ def get_db():
         database="nft_db"
     )     
 
+
+@app.get("/profile-nfts")             #USED TO FETCH ALL NFTS OF AN USER_WALLET IN /PROFILE
+def fetch_nfts(own_by: str):
+    try:
+        db = get_db()
+        cursor = db.cursor(dictionary=True)
+        query = "SELECT * FROM nfts WHERE own_by = %s"
+        cursor.execute(query, (own_by,))
+        nfts = cursor.fetchall()
+        cursor.close()
+        db.close()
+        return {"success": True, "totalNfts": nfts}
+    except mysql.connector.Error as e:
+        return {"Error fetching all nfts" : str(e)}
+
+
 @app.get("/nfts")
 def get_nfts(nft_status: str, page: int = Query(1, alias="page", description="Page number"), limit: int = Query(8, description="NFTs per page")):    #LIMIT HOW MANY NFTS CAN BE SHOWN IN LIVE BIDDING SECTION, MARKETPLACE.
 
@@ -124,6 +140,21 @@ async def create_nft(
     except mysql.connector.Error as e:
         return {"error": f"Failed to create NFT: {str(e)}"}
 
+
+
+@app.post("/update-tokenid")
+async def update_token(token_id: str = Form(...), nft_id: int=Form(...)):
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        query = "UPDATE NFTs SET token_id = %s WHERE nft_id = %s"
+        cursor.execute(query, (token_id, nft_id))
+        db.commit()
+        cursor.close()
+        db.close()   
+        return {"success": True, "nft_id": nft_id, "token_id": token_id}
+    except mysql.connector.Error as e:
+        return {"Error!": f"Failed to update token ID: {str(e)}"}
 
 
 

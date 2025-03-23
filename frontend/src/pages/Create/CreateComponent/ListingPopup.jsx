@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from "../../../api";
-import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
-import { useAuction } from "../../../context/AuctionContext"; // For auction
+// import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
+// import { useAuction } from "../../../context/AuctionContext"; // For auction
 
 
 const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit }) => {  
@@ -77,7 +77,7 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
       <div className="modal-dialog modal-lg" role="document">
         <div className="modal-content">
           <div className="modal-header d-flex justify-content-between align-items-center">
-            <h5 className="modal-title mb-0">Make an Offer</h5>
+            <h5 className="modal-title mb-0">List an NFT</h5>
             <button
               type="button"
               className="close-btn btn"

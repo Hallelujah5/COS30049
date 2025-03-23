@@ -21,8 +21,9 @@ CREATE TABLE NFTs(
     current_price DECIMAL(18, 8) NULL,
     description TEXT,       
     image_path VARCHAR(255) NOT NULL,
-    nft_status ENUM('list','auction','none') NOT NULL DEFAULT 'none'     -- DETERMINE WHETHER AN NFT IS IN LISTING OR NOT
-    -- FOREIGN KEY (own_by) REFERENCES Users(user_wallet) ON DELETE SET NULL
+    token_id VARCHAR(255),
+    nft_status ENUM('list','auction','none') NOT NULL DEFAULT 'none',     -- DETERMINE WHETHER AN NFT IS IN LISTING OR NOT
+    date_created DATE DEFAULT (CURRENT_DATE)
 );
 
 CREATE TABLE Transactions(

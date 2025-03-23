@@ -1,67 +1,93 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./profile.css";
 import { transactionHistory } from "../data/transactionHistory";
 import Popup from "../../Create/CreateComponent/ListingPopup";
 import api from "../../../api";
-
-
-// Sample data for Collected NFTs
-const collectedNFTs = [
-  {
-    id: 1,
-    name: "CryptoPunk #1234",
-    owner: "0xA12bC34D...",
-    price: "3.5",
-    acquired: "2025-01-30",
-  },
-  {
-    id: 2,
-    name: "Bored Ape #5678",
-    owner: "0xD56eF78A...",
-    price: "5.2",
-    acquired: "2025-01-29",
-  },
-];
-
-
-// Tab data mapping
-const tabData = {
-  collected: collectedNFTs, 
-  history: transactionHistory,
-  more: [],
-};
-
-// Tab title mapping
-const tabTitles = {
-  collected: "NFTs Collected",
-  history: "Transaction History",
-  more: "More",
-};
+import { TransactionContext } from "../../../context/TransactionContext";
+import { useNavigate } from "react-router-dom";
 
 const TransactionTable = () => {
-  useEffect(() => {
-    
-  }, []);
-
-
-
-
+  // STATE TO TRACK ACTIVE TAB
   const [activeTab, setActiveTab] = useState("collected");
-
-  // State for popup
+  // STATE TO STORE FETCHED NFTS
+  const [collectedNFTs, setCollectedNfts] = useState([]);
+  // STATE FOR POPUP VISIBILITY
   const [showPopup, setShowPopup] = useState(false);
+  // STATE FOR SELECTED NFT IN POPUP
   const [selectedNFT, setSelectedNFT] = useState(null);
 
-  // Handle "List" button click
-  const handleListClick = (nft) => {
-    setSelectedNFT(nft); // Set the selected NFT data
-    setShowPopup(true); // Show the popup
+  // CONTEXT TO ACCESS WALLET CONNECTION & ACCOUNT INFO
+  const { connectWallet, currentAccount } = useContext(TransactionContext);
+
+  // FETCH NFTS BELONGING TO THE CURRENT USER FROM API
+  useEffect(() => {
+    if (!currentAccount) return;
+    const fetchNFTs = async () => {
+      try {
+        const res = await api.get(`/profile-nfts?own_by=${currentAccount}`);
+        setCollectedNfts(res.data.totalNfts);
+        console.log("Fetched successfully", collectedNFTs);
+      } catch (error) {
+        console.log("Error fetching NFTs:", error);
+      }
     };
+    
+    fetchNFTs();
+  }, [currentAccount]);
+
+  // MAPPING OF TAB TITLES FOR DISPLAY PURPOSES
+  const tabTitles = {
+    collected: "NFTs Collected",
+    history: "Transaction History",
+    more: "More",
+  };
+
+  // MAPPING DATA TO TABS
+  const tabData = {
+    collected: collectedNFTs,
+    history: transactionHistory,
+    more: [],
+  };
+
+  const handleListingSubmit = async (listingData) => {
+    if (!lastMintedNFT || !lastMintedNFT.tokenId) {
+      alert("No minted NFT found. Please mint an NFT first.");
+      return;
+    }
+
+    const tokenId = lastMintedNFT.tokenId; // Use the last minted token ID
+
+    try {
+      if (listingData.listingType === "list") {
+        await listNFT(tokenId, listingData.price);
+        alert(`NFT ${tokenId} listed successfully!`);
+        navigate("/market"); // Redirect to /market after sale listing
+      } else if (listingData.listingType === "auction") {
+        await startAuction(tokenId, listingData.startingPrice);
+        alert(`Auction for NFT ${tokenId} started successfully!`);
+        navigate("/market"); // Redirect to /market after starting auction
+      }
+      setShowPopup(false); // Close popup on success
+    } catch (error) {
+      console.error("Error in listing/auction:", error);
+      alert(`Error: ${error.message}`);
+    }
+  };
+
+  // FUNCTION TO HANDLE "LIST" BUTTON CLICK
+  const handleListClick = (nft) => {
+    setSelectedNFT(nft); // STORE SELECTED NFT
+    setShowPopup(true); // DISPLAY POPUP
+  };
+
+  //NAVIGATE TO THE BUY PAGE OF EACH NFT WHEN PRESSED ACTION BUTTON
+  let navigate = useNavigate();
+  let path = "/buy";
 
   return (
     <>
       <div className="transaction-container">
-        {/* Tab Navigation */}
+        {/* TAB NAVIGATION */}
         <div className="tabs">
           {Object.keys(tabData).map((tab) => (
             <button
@@ -76,12 +102,15 @@ const TransactionTable = () => {
           ))}
           <div
             className="active-bg"
-            style={{ left: `${Object.keys(tabData).indexOf(activeTab) * 33.33333}%`, width: "33.333%"}}
+            style={{
+              left: `${Object.keys(tabData).indexOf(activeTab) * 33.33333}%`,
+              width: "33.333%",
+            }}
           ></div>
         </div>
       </div>
 
-      {/* Table Content */}
+      {/* TABLE CONTENT */}
       <div className="table-container">
         <h2 className="table-title outfit-bold">{tabTitles[activeTab]}</h2>
         <div className="table-overflow outfit">
@@ -112,20 +141,34 @@ const TransactionTable = () => {
             <tbody>
               {tabData[activeTab].length > 0 ? (
                 tabData[activeTab].map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.nft_id}>
                     {activeTab === "collected" && (
                       <>
-                        <td>{item.id}</td>
-                        <td>{item.name}</td>
-                        <td>{item.price}</td>
-                        <td>{item.acquired}</td>
+                        <td>{item.nft_id}</td>
                         <td>
-                          <button
-                            className="btn btn-list"
-                            onClick={() => handleListClick(item)}
-                          >
-                            List
-                          </button>
+                          <h5>{item.nft_name}</h5>
+                        </td>
+                        <td>
+                          {item.current_price ? item.current_price : "--"}
+                        </td>
+                        <td>{item.date_created}</td>
+                        <td>
+                          {item.current_price ? (
+                            <button
+                              className="btn btn-list"
+                              onClick={() => {
+                                navigate(`${path}/${item.nft_id}`);
+                              }}
+                            >Go
+                            </button>
+                          ) : (
+                            <button
+                              className="btn btn-list"
+                              onClick={() => handleListClick(item)}
+                            >
+                              List
+                            </button>
+                          )}
                         </td>
                       </>
                     )}
@@ -150,17 +193,23 @@ const TransactionTable = () => {
         </div>
       </div>
 
-      {/* Popup Component */}
+      {/* POPUP COMPONENT */}
       {showPopup && selectedNFT && (
         <Popup
-          image="https://picsum.photos/200" // Temporary random image
-          nftName={selectedNFT.name}
-          cid={`CID-${selectedNFT.id}`} // Fake CID for now
+          image={`https://ipfs.io/ipfs/${selectedNFT.image_path.replace(
+            "ipfs://",
+            ""
+          )}`}
+          nftName={selectedNFT.nft_name}
+          cid={selectedNFT.nft_id}
+          nft_id={selectedNFT.nft_id}
+          tokenId={selectedNFT.token_id}
           onClose={() => setShowPopup(false)}
+          onSubmit={() => handleListingSubmit()}
         />
       )}
 
-      {/* Pagination (----temporary----) */}
+      {/* PAGINATION (TEMPORARY) */}
       <div className="pagination outfit">
         <button className="pagination-btn">Previous</button>
         <span className="pagination-info">Page 1</span>
