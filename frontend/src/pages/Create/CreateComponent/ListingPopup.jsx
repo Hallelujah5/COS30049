@@ -3,14 +3,18 @@ import api from "../../../api";
 // import { useMarketplace } from "../../../context/MarketplaceContext"; // For listing
 // import { useAuction } from "../../../context/AuctionContext"; // For auction
 
-
-const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit }) => {  
+const ListingPopup = ({
+  image,
+  nftName,
+  cid,
+  tokenId,
+  nft_id,
+  onClose,
+  onSubmit,
+}) => {
   const [listingType, setListingType] = useState("list");
-  const [price, setPrice] = useState(""); // Sell price
-  // const { listNFT } = useMarketplace();
-  // const { startAuction } = useAuction();
+  const [startingPrice, setStartingPrice] = useState(""); // Renamed for clarity
 
-  // Handle submit for Sell or Auction
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -18,54 +22,44 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
       alert("No token ID available. Please mint an NFT first.");
       return;
     }
-    
-    const parsedPrice = parseFloat(price);
+
+    const parsedPrice = parseFloat(startingPrice);
     if (isNaN(parsedPrice) || parsedPrice <= 0) {
       alert("Please enter a valid price greater than 0.");
       return;
     }
 
-
-    //FORM DATA TO UPDATE NFT PRICE AND STATUS
+    // Update NFT status and price in the backend
     const formData = new FormData();
     formData.append("nft_status", listingType);
     formData.append("current_price", parsedPrice);
     formData.append("nft_id", nft_id);
+
     try {
-      const response = await api.post("/update-nft", formData); //CALLING /UPDATE-NFT FROM MAIN.PY
+      const response = await api.post("/update-nft", formData);
       if (response.data.success) {
-        console.log("Successully updated NFT row.", response.data.nft_status);
-        alert(
-          `NFT "${nftName}" price updated and listed successfully with CID: ${cid}!`
-        );
+        console.log("Successfully updated NFT row:", response.data.nft_status);
       } else {
         console.log("Error updating row.");
       }
     } catch (error) {
-      console.error(
-        "Error updating NFT:",
-        error.message,
-        error.response?.status,
-        error.response?.data
-      );
+      console.error("Error updating NFT:", error.message);
     }
-    //================================================================================================
-      const listingData = {
-        nftName,
-        listingType: listingType,
-        price: price,
-        cid: cid,
-        tokenId: tokenId,
-      };
-      await onSubmit(listingData); // Call the parent handler
-    } 
-    
-  
 
-  //===================================================================
+    // Prepare listing data for parent component
+    const listingData = {
+      nftName,
+      listingType,
+      price: startingPrice, // Pass as price for consistency with parent
+      startingPrice, // Explicitly for auction
+      cid,
+      tokenId,
+    };
+    await onSubmit(listingData); // Call parent handler (triggers startAuction)
+  };
 
-  // Update button text based on listing type
   const buttonText = listingType === "list" ? "List NFT" : "Start NFT Auction";
+
   return (
     <div
       className="modal custom fade show outfit"
@@ -88,10 +82,8 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
           <div className="modal-body">
             <div className="row align-items-center">
-              {/* NFT Image */}
               <div className="col-md-4 text-center">
                 {image && (
                   <img
@@ -101,18 +93,14 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
                   />
                 )}
               </div>
-
-              {/* NFT Details */}
               <div className="col-md-8">
                 <h5 className="mt-3">
-                  NFT Name: <span className="fw-bold"> {nftName}</span>
+                  NFT Name: <span className="fw-bold">{nftName}</span>
                 </h5>
-                {/* Display tokenId */}
                 <p>
                   <strong>Token ID:</strong> {tokenId}
-                </p>{" "}
+                </p>
                 <br />
-                {/* Select listing type */}
                 <label className="form-label">Listing Type:</label>
                 <div>
                   <input
@@ -126,7 +114,6 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
                   <label htmlFor="list" className="ms-2">
                     List on Market
                   </label>
-
                   <input
                     type="radio"
                     id="auction"
@@ -141,41 +128,23 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
                   </label>
                 </div>
                 <br />
-                {/* Input for Sell */}
-                {listingType === "list" && (
-                  <div className="mb-3">
-                    <label htmlFor="price" className="form-label">
-                      Price (ETH):
-                    </label>
-                    <input
-                      type="text"
-                      id="price"
-                      className="form-control"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                    />
-                  </div>
-                )}
-                {/* Input for Auction */}
-                {listingType === "auction" && (
-                  <div className="mb-3">
-                    <label htmlFor="starting_price" className="form-label">
-                      Starting Price (ETH):
-                    </label>
-                    <input
-                      type="text"
-                      id="starting_price"
-                      className="form-control"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                    />
-                  </div>
-                )}
+                <div className="mb-3">
+                  <label htmlFor="price" className="form-label">
+                    {listingType === "list"
+                      ? "Price (ETH):"
+                      : "Starting Price (ETH):"}
+                  </label>
+                  <input
+                    type="text"
+                    id="price"
+                    className="form-control"
+                    value={startingPrice}
+                    onChange={(e) => setStartingPrice(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
           </div>
-
-          {/* Submit button */}
           <div className="modal-footer">
             <button
               type="button"
@@ -190,4 +159,5 @@ const ListingPopup = ({ image, nftName, cid, tokenId, nft_id, onClose, onSubmit 
     </div>
   );
 };
+
 export default ListingPopup;

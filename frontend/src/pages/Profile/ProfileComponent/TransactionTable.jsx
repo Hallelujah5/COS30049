@@ -37,7 +37,7 @@ const TransactionTable = () => {
 
   // MAPPING OF TAB TITLES FOR DISPLAY PURPOSES
   const tabTitles = {
-    collected: "NFTs Collected",
+    collected: "NFTs Minted",
     history: "Transaction History",
     more: "More",
   };
