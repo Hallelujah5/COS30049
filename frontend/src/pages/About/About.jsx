@@ -4,6 +4,7 @@ import Collection from "./AboutComponent/Collection";
 import Footer from "../../components/Footer/footer";
 import { motion } from "motion/react";
 
+// Define animation variants for the fade-in effect
 const fadeInVariant = {
   offscreen: { opacity: 0, y: 50 },
   onscreen: {
@@ -13,6 +14,7 @@ const fadeInVariant = {
   },
 };
 
+// About page component
 const About = () => {
   return (
     <>
