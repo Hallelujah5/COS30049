@@ -13,7 +13,7 @@ This README guides you through setting up the backend for Xyora, a decentralized
 ### Initial Setup
 1. **Navigate to the Backend Directory**:
    ```sh
-   cd group-project-spr-2025-g6/backend
+   cd group-project-spr-2025-g6/backend/smart_contract/
    ```
 
 2. **Install Dependencies**:
