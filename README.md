@@ -1,4 +1,3 @@
-# Group 6 - Assignment 2
 
 ## Description
 Xyora is a decentralized NFT trading platform built for Assignment 2, designed to empower NFT enthusiasts with a secure, efficient, and intermediary-free marketplace. Leveraging blockchain technology via smart contracts, Xyora enables peer-to-peer trading of digital collectibles. It features an auction system, a marketplace for direct NFT sales, a custom NFT contract (MyNFT), and a transaction logging system—all deployed on Ethereum. This project showcases a full-stack dApp with a React frontend and Hardhat-managed backend.
